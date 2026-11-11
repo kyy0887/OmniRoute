@@ -546,6 +546,27 @@ export const v1SystemOneSchema = z
     }
   });
 
+// POST /v1/clocked — Clocked typed decisions & extraction. The model id
+// selects the Clocked endpoint (`clocked-1.0`/`clocked-1` decide, or
+// `clocked/<endpoint>`); every other field is endpoint-specific and passed
+// through to the upstream contract (state, questions, documents, fields, …).
+export const CLOCKED_MODEL_PATTERN = /^(clocked-1(\.0)?|clocked\/[a-z]+(\/[\w.:-]+)?)$/;
+
+export const v1ClockedSchema = z
+  .object({
+    model: z.string().regex(CLOCKED_MODEL_PATTERN).optional(),
+  })
+  .catchall(z.unknown())
+  .superRefine((value, ctx) => {
+    if (value.model !== undefined && value.model.length > 256) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "model id too long",
+        path: ["model"],
+      });
+    }
+  });
+
 export const providerChatCompletionSchema = z
   .object({
     model: modelIdSchema,

@@ -183,6 +183,29 @@ export const APIKEY_PROVIDERS_SPECIALTY = {
     apiHint:
       "TypeSafe System One answers typed questions (noul / choice / score) against a state. OmniRoute does not expose TypeSafe models in chat pickers or combos.",
   },
+  // Decision / extraction API (Clocked by rezolve.ai). Not a chat provider —
+  // no chat models in the registry. Dispatch is POST /v1/clocked, which maps
+  // `clocked/<endpoint>` model ids onto the ten published Clocked endpoints
+  // (decide, extract, fill, pii, injection, script, grounding, compare,
+  // rerank, pipeline). Trials are one-time credits, so hasFree reflects the
+  // Explore trial without a recurring monthly allowance.
+  clocked: {
+    id: "clocked",
+    serviceKinds: [],
+    alias: "clocked",
+    name: "Clocked",
+    icon: "schedule",
+    color: "#0EA5E9",
+    textIcon: "CL",
+    website: "https://clocked.rezolve.ai",
+    hasFree: true,
+    freeNote:
+      "Free trial: 4,000 one-time credits (~4,000 decisions or 493 extractions), one request at a time — no recurring monthly allowance",
+    authHint:
+      "Bearer API key (clk_live_…) from clocked.rezolve.ai/account. OmniRoute uses it for the /v1/clocked decisions & extraction passthrough — not chat completions.",
+    apiHint:
+      "Clocked answers typed decisions (noul / choice / multiselect / score) and verbatim extractions against your source. Send model clocked-1.0 or clocked/<endpoint> to POST /v1/clocked. Every request needs a UUID Idempotency-Key.",
+  },
   "fal-ai": {
     id: "fal-ai",
     serviceKinds: [],

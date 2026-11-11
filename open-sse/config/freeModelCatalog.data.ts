@@ -22,7 +22,7 @@ import type { FreeModelBudget } from "./freeModelCatalog.ts";
  * rewrites file timestamps on every deploy, which would report a months-old
  * catalog as "updated today". Bump this whenever the entries below change.
  */
-export const FREE_CATALOG_CURATED_AT = "2026-10-30";
+export const FREE_CATALOG_CURATED_AT = "2026-11-11";
 
 export const FREE_MODEL_BUDGETS: FreeModelBudget[] = [
   { provider: "agentrouter", modelId: "claude-opus-4-8", displayName: "Claude Opus 4.8", monthlyTokens: 0, creditTokens: 200000000, freeType: "one-time-initial", poolKey: "agentrouter", tos: "caution" },
@@ -120,6 +120,11 @@ export const FREE_MODEL_BUDGETS: FreeModelBudget[] = [
   // token grant. hardStopGuaranteed must stay unset: a stored card can bill.
   { provider: "cerebras", modelId: "zai-glm-4.7", displayName: "GLM 4.7", monthlyTokens: 0, creditTokens: 0, freeType: "one-time-initial", poolKey: "cerebras", tos: "caution" },
   { provider: "cerebras", modelId: "gpt-oss-120b", displayName: "GPT OSS 120B", monthlyTokens: 0, creditTokens: 0, freeType: "one-time-initial", poolKey: "cerebras", tos: "caution" },
+  // public-page https://clocked.rezolve.ai/docs (2026-11-11): Explore trial is a
+  // one-time 4,000-credit grant (25 ms model time = 1 credit, min 1/request).
+  // Decisions-only provider (no chat shape): routed via POST /v1/clocked.
+  // creditTokens carries the grant; monthlyTokens stays 0 because nothing recurs.
+  { provider: "clocked", modelId: "clocked-1.0", displayName: "Clocked 1.0 (decisions)", monthlyTokens: 0, creditTokens: 4000, freeType: "one-time-initial", poolKey: "clocked", tos: "caution" },
   // #8717: drop dead Workers AI ids (400/403/410). Keep Neurons/day budget on fp8-fast.
   { provider: "cloudflare-ai", modelId: "@cf/mistral/mistral-7b-instruct-v0.2-lora", displayName: "Mistral 7B (🆓)", monthlyTokens: 0, creditTokens: 0, freeType: "recurring-daily", poolKey: "cloudflare-ai", tos: "caution" },
   { provider: "cloudflare-ai", modelId: "@cf/qwen/qwen2.5-coder-32b-instruct", displayName: "Qwen 2.5 Coder 32B (🆓)", monthlyTokens: 0, creditTokens: 0, freeType: "recurring-daily", poolKey: "cloudflare-ai", tos: "caution" },

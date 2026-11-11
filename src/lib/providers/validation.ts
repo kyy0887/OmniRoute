@@ -358,6 +358,8 @@ export async function validateProviderApiKey({
     oneminai: validateOneMinAiProvider,
     runwayml: validateRunwayProvider,
     typesafe: ({ apiKey }: any) => validateTypesafeProvider({ apiKey }),
+    clocked: ({ apiKey }: any) =>
+      import("./validation/clocked").then((mod) => mod.validateClockedProvider({ apiKey })),
     snowflake: validateSnowflakeProvider,
     gigachat: validateGigachatProvider,
     "deepseek-web": validateDeepSeekWebProvider,
