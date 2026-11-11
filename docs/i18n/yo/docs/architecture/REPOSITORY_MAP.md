@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `components/`                    | Dasibodu paati API: awọn oluyipada lori `packages/ui-kit` — wo `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: aami awọn orukọ ti a lo nipasẹ awọn iboju → Lucide irinše (`<Icon>`)                    |
-| `constants/providers.ts`         | **381 olupese** pẹlu afọwọsi Zod (orisun otitọ)                                                     |
+| `constants/providers.ts`         | **388 olupese** pẹlu afọwọsi Zod (orisun otitọ)                                                     |
 | `constants/cliTools.ts`          | Iforukọsilẹ irinṣẹ CLI ita                                                                          |
 | `constants/routingStrategies.ts` | **20 afisona ogbon** pẹlu ayo                                                                       |
 | `constants/publicApiRoutes.ts`   | Awọn ipa-ọna ti o nilo Olutọju (la iṣakoso) auth                                                    |
@@ -409,10 +409,10 @@ open-sse/
 | `RELEASE_CHECKLIST.md`      | Ṣiṣan itusilẹ ni kikun (awọn ọgbọn, husky, awọn adehun aṣa, ran lọ)                             |
 | `COVERAGE_PLAN.md`          | Awọn ibi-afẹde agbegbe ati ipo lọwọlọwọ                                                         |
 | `FREE_TIERS.md`             | Awọn olupese ipele ọfẹ (48 + + 11 OAuth ọfẹ)                                                    |
-| `CLI-TOOLS.md`              | Awọn akojọpọ CLI ita + Ti abẹnu OmniRoute CLI                                                   |
+| `CLI-TOOLS.md`              | Awọn akojọpọ CLI ita + Inu OmniRoute CLI                                                        |
 | `I18N.md`                   | i18n faaji, fifi a ede, 67 locales                                                              |
 | `UNINSTALL.md`              | Nu aifi si awọn igbesẹ                                                                          |
-| `PROVIDER_REFERENCE.md`     | **Ti ipilẹṣẹ laifọwọyi** katalogi ti awọn olupese 381 (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Ti ipilẹṣẹ laifọwọyi** katalogi ti awọn olupese 388 (regen: `npm run gen:provider-reference`) |
 
 ### Subsystem jin-dives
 
@@ -445,7 +445,7 @@ open-sse/
 | `COMPRESSION_LANGUAGE_PACKS.md` | Iṣakojọpọ akopọ ofin fun ede-ede         |
 | `RTK_COMPRESSION.md`            | opo gigun ti epo alaye RTK (awọn asẹ 56) |
 
-### Ifiranṣẹ
+### Gbigbe
 
 | Dókítà                       | Idi                                                                 |
 | ---------------------------- | ------------------------------------------------------------------- |

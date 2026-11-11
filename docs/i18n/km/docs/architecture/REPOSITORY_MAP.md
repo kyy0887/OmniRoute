@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `components/`                    | សមាសធាតុផ្ទាំងគ្រប់គ្រង API: អាដាប់ទ័រលើ `packages/ui-kit` — មើល `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ឈ្មោះរូបតំណាងដែលប្រើដោយអេក្រង់ → Lucide components (`<Icon>`)                             |
-| `constants/providers.ts`         | **អ្នកផ្គត់ផ្គង់ 381** ជាមួយនឹងការបញ្ជាក់ Zod (ប្រភពនៃការពិត)                                         |
+| `constants/providers.ts`         | **អ្នកផ្គត់ផ្គង់ 388** ជាមួយនឹងការបញ្ជាក់ Zod (ប្រភពនៃការពិត)                                         |
 | `constants/cliTools.ts`          | បញ្ជីឈ្មោះឧបករណ៍ CLI ខាងក្រៅ                                                                          |
 | `constants/routingStrategies.ts` | **យុទ្ធសាស្ត្រកំណត់ផ្លូវចំនួន 20** ជាមួយនឹងអាទិភាព                                                    |
 | `constants/publicApiRoutes.ts`   | ផ្លូវដែលទាមទារសិទ្ធិ Bearer (ទល់នឹងការគ្រប់គ្រង)                                                      |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ការរួមបញ្ចូល CLI ខាងក្រៅ + ខាងក្នុង OmniRoute CLI                                                 |
 | `I18N.md`                   | ស្ថាបត្យកម្ម i18n បន្ថែមភាសា 67 មូលដ្ឋាន                                                          |
 | `UNINSTALL.md`              | សម្អាតជំហានដកការដំឡើង                                                                             |
-| `PROVIDER_REFERENCE.md`     | **បង្កើតដោយស្វ័យប្រវត្តិ** កាតាឡុករបស់អ្នកផ្តល់សេវា 381 (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **បង្កើតដោយស្វ័យប្រវត្តិ** កាតាឡុករបស់អ្នកផ្តល់សេវា 388 (regen: `npm run gen:provider-reference`) |
 
 ### ប្រព័ន្ធរងការជ្រមុជទឹកជ្រៅ
 
@@ -422,8 +422,8 @@ open-sse/
 | `A2A-SERVER.md`                           | A2A v0.3: JSON-RPC, 6 ជំនាញ, ជំនួយ REST, កាតភ្នាក់ងារ                    |
 | `AGENT_PROTOCOLS_GUIDE.md`                | មគ្គុទ្ទេសក៍បង្រួបបង្រួម៖ A2A vs ACP vs Cloud Agents                     |
 | `CLOUD_AGENT.md`                          | Codex Cloud / Devin / Jules orchestration                                |
-| `SKILLS.md`                               | ក្របខ័ណ្ឌជំនាញ (ដែលភ្ជាប់មកជាមួយនៅក្នុងទីផ្សារ + + SkillsSH + sandbox)   |
-| `RADAR.md`                                | ការត្រួតលើកាតាឡុកគំរូឥតគិតថ្លៃរ៉ាដា (`RADAR_ENABLED` បិទតាមលំនាំដើម)     |
+| `SKILLS.md`                               | ក្របខ័ណ្ឌជំនាញ (ដែលភ្ជាប់មកជាមួយនូវទីផ្សារ + + SkillsSH + sandbox)       |
+| `RADAR.md`                                | ការត្រួតលើកាតាឡុកម៉ូដែលឥតគិតថ្លៃរ៉ាដា (`RADAR_ENABLED` បិទតាមលំនាំដើម)   |
 | `MEMORY.md`                               | ប្រព័ន្ធអង្គចងចាំ (SQLite FTS5 + Qdrant)                                 |
 | `EVALS.md`                                | ក្របខ័ណ្ឌ Eval (ឈុត ការរត់ រូបិយវត្ថុ)                                   |
 | `GUARDRAILS.md`                           | របាំងមុខ PII, ការចាក់ភ្លាមៗ, ស្ពានចក្ខុវិស័យ                             |

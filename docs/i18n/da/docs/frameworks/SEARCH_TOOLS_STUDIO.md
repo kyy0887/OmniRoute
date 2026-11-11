@@ -100,13 +100,13 @@ Kører den samme forespørgsel/URL parallelt hos op til **4 providers** (D22):
 
 ## Udbyderkatalog
 
-`ProviderCatalog.tsx` viser den fulde liste over udbydere fra `GET /api/search/providers`
-(udvidet i F4 til at inkludere fetch-udbydere):
+`ProviderCatalog.tsx` afslører den fulde udbyderliste fra `GET /api/search/providers` (udvidet i F4 til at omfatte henteudbydere):
 
-| `kind` | `"search"` (20 udbydere) eller `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 udbydere) eller `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-Statussen **udledes på anmodningstidspunktet** ved at kontrollere, om legitimationsoplysninger findes, og om
-alle nøgler aktuelt er i nedkølingsperioden.
+Status er** udledt på anmodningstidspunktet** ved at kontrollere, om der findes legitimationsoplysninger, og om alle nøgler i øjeblikket er i nedkøling.
+
+`codex-search` (Codex websøgning) har ingen egen nøgle: den genbruger en tilsluttet Codex (ChatGPT) konto, så hver søgning bruger ChatGPT abonnementskvote og tager omkring 10-40 s. Den kører, når en anmodning navngiver den; automatisk valg kræver `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` -funktionsflaget (deaktiveret som standard).
 
 ---
 

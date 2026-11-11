@@ -10,11 +10,11 @@ _Utolsó frissítés: 2026-06-28_
 
 ## Vezetői összefoglaló
 
-OmniRoute egy helyi AI útválasztási átjáró és műszerfal, amely Next.js re épül. Egyetlen OpenAI-kompatibilis végpontot (`/v1/*`) biztosít, és a forgalmat több upstream szolgáltató között irányítja át fordítással, tartalékkal, tokenfrissítéssel és használat követéssel.
+OmniRoute egy helyi AI útválasztási átjáró és műszerfal, amely Next.js re épül. Egyetlen OpenAI-kompatibilis végpontot (`/v1/*`) biztosít, és a forgalmat több upstream szolgáltató között irányítja át fordítással, tartalékkal, tokenfrissítéssel és használati követéssel.
 
 Alapvető képességek:
 
-- OpenAI-kompatibilis API felület CLI/tools (381 szolgáltató, 159 végrehajtó modul)
+- OpenAI-kompatibilis API felület CLI/tools (388 szolgáltató, 159 végrehajtó modul)
 - Request/response fordítás a szolgáltatói formátumok között
 - Modell kombinált tartalék (több modell sorozat)
 - Strukturált kombinált lépések (`provider + model + connection`) `compositeTiers` futásidejű sorrendjével
@@ -70,8 +70,8 @@ Alapvető képességek:
 - Szinkron tokenkezelés (issue/revoke, ETag-verziójú konfigurációs csomag letöltése)
 - GLM Thinking (`glmt`) első osztályú szolgáltató előre beállított
 - Hibrid token számlálás (szolgáltató oldali `/messages/count_tokens` becslési tartalékkal)
-- Modellalias automatikus vetés (30 + proxy dialektusok közötti normalizálás indításkor)
-- Biztonságos kimenő letöltés SSRF védelemmel, privát URL blokkolással és konfigurálható újrapróbálkozással
+- Modell alias automatikus vetés (30 + proxy dialektusok közötti normalizálás indításkor)
+- Biztonságos kimenő lekérés SSRF védelemmel, privát URL blokkolással és konfigurálható újrapróbálkozással
 - Lehűlés-tudatos csevegési próbálkozások konfigurálható `requestRetry` és `maxRetryIntervalSec` segítségével
 - Futási környezet ellenőrzése Zod val indításkor
 - Megfelelőségi audit v2 oldalszámozással, szolgáltatói CRUD eseményekkel és SSRF által blokkolt érvényesítési naplózással
@@ -857,41 +857,47 @@ flowchart LR
 - `src/lib/db/*`: az egyes modulokat közvetlenül importáld — nincs gyűjtőmodul (a régi `localDb.ts` újraexportáló réteget eltávolították)
 - `src/lib/usageDb.ts`: használati előzmények és hívásnaplók homlokzata az SQLite-táblák felett
 
-## Szolgáltatói végrehajtók lefedettsége (stratégiaminta)
+## Szolgáltatói végrehajtói lefedettség (stratégiai minta)
 
-Minden szolgáltató rendelkezik egy specializált, a `BaseExecutor` osztályt kiterjesztő végrehajtóval (az `open-sse/executors/base.ts` fájlban), amely biztosítja az URL-ek összeállítását, a fejlécek létrehozását, az exponenciális késleltetésű újrapróbálkozást, a hitelesítő adatok frissítéséhez szükséges hookokat, valamint az `execute()` vezénylési metódust.
+Minden szolgáltató rendelkezik egy speciális végrehajtóval, amely kiterjeszti `BaseExecutor` ( `open-sse/executors/base.ts` ben), amely biztosítja URL építést, a fejléc-konstrukciót, az újrapróbálkozást exponenciális visszalépéssel, a hitelesítő adatok frissítését és a `execute()` hangszerelési módszert.
 
-| Végrehajtó                | Szolgáltató(k)                                                                                                                                             | Speciális kezelés                                                                      |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA stb. | Dinamikus URL-/fejléc-konfiguráció szolgáltatónként                                    |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                         | Egyéni projekt-/munkamenet-azonosítók, Retry-After feldolgozása, 429-es hibák elfedése |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                               | Telepítésalapú útválasztás, az api-version lekérdezési paraméter kikényszerítése       |
-| `BlackboxWebExecutor`     | Blackbox AI (webes mód)                                                                                                                                    | Webes munkamenet visszafejtése TLS-ujjlenyomat-emulációval                             |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH-útvonal)                                                                                                                                    | Korlátozási és eszköz-újraleképezési folyamatok, ujjlenyomat-formálás                  |
-| `CliProxyApiExecutor`     | CLIProxyAPI-kompatibilis szolgáltatók                                                                                                                      | Egyéni hitelesítés- és protokollkezelés                                                |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                      | Fiókazonosító beillesztése, Neurons-alapú használatkövetés                             |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                               | Rendszerutasításokat illeszt be, kikényszeríti az érvelési erőfeszítés szintjét        |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                        | Böngésző-munkamenetes Responses API-híd szál-/fordulórögzítéssel                       |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                               | OAuth és munkamenetenkénti fejlécrotáció                                               |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                 | ConnectRPC protokoll, Protobuf-kódolás, kérések aláírása ellenőrzőösszeggel            |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                  | A Devin-feladatok életciklusának összekapcsolása felhőügynök-modulon keresztül         |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                             | Copilot-token frissítése, VSCode-ot utánzó fejlécek                                    |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                 | GitLab OAuth és projekthatókörű útválasztás                                            |
-| `GlmExecutor`             | Z.AI GLM (beleértve a `glmt` előbeállítást)                                                                                                                | Gondolkodási keretet figyelembe vevő működés, GLMT előbeállítási állandók              |
-| `GrokWebExecutor`         | xAI Grok web                                                                                                                                               | Webes munkamenet visszafejtése, módválasztás (gondolkodó/normál)                       |
-| `KieExecutor`             | KIE                                                                                                                                                        | Egyéni tokenkibocsátás változó munkamenet-horgonyokkal                                 |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                     | AWS EventStream bináris formátum → SSE-konverzió                                       |
-| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                           | Webes munkamenet visszafejtése képüzenetek áthidalásával                               |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                  | Szolgáltatóspecifikus kérés-törzsstruktúra                                             |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                   | AI SDK-kompatibilis szolgáltató-beállítás                                              |
-| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                             | Webes munkamenet visszafejtése a csevegés folytatásához                                |
-| `PetalsExecutor`          | Petals elosztott inferencia                                                                                                                                | Decentralizált rajalapú útválasztás                                                    |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                            | Nem igényel API-kulcsot, sebességkorlátozott kérések                                   |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                   | PAT- és OAuth-támogatás, többmodelles ingyenes csomag                                  |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                           | Szolgáltatásfiók-alapú hitelesítés, régióalapú végpontok                               |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                              | Importált API-kulcs és Connect-protobuf csevegésstreamelés                             |
+| Végrehajtó                | Szolgáltató(k)                                                                                                                                            | Speciális kezelés                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity , Together, Fireworks, Cerebras, CohereNVIDIA qqp. | Dinamikus URL/header konfiguráció szolgáltatónként                                  |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                        | Egyéni project/session IDs, Újrapróbálkozás-elemzés után, 429-es homályosítás       |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                              | Telepítés alapú útválasztás, API-verziós lekérdezés kényszerítése                   |
+| `BlackboxWebExecutor`     | Blackbox AI (webes mód)                                                                                                                                   | Webes munkamenet visszafordítása TLS ujjlenyomat emulációval                        |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH elérési út)                                                                                                                                | Kényszer + tool-remap pipelines, ujjlenyomat alakítás                               |
+| `CliProxyApiExecutor`     | CLIProxyAPI-kompatibilis szolgáltatók                                                                                                                     | Egyéni hitelesítés és protokollkezelés                                              |
+| `CloudflareAiExecutor`    | Cloudflare Dolgozók AI                                                                                                                                    | Fiók ID injekció, Neuron alapú használat követése                                   |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                              | Rendszerutasításokat ad be, érvelési erőfeszítést kényszerít                        |
+| `ChatGptWebCodexExecutor` | ChatGPT web (Codex)                                                                                                                                       | Böngésző-munkamenetre adott válaszok API híd thread/turn rögzítéssel                |
+| `CommandCodeExecutor`     | Parancskód                                                                                                                                                | OAuth + munkamenetenkénti fejléc rotáció                                            |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                | ConnectRPC protokoll, Protobuf kódolás, kérés aláírása ellenőrző összegen keresztül |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                 | Devin feladat életciklus áthidalás felhőügynök modulon keresztül                    |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                            | Copilot token frissítés, VSCode-ot utánzó fejlécek                                  |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                | GitLab OAuth + projekt-hatókörű útválasztás                                         |
+| `GlmExecutor`             | Z.AI GLM (beleértve `glmt` előre beállított)                                                                                                              | Gondolkodás-költségvetés-tudatos, GLMT előre beállított állandók                    |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                              | Web-munkamenet fordított, módválasztás (think/standard)                             |
+| `KieExecutor`             | KIE                                                                                                                                                       | Egyéni token-kibocsátás forgó munkamenet-horgonyokkal                               |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                    | AWS EventStream bináris formátumú → SSE konverzió                                   |
+| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                          | Webes munkamenet fordított kép-üzenet áthidalással                                  |
+| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                 | Szolgáltató-specifikus kérés testforma                                              |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                  | AI SDK kompatibilis szolgáltató beállítása                                          |
+| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                            | Webes munkamenet fordított a csevegés folytatásához                                 |
+| `PetalsExecutor`          | Szirmok elosztott következtetés                                                                                                                           | Decentralizált raj-útválasztás                                                      |
+| `PollinationsExecutor`    | Beporzások AI                                                                                                                                             | Nincs szükség API kulcsra, korlátozott sebességű kérések                            |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                  | PAT és OAuth támogatás, több modell nélküli szint                                   |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                          | Szolgáltatásfiók hitelesítés, régióalapú végpontok                                  |
+| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                             | Importált API kulcs + Connect-protobuf chat streaming                               |
 
-Minden más szolgáltató (beleértve az egyéni kompatibilis csomópontokat is) a `DefaultExecutor` végrehajtót használja.
+Minden más szolgáltató (beleértve az egyéni kompatibilis csomópontokat is) a `DefaultExecutor` használja.
+
+### Automatizált szondák és webes munkamenet-fiókok
+
+A modelltesztek, az összes tesztelése, a kombinált tesztek és értékelések valódi csevegési kéréseket küldenek. A webes munkamenet-szolgáltató bejelentkezett felhasználóként működik, így a kérések mindegyike beszélgetésként kerül mentésre az adott fiókban; Az ilyen beszélgetéseket elhagyó automatizált szondák fiókját felfüggesztették (#14780). A csevegési folyamat ezért visszautasít minden olyan célpontot, amelyet egy automatizált vizsgáló elér, amelynek szolgáltatója webes munkamenet hitelesítő adatait kapja, amint a cél szolgáltatója megtörtént, és a hitelesítési adat kiválasztása előtt (`src/lib/providers/chatProbePolicy.ts`). Az elutasítás `422` `error.code` `chat_probe_not_isolated`-vel, és a szondafutók kihagyásként, nem meghibásodásként jelentik.
+
+Egy végrehajtó, amely minden csevegést a szolgáltató saját előzmény nélküli módjában futtat, `ChatProbeIsolatingExecutor` -val (`open-sse/executors/chatProbeIsolation.ts`) deklarálja azt; a szolgáltatóhoz történő szondák ekkor engedélyezettek. ChatGPT web deklarálja `temporary-chat`. Rögzítse a deklarációt a mechanizmusához egy teszttel, így az állítás nem élheti túl azt a kódot, amely igazzá teszi.
 
 ## Szolgáltatói kompatibilitási mátrix
 

@@ -98,15 +98,15 @@ Esegue la stessa query/lo stesso URL su un massimo di **4 provider in parallelo*
 
 ---
 
-## Catalogo dei provider
+## Catalogo dei fornitori
 
-`ProviderCatalog.tsx` espone l'elenco completo dei provider da `GET /api/search/providers`
-(esteso in F4 per includere i provider di recupero):
+`ProviderCatalog.tsx` espone l'elenco completo dei fornitori da `GET /api/search/providers` (esteso in F4 per includere i fornitori di recupero):
 
-| `kind` | `"search"` (20 provider) oppure `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 fornitori) o `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-Lo stato viene **determinato al momento della richiesta** verificando se esistono credenziali e se
-tutte le chiavi sono attualmente in cooldown.
+Lo stato è** derivato al momento della richiesta** controllando se esistono credenziali e se tutte le chiavi sono attualmente in fase di raffreddamento.
+
+`codex-search` (Codex Web Search) non ha una chiave propria: riutilizza un account Codex (ChatGPT) connesso, quindi ogni ricerca consuma la quota di abbonamento ChatGPT e richiede circa 10–40 secondi. Viene eseguito quando una richiesta lo nomina; la selezione automatica richiede il flag di funzionalità `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (disattivato per impostazione predefinita).
 
 ---
 

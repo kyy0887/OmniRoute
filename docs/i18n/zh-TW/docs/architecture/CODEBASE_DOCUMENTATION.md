@@ -492,7 +492,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, plus `claudeIdentity.ts` (shared identity helper) and `index.ts` (registry).
 
-> 注意：此處未列出的提供者由`default.ts`使用通用 OpenAI 相容執行器提供服務。完整的提供者目錄（381 個提供者）位於`src/shared/constants/providers.ts`。
+> 注意：此處未列出的提供者由`default.ts`使用通用 OpenAI 相容執行器提供服務。完整的提供者目錄（388 個提供者）位於`src/shared/constants/providers.ts`。
 
 ### 4.3 `open-sse/translator/`
 
@@ -543,7 +543,7 @@ open-sse/
 
 ### 4.8 `open-sse/utils/`
 
-串流原語和提供者助手： `stream.ts`、 `streamHandler.ts`、 `streamHelpers.ts`、 `streamPayloadCollector.ts`、 `streamReadiness.ts`、 `sseHeartbeat.ts`、 `proxyFetch.ts`、 `proxyDispatcher.ts`、 `tlsClient.ts`、 `networkProxy.ts`、 `awsSigV4.ts`、 `cacheControlPolicy.ts`、 `cursorChecksum.ts`、 `cursorAgentProtobuf.ts`、 `cursorVersionDetector.ts` `ollamaTransform.ts` `comfyuiClient.ts`、 `kieTask.ts`、 `bypassHandler.ts`、 `aiSdkCompat.ts`、 `thinkTagParser.ts`、 `urlSanitize.ts`、 `usageTracking.ts`、 `requestLogger.ts`、 `progressTracker.ts`、 `cors.ts`、 `error.ts`、 `logger.ts`、 `sleep.ts`。
+串流處理原語與提供者助手： `stream.ts`、 `streamHandler.ts`、 `streamHelpers.ts`、 `streamPayloadCollector.ts`、 `streamReadiness.ts`、 `sseHeartbeat.ts`、 `proxyFetch.ts`、 `proxyDispatcher.ts`、 `tlsClient.ts`、 `networkProxy.ts`、 `awsSigV4.ts`、 `cacheControlPolicy.ts`、 `cursorChecksum.ts`、 `cursorAgentProtobuf.ts`、 `cursorVersionDetector.ts`、 `comfyuiClient.ts`、 `kieTask.ts`、 `bypassHandler.ts`、 `urlSanitize.ts`、 `aiSdkCompat.ts`、 `thinkTagParser.ts` `usageTracking.ts`、 `requestLogger.ts`、 `progressTracker.ts`、 `cors.ts`、 `error.ts`、 `logger.ts`、 `sleep.ts`、 `ollamaTransform.ts`。
 
 ---
 

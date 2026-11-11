@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Instrumentpanelskomponent API: adaptrar över `packages/ui-kit` — se `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ikonnamn som används av skärmarna → Lucide-komponenter (`<Icon>`)                            |
-| `constants/providers.ts`         | **381 leverantörer** med Zod -validering (källa till sanning)                                            |
+| `constants/providers.ts`         | **388 leverantörer** med Zod -validering (källa till sanning)                                            |
 | `constants/cliTools.ts`          | Externt CLI -verktygsregister                                                                            |
 | `constants/routingStrategies.ts` | **20 routingstrategier** med prioriteringar                                                              |
 | `constants/publicApiRoutes.ts`   | Rutter som kräver bärare (mot hantering) autentisering                                                   |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Externa CLI -integreringar + Intern OmniRoute CLI                                        |
 | `I18N.md`                   | i18n-arkitektur, lägga till ett språk, 67 språk                                          |
 | `UNINSTALL.md`              | Rengör avinstallationsstegen                                                             |
-| `PROVIDER_REFERENCE.md`     | **Autogenererad** katalog med 381 leverantörer (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Autogenererad** katalog med 388 leverantörer (regen: `npm run gen:provider-reference`) |
 
 ### Delsystem djupdykning
 
@@ -429,7 +429,7 @@ open-sse/
 | `GUARDRAILS.md`                               | PII masker, snabb injektion, synbro                                        |
 | `COMPLIANCE.md`                               | Granskningslogg, retention, noLog opt-out                                  |
 | `WEBHOOKS.md`                                 | HMAC-signerad webhook leverans                                             |
-| `REASONING_REPLAY.md`                         | Hybrid memory/SQLite cache för `reasoning_content`                         |
+| `REASONING_REPLAY.md`                         | Hybrid memory/SQLite -cache för `reasoning_content`                        |
 | `AUTHZ_GUIDE.md`                              | Auktoriseringspipeline (`classify` → `policies` → `enforce`)               |
 | `RESILIENCE_GUIDE.md`                         | Strömbrytare + cooldown + modell lockout                                   |
 | `docs/security/STEALTH_GUIDE.md` (endast git) | TLS fingeravtryck (JA3/JA4), Claude Code CCH, MITM cert                    |

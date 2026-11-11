@@ -10,11 +10,11 @@ _Sist oppdatert: 2026-06-28_
 
 ## Sammendrag
 
-OmniRoute er en lokal AI rutinggateway og dashbord bygget på Next.js. Den gir et enkelt OpenAI-kompatibelt endepunkt (`/v1/*`) og ruter trafikk på tvers av flere oppstrømsleverandører med oversettelse, fallback, token-oppdatering og brukssporing.
+OmniRoute er en lokal AI -rutinggateway og dashbord bygget på Next.js. Den gir et enkelt OpenAI-kompatibelt endepunkt (`/v1/*`) og ruter trafikk på tvers av flere oppstrømsleverandører med oversettelse, fallback, token-oppdatering og brukssporing.
 
 Kjernefunksjoner:
 
-- OpenAI-kompatibel API overflate for CLI/tools (381 leverandører, 159 eksekveringsmoduler)
+- OpenAI-kompatibel API overflate for CLI/tools (388 leverandører, 159 eksekveringsmoduler)
 - Request/response -oversettelse på tvers av leverandørformater
 - Modell combo fallback (multi-modell sekvens)
 - Strukturerte kombinasjonstrinn (`provider + model + connection`) med kjøretidsbestilling etter `compositeTiers`
@@ -60,7 +60,7 @@ Kjernefunksjoner:
 - Minnesystem (ekstraksjon, injeksjon, gjenfinning, oppsummering)
 - Ferdighetssystem (register, eksekutør, sandkasse, innebygde ferdigheter)
 - MITM proxy med sertifikathåndtering og DNS -håndtering
-- Rask injeksjonsbeskyttelse mellomvare
+- Rask mellomvare for injeksjonsbeskyttelse
 - Spør kompresjonspipeline med Caveman, RTK, stablede pipelines, kompresjonskombinasjoner, språkpakker og analyser
 - ACP -registeret (Agent Communication Protocol).
 - Modulære OAuth leverandører (22 individuelle moduler under `src/lib/oauth/providers/`)
@@ -72,7 +72,7 @@ Kjernefunksjoner:
 - Hybrid tokentelling ( `/messages/count_tokens` på leverandørsiden med estimert reserve)
 - Modellalias automatisk seeding (30 + kryssproxy-dialektnormaliseringer ved oppstart)
 - Sikker utgående henting med SSRF vakt, privat URL blokkering og konfigurerbart forsøk på nytt
-- Nedkjølingsbevisste chat-forsøk på nytt med konfigurerbare `requestRetry` og `maxRetryIntervalSec`
+- Nedkjølingsbevisste chatteforsøk med konfigurerbare `requestRetry` og `maxRetryIntervalSec`
 - Kjøretidsmiljøvalidering med Zod ved oppstart
 - Samsvarsrevisjon v2 med paginering, leverandør- CRUD hendelser og SSRF-blokkert valideringslogging
 
@@ -858,41 +858,47 @@ flowchart LR
 - `src/lib/db/*`: importer spesifikke moduler direkte — ingen samlemodul (det gamle reeksportlaget `localDb.ts` ble fjernet)
 - `src/lib/usageDb.ts`: fasade for brukshistorikk/anropslogger oppå SQLite-tabeller
 
-## Dekning for leverandøreksekutorer (strategimønster)
+## Leverandørdekning (strategimønster)
 
-Hver leverandør har en spesialisert eksekutor som utvider `BaseExecutor` (i `open-sse/executors/base.ts`), som tilbyr URL-bygging, konstruksjon av headere, nye forsøk med eksponentiell tilbakekobling, hooks for fornyelse av legitimasjon og orkestreringsmetoden `execute()`.
+Hver leverandør har en spesialisert executor som utvider `BaseExecutor` (i `open-sse/executors/base.ts`), som gir URL bygging, header-konstruksjon, forsøk på nytt med eksponentiell backoff, credential refresh hooks og `execute()` orkestreringsmetoden.
 
-| Eksekverer                | Leverandør(er)                                                                                                                                             | Spesiell håndtering                                                          |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA osv. | Dynamisk URL-/headerkonfigurasjon per leverandør                             |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                         | Egendefinerte prosjekt-/økt-ID-er, tolking av Retry-After, maskering av 429  |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                               | Distribusjonsbasert ruting, håndheving av api-version-spørring               |
-| `BlackboxWebExecutor`     | Blackbox AI (nettmodus)                                                                                                                                    | Reversering av nettøkt med emulering av TLS-fingeravtrykk                    |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH-bane)                                                                                                                                       | Begrensnings- og verktøyomtilordningskjeder, tilpassing av fingeravtrykk     |
-| `CliProxyApiExecutor`     | CLIProxyAPI-kompatible leverandører                                                                                                                        | Egendefinert autentisering og protokollhåndtering                            |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                      | Innsetting av konto-ID, Neurons-basert brukssporing                          |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                               | Setter inn systeminstruksjoner, fremtvinger resonneringsinnsats              |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                        | Nettleserøktbro til Responses API med låsing av tråd/sekvens                 |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                               | OAuth + headerrotasjon per økt                                               |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                 | ConnectRPC-protokoll, Protobuf-koding, forespørselssignering via kontrollsum |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                  | Brokobling av Devin-oppgavens livssyklus via skyagentmodul                   |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                             | Oppdatering av Copilot-token, headere som etterligner VSCode                 |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                 | GitLab OAuth + prosjektavgrenset ruting                                      |
-| `GlmExecutor`             | Z.AI GLM (inkl. forhåndsinnstillingen `glmt`)                                                                                                              | Bevissthet om resonneringsbudsjett, GLMT-forhåndsinnstillingskonstanter      |
-| `GrokWebExecutor`         | xAI Grok web                                                                                                                                               | Reversering av nettøkt, modusvalg (tenkning/standard)                        |
-| `KieExecutor`             | KIE                                                                                                                                                        | Egendefinert tokenutstedelse med roterende øktankre                          |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                     | Binært AWS EventStream-format → SSE-konvertering                             |
-| `MuseSparkWebExecutor`    | Muse Spark (nett)                                                                                                                                          | Reversering av nettøkt med brokobling av bildemeldinger                      |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                  | Leverandørspesifikk struktur for forespørselskropp                           |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                   | AI SDK-kompatibelt leverandøroppsett                                         |
-| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                             | Reversering av nettøkt for videreføring av chat                              |
-| `PetalsExecutor`          | Petals-distribuert inferens                                                                                                                                | Desentralisert svermruting                                                   |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                            | Ingen API-nøkkel kreves, hastighetsbegrensede forespørsler                   |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                   | PAT- og OAuth-støtte, gratisnivå med flere modeller                          |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                           | Tjenestekontoautentisering, regionbaserte endepunkter                        |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                              | Importert API-nøkkel + Connect-protobuf-strømming av chat                    |
+| Utfører                   | Leverandør(er)                                                                                                                                                 | Spesiell håndtering                                                             |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, perpleksitet , Together, Fireworks, Cerebras, Cohere, NVIDIA, etc. | Dynamisk URL/header -konfigurasjon per leverandør                               |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                             | Egendefinert project/session IDs, Prøv på nytt - Etter parsing, 429 obfuskering |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                   | Implementeringsbasert ruting, håndheving av spørringer i API-versjon            |
+| `BlackboxWebExecutor`     | Blackbox AI (nettmodus)                                                                                                                                        | Omvendt nettøkt med TLS fingeravtrykkemulering                                  |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH bane)                                                                                                                                           | Begrensning av + verktøy-omkart rørledninger, forming av fingeravtrykk          |
+| `CliProxyApiExecutor`     | CLIProxyAPI-kompatible leverandører                                                                                                                            | Tilpasset autentisering og protokollhåndtering                                  |
+| `CloudflareAiExecutor`    | Cloudflare Arbeidere AI                                                                                                                                        | Konto ID injeksjon, nevronbasert brukssporing                                   |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                                   | Injiserer systeminstruksjoner, tvinger fram resonnementanstrengelser            |
+| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                            | Nettleserøktsvar API bridge med thread/turn pinning                             |
+| `CommandCodeExecutor`     | Kommandokode                                                                                                                                                   | OAuth + topptekstrotasjon per økt                                               |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                     | ConnectRPC protokoll, Protobuf-koding, forespørsel om signering via kontrollsum |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                      | Devin oppgavelivssyklusbro via skyagentmodul                                    |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                                 | Copilot token oppdatering, VSCode-lignende overskrifter                         |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                     | GitLab OAuth + prosjektomfanget ruting                                          |
+| `GlmExecutor`             | Z.AI GLM (inkl. `glmt` forhåndsinnstilling)                                                                                                                    | Tenkende budsjettbevisst, GLMT forhåndsinnstilte konstanter                     |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                                   | Omvendt nettøkt, modusvalg (think/standard)                                     |
+| `KieExecutor`             | KIE                                                                                                                                                            | Tilpasset utstedelse av token med roterende øktankere                           |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                         | AWS EventStream binærformat → SSE konvertering                                  |
+| `MuseSparkWebExecutor`    | Muse Spark (nett)                                                                                                                                              | Omvendt nettøkt med bildemeldingsbro                                            |
+| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                      | Leverandørspesifikk forespørsel kroppsform                                      |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                       | AI SDK kompatibel leverandøroppsett                                             |
+| `PerplexityWebExecutor`   | Forvirring web                                                                                                                                                 | Omvendt nettøkt for fortsettelse av chat                                        |
+| `PetalsExecutor`          | Kronbladene fordelt slutning                                                                                                                                   | Desentralisert svermeruting                                                     |
+| `PollinationsExecutor`    | Pollinering AI                                                                                                                                                 | Ingen API nøkkel kreves, satsbegrensede forespørsler                            |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                       | PAT og OAuth støtte, multi-modell gratis tier                                   |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                               | Autentisering av tjenestekonto, regionbaserte endepunkter                       |
+| `DevinDesktopExecutor`    | Devin skrivebord                                                                                                                                               | Importert API key + Connect-protobuf chat streaming                             |
 
-Alle andre leverandører (inkludert egendefinerte kompatible noder) bruker `DefaultExecutor`.
+Alle andre leverandører (inkludert tilpassede kompatible noder) bruker `DefaultExecutor`.
+
+### Automatiserte sonder og nettøktkontoer
+
+Modelltester, Test alle, kombinasjonstester og vurderinger sender ekte chat-forespørsler. En leverandør av nettøkter fungerer som den påloggede brukeren, så hver av disse forespørslene vil bli lagret som en samtale på den kontoen; automatiserte sonder som forlot slike samtaler fikk en konto suspendert (#14780). Chat-pipelinen nekter derfor hvert mål en automatisert probe når hvis leverandør tar en nettøkt-legitimasjon, når målets leverandør er løst og før en legitimasjon er valgt (`src/lib/providers/chatProbePolicy.ts`). Avslaget er `422` med `error.code` `chat_probe_not_isolated`, og sondeløperne rapporterer det som et hopp, ikke en feil.
+
+En executor som kjører hver chat i leverandørens egen modus uten historikk, erklærer den med `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`); sonder til den leverandøren er da tillatt. ChatGPT Web erklærer `temporary-chat`. Fest en erklæring til mekanismen med en test, slik at påstanden ikke kan overleve koden som gjør den sann.
 
 ## Kompatibilitetsmatrise for leverandører
 

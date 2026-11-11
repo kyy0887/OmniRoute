@@ -99,15 +99,15 @@ Ritheann sé an t-iarratas/URL céanna thar suas le **4 sholáthraí go comhthre
 
 ---
 
-## Catalóg Soláthraithe
+## Catalóg Soláthraí
 
-Nochtann `ProviderCatalog.tsx` liosta iomlán na soláthraithe ó `GET /api/search/providers`
-(leathnaithe in F4 chun soláthraithe aisghabhála a chur san áireamh):
+nochtar `ProviderCatalog.tsx` liosta iomlán na soláthróirí ó `GET /api/search/providers` (sínte i F4 chun soláthraithe beir a áireamh):
 
-| `kind` | `"search"` (20 soláthraí) nó `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 soláthraí) nó `"fetch"` (crawl dóiteáin, léitheoir jina, cuardach tavily, iasc beag bídeach, cuardach nimble, aon chuardach-cuardach, cuardach comhthreomhar) |
 
-Déantar an stádas a **dhíorthú tráth na hiarrata** trí sheiceáil an bhfuil dintiúir ann agus an bhfuil
-na heochracha uile i dtréimhse shuaimhnithe faoi láthair.
+Tá an stádas** díorthaithe ag am iarratais** trí sheiceáil cibé an bhfuil dintiúir ann agus an bhfuil na heochracha go léir faoi chuimsiú faoi láthair.
+
+Níl aon eochair dá chuid féin ag `codex-search` (Codex Web Search): déanann sé cuntas Codex (ChatGPT) ceangailte a athúsáid, mar sin caitheann gach cuardach cuóta síntiúis ChatGPT agus tógann sé thart ar 10-40 s. Ritheann sé nuair a ainmníonn iarratas é; Teastaíonn bratach na gné `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` le roghnú uathoibríoch (amach de réir réamhshocraithe).
 
 ---
 

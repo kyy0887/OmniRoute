@@ -100,13 +100,13 @@ Search Tools Studio превращает `/dashboard/search-tools` из прос
 
 ## Каталог провайдеров
 
-`ProviderCatalog.tsx` предоставляет полный список провайдеров из `GET /api/search/providers`
-(расширенный в F4 для включения fetch-провайдеров):
+`ProviderCatalog.tsx` предоставляет полный список поставщиков из `GET /api/search/providers` (расширенный в F4 для включения поставщиков выборки):
 
-| `kind` | `"search"` (20 провайдеров) или `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 провайдера) или `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, Anysearch-search, параллельный поиск) |
 
-Статус **определяется во время запроса** путём проверки наличия учётных данных и того,
-находятся ли все ключи в данный момент в периоде ожидания.
+Статус** получено во время запроса** проверяя, существуют ли учетные данные и все ли ключи в настоящее время находятся в режиме восстановления.
+
+`codex-search` (Codex Web Search) не имеет собственного ключа: он повторно использует подключенную учетную запись Codex (ChatGPT), поэтому каждый поиск тратит квоту подписки ChatGPT и занимает около 10–40 с. Он запускается, когда запрос называет его; для автоматического выбора требуется флаг функции `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (по умолчанию отключен).
 
 ---
 

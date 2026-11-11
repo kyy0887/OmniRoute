@@ -444,7 +444,7 @@ server/
 
 ---
 
-## 4. Рабочая область `open-sse/` — Streaming Engine
+## 4. Рабочая область механизма потоковой передачи `open-sse/` —
 
 Отдельное рабочее пространство npm, опубликованное как `@omniroute/open-sse`. Владеет обработкой запросов, исполнителями, трансляторами, сервисами, преобразователем и сервером MCP.
 
@@ -481,7 +481,7 @@ open-sse/
 | `search.ts`             | Веб-поиск                                                                                               |
 | `sseParser.ts`          | парсер событий SSE                                                                                      |
 | `usageExtractor.ts`     | Извлечение количества токенов из восходящих потоков                                                     |
-| `responseSanitizer.ts`  | Удаление шума, специфичного для провайдера                                                              |
+| `responseSanitizer.ts`  | Удалить шум, специфичный для провайдера                                                                 |
 | `responseTranslator.ts` | Связка между ответом провайдера и уровнем переводчика                                                   |
 
 ### 4.2 `open-sse/executors/`
@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, плюс `claudeIdentity.ts` (помощник по общим идентификаторам) и `index.ts` (реестр).
 
-> Примечание. Поставщики, не перечисленные здесь, обслуживаются `default.ts` с использованием универсального исполнителя, совместимого с OpenAI. Полный каталог провайдеров (381 провайдер) находится в `src/shared/constants/providers.ts`.
+> Примечание. Поставщики, не перечисленные здесь, обслуживаются `default.ts` с использованием универсального исполнителя, совместимого с OpenAI. Полный каталог провайдеров (388 провайдеров) находится в `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 

@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | `components/`                    | جزء داشبورد API: آداپتورهای روی `packages/ui-kit` — به `docs/architecture/DESIGN_SYSTEM.md` مراجعه کنید |
 | `constants/iconMap.ts`           | `ICON_MAP`: نام نمادهای مورد استفاده در صفحه نمایش اجزای → Lucide (`<Icon>`)                            |
-| `constants/providers.ts`         | **381 ارائه دهنده** با اعتبار Zod (منبع حقیقت)                                                          |
+| `constants/providers.ts`         | **388 ارائه دهنده** با اعتبار Zod (منبع حقیقت)                                                          |
 | `constants/cliTools.ts`          | رجیستری ابزار CLI خارجی                                                                                 |
 | `constants/routingStrategies.ts` | **20 استراتژی مسیریابی** با اولویت ها                                                                   |
 | `constants/publicApiRoutes.ts`   | مسیرهایی که به مجوز حامل (در مقابل مدیریت) نیاز دارند                                                   |
@@ -404,7 +404,7 @@ open-sse/
 | `API_REFERENCE.md`          | مرجع نقطه پایانی API با مدل auth                                                                  |
 | `openapi.yaml`              | مشخصات OpenAPI 3.0 (121 مسیر)                                                                     |
 | `SETUP_GUIDE.md`            | روشهای نصب (npm، npx، Docker، Electron، Termux، منبع)                                             |
-| `ENVIRONMENT.md`            | همه env vars (~ 800 مستند، ~ 3050 خط `.env.example`)                                              |
+| `ENVIRONMENT.md`            | همه env vars (~ 800 مستند شده، ~ 3050 lines `.env.example`)                                       |
 | `TROUBLESHOOTING.md`        | خطاهای رایج + v3.8.0 مسائل شناخته شده                                                             |
 | `RELEASE_CHECKLIST.md`      | جریان آزادسازی کامل (مهارت ها، هاسکی، تعهدات معمولی، استقرار)                                     |
 | `COVERAGE_PLAN.md`          | اهداف پوشش و وضعیت فعلی                                                                           |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ادغام CLI خارجی + داخلی OmniRoute CLI                                                             |
 | `I18N.md`                   | معماری i18n، اضافه کردن یک زبان، 67 منطقه                                                         |
 | `UNINSTALL.md`              | مراحل حذف را پاک کنید                                                                             |
-| `PROVIDER_REFERENCE.md`     | **به صورت خودکار تولید می شود** کاتالوگ 381 ارائه دهنده (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **به صورت خودکار تولید می شود** کاتالوگ 388 ارائه دهنده (regen: `npm run gen:provider-reference`) |
 
 ### زیرسیستم غواصی عمیق
 

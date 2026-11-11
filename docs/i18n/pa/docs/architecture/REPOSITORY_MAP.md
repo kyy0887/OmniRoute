@@ -186,7 +186,7 @@ src/
 | `embeddings/`                            | ਏਮਬੈਡਿੰਗ ਸੇਵਾ ਸਹਾਇਕ                                                                                                                                                                                                                                                                                             |
 | `env/`                                   | Env ਵੇਰੀਏਬਲ ਪਾਰਸਿੰਗ + ਪ੍ਰਮਾਣਿਕਤਾ                                                                                                                                                                                                                                                                                |
 | `evals/`                                 | Eval ਫਰੇਮਵਰਕ (ਸੂਟ, ਰਨਰ, ਰਨਟਾਈਮ) — `docs/frameworks/EVALS.md` ਵੇਖੋ                                                                                                                                                                                                                                               |
-| `guardrails/`                            | PII ਮਾਸਕ, ਪ੍ਰੋਂਪਟ ਇੰਜੈਕਸ਼ਨ, ਵਿਜ਼ਨ ਬ੍ਰਿਜ — ਦੇਖੋ `docs/security/GUARDRAILS.md`                                                                                                                                                                                                                                    |
+| `guardrails/`                            | PII ਮਾਸਕਰ, ਪ੍ਰੋਂਪਟ ਇੰਜੈਕਸ਼ਨ, ਵਿਜ਼ਨ ਬ੍ਰਿਜ — ਦੇਖੋ `docs/security/GUARDRAILS.md`                                                                                                                                                                                                                                   |
 | `jobs/`                                  | ਪਿਛੋਕੜ ਦੀਆਂ ਨੌਕਰੀਆਂ (ਕ੍ਰੋਨ ਵਰਗੀਆਂ)                                                                                                                                                                                                                                                                              |
 | `memory/`                                | ਗੱਲਬਾਤ ਸੰਬੰਧੀ ਮੈਮੋਰੀ (SQLite FTS5 + sqlite-vec ਹਾਈਬ੍ਰਿਡ RRF + Qdrant ਟੀਅਰ 2) — ਦੇਖੋ `docs/frameworks/MEMORY.md`                                                                                                                                                                                                 |
 | `memory/embedding/`                      | ਮਲਟੀ-ਸੋਰਸ ਏਮਬੈਡਿੰਗ ਲੇਅਰ: `index.ts` (ਰੈਜ਼ੋਲਵਰ), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (ਯੋਜਨਾ 21)                                                                                                                                                                       |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `components/`                    | ਡੈਸ਼ਬੋਰਡ ਕੰਪੋਨੈਂਟ API: `packages/ui-kit` — ਉੱਤੇ ਅਡਾਪਟਰ ਵੇਖੋ `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ਸਕ੍ਰੀਨਾਂ ਦੁਆਰਾ ਵਰਤੇ ਗਏ ਆਈਕਨ ਨਾਮ → ਲੂਸਾਈਡ ਕੰਪੋਨੈਂਟਸ (`<Icon>`)                        |
-| `constants/providers.ts`         | **੩੮੧ ਪ੍ਰਦਾਤਾ** Zod ਪ੍ਰਮਾਣਿਕਤਾ ਦੇ ਨਾਲ (ਸੱਚ ਦਾ ਸਰੋਤ)                                              |
+| `constants/providers.ts`         | **388 ਪ੍ਰਦਾਤਾ** Zod ਪ੍ਰਮਾਣਿਕਤਾ ਦੇ ਨਾਲ (ਸੱਚ ਦਾ ਸਰੋਤ)                                              |
 | `constants/cliTools.ts`          | ਬਾਹਰੀ CLI ਟੂਲ ਰਜਿਸਟਰੀ                                                                            |
 | `constants/routingStrategies.ts` | **20 ਰੂਟਿੰਗ ਰਣਨੀਤੀਆਂ** ਤਰਜੀਹਾਂ ਦੇ ਨਾਲ                                                            |
 | `constants/publicApiRoutes.ts`   | ਰੂਟ ਜਿਨ੍ਹਾਂ ਲਈ ਬੇਅਰਰ (ਬਨਾਮ ਪ੍ਰਬੰਧਨ) ਪ੍ਰਮਾਣਿਕਤਾ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ                                   |
@@ -391,7 +391,7 @@ open-sse/
 
 ---
 
-## `docs/` — ਜਨਤਕ ਦਸਤਾਵੇਜ਼ (7 ਰੂਟ ਫਾਈਲਾਂ + 17 ਸਬਡਾਈਰਜ਼)
+## `docs/` — ਪਬਲਿਕ ਡੌਕੂਮੈਂਟੇਸ਼ਨ (7 ਰੂਟ ਫਾਈਲਾਂ + 17 ਸਬਡਾਈਰਜ਼)
 
 ### ਸਿਖਰ-ਪੱਧਰ ਦੀਆਂ ਗਾਈਡਾਂ
 
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ਬਾਹਰੀ CLI ਏਕੀਕਰਣ + ਅੰਦਰੂਨੀ OmniRoute CLI                                          |
 | `I18N.md`                   | i18n ਆਰਕੀਟੈਕਚਰ, ਇੱਕ ਭਾਸ਼ਾ ਜੋੜਨਾ, 67 ਲੋਕੇਲ                                         |
 | `UNINSTALL.md`              | ਅਣਇੰਸਟੌਲ ਕਦਮਾਂ ਨੂੰ ਸਾਫ਼ ਕਰੋ                                                       |
-| `PROVIDER_REFERENCE.md`     | **ਸਵੈ-ਤਿਆਰ ਕੀਤਾ** 381 ਪ੍ਰਦਾਤਾਵਾਂ ਦੀ ਸੂਚੀ (ਰੀਜਨ: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ਸਵੈ-ਤਿਆਰ ਕੀਤਾ** 388 ਪ੍ਰਦਾਤਾਵਾਂ ਦੀ ਸੂਚੀ (ਰੀਜਨ: `npm run gen:provider-reference`) |
 
 ### ਉਪ-ਸਿਸਟਮ ਡੂੰਘੇ-ਡੁਬਕੀ
 

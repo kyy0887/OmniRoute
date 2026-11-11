@@ -99,13 +99,13 @@ Bir xil soʻrov/URLni **4 tagacha provayderda parallel ravishda** ishga tushirad
 
 ## Provayderlar katalogi
 
-`ProviderCatalog.tsx` `GET /api/search/providers` dan olingan provayderlarning toʻliq roʻyxatini taqdim etadi
-(F4 da fetch provayderlarini ham qamrab olish uchun kengaytirilgan):
+`ProviderCatalog.tsx` `GET /api/search/providers` dan to‘liq provayderlar ro‘yxatini ochib beradi (F4 da kengaytirilgan, olib keluvchi provayderlarni o‘z ichiga oladi):
 
-| `kind` | `"search"` (20 ta provayder) yoki `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 ta provayder) yoki `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-Holat soʻrov vaqtida hisob maʼlumotlari mavjudligi va barcha kalitlar hozirda cooldown holatida ekanligini
-tekshirish orqali **aniqlanadi**.
+Holati shunday** so'rov vaqtida olingan** hisob ma'lumotlari mavjudligini va barcha kalitlar hozirda sovutish rejimida ekanligini tekshirish orqali.
+
+`codex-search` (Codex Web Search) ning o‘ziga xos kaliti yo‘q: u ulangan Codex (ChatGPT) hisobini qayta ishlatadi, shuning uchun har bir qidiruv ChatGPT obuna kvotasini sarflaydi va taxminan 10–40 soniya vaqt oladi. So'rov uni nomlaganda ishlaydi; avtomatik tanlash uchun `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` xususiyat bayrog'i kerak (sukut bo'yicha o'chirilgan).
 
 ---
 

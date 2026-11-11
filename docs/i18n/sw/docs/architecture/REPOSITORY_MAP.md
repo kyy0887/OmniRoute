@@ -182,7 +182,7 @@ src/
 | `db/`                                    | 120 + kikoa DB moduli + 168 uhamiaji (daima pitia hapa kwa SQLite)                                                                                                                                                                                                                                                                    |
 | `quota/`                                 | Injini ya Kushiriki Nukuu: `dimensions.ts` (types/Zod), `types.ts` ( kiolesura cha QuotaStore ), `sqliteQuotaStore.ts`, `redisQuotaStore.ts`, `storeFactory.ts`, `fairShare.ts`, `burnRate.ts`, `planResolver.ts`, `planRegistry.ts`, `saturationSignals.ts`, `enforce.ts`, `spendRecorder.ts` — tazama `docs/routing/QUOTA_SHARE.md` |
 | `radar/`                                 | Mteja wa katalogi ya muundo usiolipishwa wa rada: `feedSchema.ts`, `pinnedKeys.ts`, `verify.ts`, `sync.ts`, `applyFeed.ts`, `index.ts` (`getRadarCatalog()`) — tazama `docs/frameworks/RADAR.md`                                                                                                                                      |
-| `display/`                               | UI wasaidizi wa uumbizaji (gharama, muda wa kusubiri, n.k.)                                                                                                                                                                                                                                                                           |
+| `display/`                               | wasaidizi wa uumbizaji wa UI (gharama, muda wa kusubiri, n.k.)                                                                                                                                                                                                                                                                        |
 | `embeddings/`                            | Wasaidizi wa huduma ya upachikaji                                                                                                                                                                                                                                                                                                     |
 | `env/`                                   | Uthibitishaji wa uchanganuzi wa + wa env                                                                                                                                                                                                                                                                                              |
 | `evals/`                                 | Mfumo wa Eval (vyumba, mkimbiaji, wakati wa kukimbia) — tazama `docs/frameworks/EVALS.md`                                                                                                                                                                                                                                             |
@@ -192,7 +192,7 @@ src/
 | `memory/embedding/`                      | Safu ya upachikaji wa vyanzo vingi: `index.ts` (kitatuzi), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (mpango 21)                                                                                                                                                                                 |
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + mseto RRF (FTS5 + vekta, k = 60). Uvivu-init, huharibika kwa uzuri wakati sqlite-vec haipatikani. (mpango 21)                                                                                                                                                                           |
 | `memory/reindex.ts`                      | `runReindexBatch()` — huchakata kumbukumbu na `needs_reindex=1` nyuma; inayoitwa na `POST /api/memory/reindex` na njia ya uvivu ya kujaza nyuma. (mpango 21)                                                                                                                                                                          |
-| `monitoring/`                            | Ukaguzi wa afya, utoaji wa metrics                                                                                                                                                                                                                                                                                                    |
+| `monitoring/`                            | Ukaguzi wa afya, utoaji wa vipimo                                                                                                                                                                                                                                                                                                     |
 | `oauth/`                                 | OAuth/import hutiririka kwa moduli 22 za watoa huduma (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, qoder, kiro, kiroder mwenyeji wa zed, zed)                                                                      |
 | `plugins/`                               | Usajili wa programu-jalizi                                                                                                                                                                                                                                                                                                            |
 | `promptCache/`                           | Viini vya akiba vya haraka vya mtindo wa anthropic                                                                                                                                                                                                                                                                                    |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `components/`                    | Sehemu ya Dashibodi API: adapta juu ya `packages/ui-kit` — tazama `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: majina ya ikoni yanayotumiwa na skrini → vipengele vya Lucide (`<Icon>`)                   |
-| `constants/providers.ts`         | **381 watoa huduma** na uthibitisho wa Zod (chanzo cha ukweli)                                         |
+| `constants/providers.ts`         | **388 watoa huduma** na uthibitisho wa Zod (chanzo cha ukweli)                                         |
 | `constants/cliTools.ts`          | Usajili wa zana za CLI za nje                                                                          |
 | `constants/routingStrategies.ts` | **Mikakati 20 ya uelekezaji** na vipaumbele                                                            |
 | `constants/publicApiRoutes.ts`   | Njia zinazohitaji Bearer (dhidi ya usimamizi) auth                                                     |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Miunganisho ya CLI ya nje + OmniRoute CLI ya ndani                                             |
 | `I18N.md`                   | i18n usanifu, kuongeza lugha, 67 locales                                                       |
 | `UNINSTALL.md`              | Safisha hatua za kufuta                                                                        |
-| `PROVIDER_REFERENCE.md`     | **Imetolewa kiotomatiki** orodha ya watoa huduma 381 (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Imetolewa kiotomatiki** orodha ya watoa huduma 388 (regen: `npm run gen:provider-reference`) |
 
 ### Mfumo mdogo wa kupiga mbizi
 
@@ -420,7 +420,7 @@ open-sse/
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `MCP-SERVER.md`                              | seva ya MCP : zana 110, usafirishaji 3, wigo 33, ncha REST                                         |
 | `A2A-SERVER.md`                              | A2A v0.3: JSON-RPC, ujuzi 6, wasaidizi wa REST, kadi ya wakala                                     |
-| `AGENT_PROTOCOLS_GUIDE.md`                   | Mwongozo uliounganishwa: A2A dhidi ya ACP dhidi ya Mawakala wa Wingu                               |
+| `AGENT_PROTOCOLS_GUIDE.md`                   | Mwongozo uliounganishwa: A2A vs ACP dhidi ya Mawakala wa Wingu                                     |
 | `CLOUD_AGENT.md`                             | Codex Cloud / Devin / Jules orchestration                                                          |
 | `SKILLS.md`                                  | Mfumo wa ujuzi (skofu la + lililojengwa ndani + SkillsSH + sandbox)                                |
 | `RADAR.md`                                   | Uwekeleaji wa katalogi ya muundo usiolipishwa wa rada (`RADAR_ENABLED`, imezimwa kwa chaguomsingi) |
@@ -433,7 +433,7 @@ open-sse/
 | `AUTHZ_GUIDE.md`                             | Bomba la uidhinishaji (`classify` → `policies` → `enforce`)                                        |
 | `RESILIENCE_GUIDE.md`                        | Kivunja mzunguko + cooldown + mtindo wa kufuli                                                     |
 | `docs/security/STEALTH_GUIDE.md` (git pekee) | alama za vidole za TLS (JA3/JA4), Claude Code CCH, MITM cert                                       |
-| `AUTO-COMBO.md`                              | Injini ya Mchanganyiko Otomatiki (ufungaji wa sababu 16, vifurushi 6 vya hali, kiwanda pepe)       |
+| `AUTO-COMBO.md`                              | Injini ya Mchanganyiko otomatiki (ufungaji wa sababu 16, vifurushi 6 vya hali, kiwanda pepe)       |
 
 ### Mfinyazo
 

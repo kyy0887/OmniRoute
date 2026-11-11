@@ -488,9 +488,9 @@ open-sse/
 
 159 spouštěcích modulů nejvyšší úrovně (`*.ts` minus `base.ts`, `index.ts` a testy — počet měření `npm run check:docs-counts` ). Každá třída exekutorů rozšiřuje `BaseExecutor` (`base.ts`), přímo nebo prostřednictvím `DefaultExecutor` nebo jiného exekutoru; zbývající moduly jsou pomocníci pro jednotlivé poskytovatele (schémata nástrojů, adaptéry fetch/TTS, ovladače quirk). Mezi exekutory patří:
 
-`antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, identita plus `claudeIdentity.ts` `index.ts` (registr).
+`antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, plus `claudeIdentity.ts` (shared identity helper) and `index.ts` (registry).
 
-> Poznámka: Poskytovatelé, kteří zde nejsou uvedeni, jsou obsluhováni `default.ts` pomocí generického spouštěče kompatibilního s OpenAI. Úplný katalog poskytovatelů (381 poskytovatelů) žije v `src/shared/constants/providers.ts`.
+> Poznámka: Poskytovatelé, kteří zde nejsou uvedeni, jsou obsluhováni `default.ts` pomocí generického spouštěče kompatibilního s OpenAI. Úplný katalog poskytovatelů (388 poskytovatelů) žije v `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 

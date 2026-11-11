@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop` `muse-spark-web` `claudeIdentity.ts` `index.ts` (רישום).
 
-> הערה: ספקים שאינם רשומים כאן מוגשת על ידי `default.ts` באמצעות ה-executor הגנרי תואם OpenAI. קטלוג הספקים המלא (381 ספקים) חי ב- `src/shared/constants/providers.ts`.
+> הערה: ספקים שאינם רשומים כאן מוגשת על ידי `default.ts` באמצעות ה-executor הגנרי תואם OpenAI. קטלוג הספקים המלא (388 ספקים) חי ב- `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 
@@ -519,7 +519,7 @@ open-sse/
 | שמירה במטמון            | `reasoningCache.ts`, `searchCache.ts`, `signatureCache.ts`, `requestDedup.ts`                                                                                                                                                                            |
 | ניתוב מודיעין           | `intentClassifier.ts`, `taskAwareRouter.ts`, `backgroundTaskDetector.ts`, `volumeDetector.ts`, `wildcardRouter.ts`, `workflowFSM.ts`, `specificityDetector.ts`, `specificityRules.ts`, `specificityTypes.ts`                                             |
 | טיפול בדגם              | `modelCapabilities.ts`, `modelDeprecation.ts`, `modelFamilyFallback.ts`, `modelStrip.ts`, `model.ts`, `provider.ts`, `providerRequestDefaults.ts`, `providerCostData.ts`, `payloadRules.ts`                                                              |
-| דְחִיסָה                | חיווט מנוע דחיסה מלא `compression/` —                                                                                                                                                                                                                    |
+| דְחִיסָה                | חיווט מנוע דחיסה מלאה `compression/` —                                                                                                                                                                                                                   |
 | סשן + אסימון            | `tokenRefresh.ts`, `sessionManager.ts`, `apiKeyRotator.ts`, `contextManager.ts`, `contextHandoff.ts`, `systemPrompt.ts`, `roleNormalizer.ts`, `responsesInputSanitizer.ts`, `toolSchemaSanitizer.ts`, `toolLimitDetector.ts`, `thinkingBudget.ts`        |
 | שכבה / מניפסט           | `tierResolver.ts`, `tierConfig.ts`, `tierDefaults.json`, `tierTypes.ts`, `manifestAdapter.ts`                                                                                                                                                            |
 | IP / רשת                | `ipFilter.ts`, `webSearchFallback.ts`                                                                                                                                                                                                                    |

@@ -98,15 +98,15 @@
 
 ---
 
-## كتالوج المزوّدين
+## كتالوج المزود
 
-يعرض `ProviderCatalog.tsx` القائمة الكاملة للمزوّدين من `GET /api/search/providers`
-(تم توسيعها في F4 لتشمل مزوّدي الجلب):
+تعرض `ProviderCatalog.tsx` قائمة الموفرين الكاملة من `GET /api/search/providers` (ممتدة في F4 لتشمل موفري الجلب):
 
-| `kind` | `"search"` (20 مزوّدًا) أو `"fetch"` (firecrawl، jina-reader، tavily-search، tinyfish، nimble-search، anysearch-search، parallel-search) |
+| `kind` | `"search"` (23 مزودًا) أو `"fetch"` (firecrawl، jina-reader، tavily-search، tinyfish، nimble-search، Anysearch-search،توازي البحث) |
 
-تُشتق الحالة **وقت الطلب** عبر التحقق مما إذا كانت بيانات الاعتماد موجودة، وما إذا كانت
-جميع المفاتيح حاليًا في فترة انتظار.
+الوضع هو** مشتقة في وقت الطلب** عن طريق التحقق من وجود بيانات الاعتماد وما إذا كانت جميع المفاتيح موجودة حاليًا في فترة التباطؤ.
+
+لا يحتوي `codex-search` (بحث الويب Codex ) على مفتاح خاص به: فهو يعيد استخدام حساب Codex (ChatGPT) متصل، لذلك ينفق كل بحث حصة اشتراك ChatGPT ويستغرق حوالي 10 إلى 40 ثانية. يتم تشغيله عندما يسميه الطلب؛ يحتاج التحديد التلقائي إلى علامة ميزة `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (متوقفة بشكل افتراضي).
 
 ---
 

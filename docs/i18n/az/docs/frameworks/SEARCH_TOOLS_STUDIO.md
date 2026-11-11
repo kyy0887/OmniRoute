@@ -97,15 +97,15 @@ Eyni sorğunu/URL-i paralel olaraq maksimum **4 provayder** üzrə icra edir (D2
 
 ---
 
-## Provayder Kataloqu
+## Provayder kataloqu
 
-`ProviderCatalog.tsx`, `GET /api/search/providers` vasitəsilə tam provayder siyahısını təqdim edir
-(F4-də fetch provayderlərini daxil etmək üçün genişləndirilib):
+`ProviderCatalog.tsx` `GET /api/search/providers` -dən tam provayder siyahısını təqdim edir (gəlmə təminatçılarını daxil etmək üçün F4-də genişləndirilib):
 
-| `kind` | `"search"` (20 provayder) və ya `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 provayder) və ya `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, çevik axtarış, anysearch-search, parallel-search) |
 
-Status sorğu zamanı etimadnamələrin mövcud olub-olmadığı və bütün
-açarların hazırda gözləmə müddətində olub-olmadığı yoxlanılaraq **müəyyən edilir**.
+Vəziyyət belədir** sorğu zamanı əldə edilir** etimadnamələrin olub-olmadığını və bütün açarların hazırda soyuma müddətində olub olmadığını yoxlayaraq.
+
+`codex-search` (Codex Web Search ) öz açarı yoxdur: o, bağlı Codex (ChatGPT) hesabını təkrar istifadə edir, ona görə də hər axtarış ChatGPT abunə kvotası sərf edir və təxminən 10-40 s çəkir. Sorğu onu adlandırdıqda işləyir; avtomatik seçim üçün `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` xüsusiyyət bayrağı lazımdır (defolt olaraq söndürülür).
 
 ---
 

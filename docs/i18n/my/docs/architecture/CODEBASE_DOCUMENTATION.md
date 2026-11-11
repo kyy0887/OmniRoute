@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, `claudeIdentity.ts` (အကူအညီ) နှင့် `index.ts`
 
-> မှတ်ချက်- ဤနေရာတွင် စာရင်းမသွင်းထားသော ဝန်ဆောင်မှုပေးသူများကို ယေဘူယျ OpenAI-သဟဇာတဖြစ်သော executor ကို အသုံးပြု၍ `default.ts` မှ ဆောင်ရွက်ပေးပါသည်။ ဝန်ဆောင်မှုပေးသူ ကတ်တလောက် အပြည့်အစုံ (381 ဝန်ဆောင်မှုပေးသူ) သည် `src/shared/constants/providers.ts` တွင် နေထိုင်သည်။
+> မှတ်ချက်- ဤနေရာတွင် စာရင်းမသွင်းထားသော ဝန်ဆောင်မှုပေးသူများကို ယေဘူယျ OpenAI-သဟဇာတဖြစ်သော executor ကို အသုံးပြု၍ `default.ts` မှ ဆောင်ရွက်ပေးပါသည်။ ဝန်ဆောင်မှုပေးသူ ကတ်တလောက် အပြည့်အစုံ (388 ဝန်ဆောင်မှုပေးသူ) သည် `src/shared/constants/providers.ts` တွင် နေထိုင်သည်။
 
 ### 4.3 `open-sse/translator/`
 
@@ -541,7 +541,7 @@ Hub-and-spoke ဘာသာပြန်ဆိုချက် (OpenAI သည် �
 
 ### 4.8 `open-sse/utils/`
 
-ထုတ်လွှ `thinkTagParser.ts`် `awsSigV4.ts` `tlsClient.ts` `stream.ts` `streamHandler.ts` `streamHelpers.ts` `streamPayloadCollector.ts` `streamReadiness.ts` `sseHeartbeat.ts` `proxyFetch.ts` `proxyDispatcher.ts` `networkProxy.ts` `cacheControlPolicy.ts` `cursorChecksum.ts` `cursorAgentProtobuf.ts` `cursorVersionDetector.ts` `comfyuiClient.ts` `kieTask.ts` `bypassHandler.ts` `aiSdkCompat.ts`, `urlSanitize.ts`, `usageTracking.ts`, `requestLogger.ts`, `progressTracker.ts`, `cors.ts`, `error.ts`, `logger.ts`, `sleep.ts`, `ollamaTransform.ts`.
+ထုတ်လွှင့်ခြင်း `tlsClient.ts` အခြေခံများနှင့် ပံ့ပိုးပေးသူများ- `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts`, `aiSdkCompat.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `requestLogger.ts`, `progressTracker.ts`, `cors.ts`, `error.ts`, `logger.ts`, `sleep.ts`, `ollamaTransform.ts`.
 
 ---
 

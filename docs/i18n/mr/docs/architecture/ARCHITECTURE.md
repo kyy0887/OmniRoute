@@ -14,8 +14,8 @@ OmniRoute हे स्थानिक AI राउटिंग गेटवे 
 
 मुख्य क्षमता:
 
-- CLI/tools साठी OpenAI- सुसंगत API पृष्ठभाग (381 प्रदाता, 159 एक्झिक्युटर मॉड्यूल)
-- Request/response translation across provider formats
+- CLI/tools साठी OpenAI- सुसंगत API पृष्ठभाग (388 प्रदाता, 159 एक्झिक्युटर मॉड्यूल)
+- प्रदाता स्वरूपांमध्येRequest/response भाषांतर
 - मॉडेल कॉम्बो फॉलबॅक (मल्टी-मॉडेल क्रम)
 - `compositeTiers` द्वारे रनटाइम ऑर्डरिंगसह संरचित कॉम्बो स्टेप्स (`provider + model + connection`).
 - खाते-स्तरीय फॉलबॅक (प्रति प्रदाता एकाधिक-खाते)
@@ -30,7 +30,7 @@ OmniRoute हे स्थानिक AI राउटिंग गेटवे 
 - `/v1/search` द्वारे वेब शोध (20 प्रदाते)
 - `/v1/moderations` द्वारे नियंत्रण
 - `/v1/rerank` द्वारे रँकिंग
-- Think tag parsing (`<think>...</think>`) for reasoning models
+- तर्क मॉडेलसाठी टॅग पार्सिंग (`<think>...</think>`) विचार करा
 - कठोर OpenAI SDK अनुकूलतेसाठी प्रतिसाद स्वच्छता
 - क्रॉस-प्रदाता सुसंगततेसाठी रोल सामान्यीकरण (डेव्हलपर → सिस्टम, सिस्टम → वापरकर्ता)
 - संरचित आउटपुट रूपांतरण (json_schema → Gemini responseSchema)
@@ -47,7 +47,7 @@ OmniRoute हे स्थानिक AI राउटिंग गेटवे 
 - स्वाक्षरी-आधारित विनंती डुप्लिकेशन कॅशे
 - डोमेन स्तर: खर्चाचे नियम, फॉलबॅक धोरण, लॉकआउट धोरण
 - संदर्भ रिले: खाते रोटेशन निरंतरतेसाठी सत्र हँडऑफ सारांश
-- Domain state persistence (SQLite write-through cache for fallbacks, budgets, lockouts, circuit breakers)
+- डोमेन स्टेट पर्सिस्टन्स (फॉलबॅक, बजेट, लॉकआउट्स, सर्किट ब्रेकर्ससाठीSQLite राइट-थ्रू कॅशे)
 - केंद्रीकृत विनंती मूल्यमापनासाठी पॉलिसी इंजिन (लॉकआउट → बजेट → फॉलबॅक)
 - p50/p95/p99 विलंबता एकत्रीकरणासह टेलिमेट्रीची विनंती करा
 - कॉम्बो टार्गेट टेलिमेट्री आणि ऐतिहासिक कॉम्बो टार्गेट हेल्थ `combo_execution_key` / `combo_step_id` द्वारे
@@ -56,7 +56,7 @@ OmniRoute हे स्थानिक AI राउटिंग गेटवे 
 - LLM गुणवत्ता हमी साठी Eval फ्रेमवर्क
 - रिअल-टाइम प्रदाता सर्किट ब्रेकर स्थितीसह आरोग्य डॅशबोर्ड
 - 3 ट्रान्सपोर्टसह MCP सर्व्हर (110 टूल्स) (stdio/SSE/Streamable HTTP)
-- A2A Server (JSON-RPC 2.0 + SSE) with skills and task lifecycle
+- A2A सर्व्हर (JSON-RPC 2.0 + SSE) कौशल्ये आणि कार्य जीवनचक्रासह
 - मेमरी सिस्टम (एक्सट्रॅक्शन, इंजेक्शन, पुनर्प्राप्ती, सारांश)
 - कौशल्य प्रणाली (रजिस्ट्री, एक्झिक्युटर, सँडबॉक्स, अंगभूत कौशल्ये)
 - प्रमाणपत्र व्यवस्थापन आणि DNS हाताळणीसह MITM प्रॉक्सी
@@ -66,10 +66,10 @@ OmniRoute हे स्थानिक AI राउटिंग गेटवे 
 - मॉड्यूलर OAuth प्रदाता ( `src/lib/oauth/providers/` अंतर्गत 22 वैयक्तिक मॉड्यूल)
 - Uninstall/full-uninstall स्क्रिप्ट
 - OAuth पर्यावरण दुरुस्ती कृती
-- OpenAI-सुसंगत WS क्लायंटसाठीWebSocket ब्रिज (`/v1/ws`)
-- सिंक टोकन व्यवस्थापन (issue/revoke, ETag-आवृत्तीचे कॉन्फिग बंडल डाउनलोड)
+- ओपनएआय-सुसंगत WS क्लायंटसाठीWebSocket ब्रिज (`/v1/ws`)
+- समक्रमण टोकन व्यवस्थापन (issue/revoke, ETag-आवृत्तीचे कॉन्फिग बंडल डाउनलोड)
 - GLM थिंकिंग (`glmt`) प्रथम श्रेणी प्रदाता प्रीसेट
-- हायब्रिड टोकन मोजणी (अंदाज फॉलबॅकसह प्रदाता-साइड `/messages/count_tokens` )
+- हायब्रीड टोकन मोजणी (अंदाज फॉलबॅकसह प्रदाता-साइड `/messages/count_tokens` )
 - मॉडेल ऊर्फ ऑटो-सीडिंग (स्टार्टअपवर 30 + क्रॉस-प्रॉक्सी बोली सामान्यीकरण)
 - SSRF गार्ड, खाजगी URL ब्लॉकिंग आणि कॉन्फिगर करण्यायोग्य पुन्हा प्रयत्नासह सुरक्षित आउटबाउंड फेच
 - कूलडाउन-अवेअर चॅट कॉन्फिगर करण्यायोग्य `requestRetry` आणि `maxRetryIntervalSec` सह पुन्हा प्रयत्न करतात
@@ -847,41 +847,47 @@ flowchart LR
 - `src/lib/db/*`: विशिष्ट मॉड्यूल्स थेट इम्पोर्ट करा — बॅरल वापरू नका (जुना `localDb.ts` री-एक्सपोर्ट स्तर काढून टाकला आहे)
 - `src/lib/usageDb.ts`: SQLite टेबल्सवर आधारित वापर इतिहास/कॉल लॉग्स फसाड
 
-## प्रोव्हायडर एक्झिक्युटर कव्हरेज (स्ट्रॅटेजी पॅटर्न)
+## प्रदाता एक्झिक्युटर कव्हरेज (स्ट्रॅटेजी पॅटर्न)
 
-प्रत्येक प्रोव्हायडरसाठी `BaseExecutor` (`open-sse/executors/base.ts` मधील) विस्तारित करणारा एक विशेषीकृत एक्झिक्युटर असतो, जो URL तयार करणे, हेडर तयार करणे, एक्स्पोनेन्शियल बॅकऑफसह पुनर्प्रयत्न, क्रेडेन्शियल रिफ्रेश हुक्स आणि `execute()` ऑर्केस्ट्रेशन पद्धत प्रदान करतो.
+प्रत्येक प्रदात्याकडे `BaseExecutor` ( `open-sse/executors/base.ts` मध्ये) विस्तारित करणारा एक विशेष एक्झिक्यूटर असतो, जो URL बिल्डिंग, हेडर बांधकाम, एक्सपोनेन्शियल बॅकऑफसह पुन्हा प्रयत्न, क्रेडेन्शियल रिफ्रेश हुक आणि `execute()` ऑर्केस्ट्रेशन पद्धत प्रदान करतो.
 
-| एक्झिक्युटर               | प्रदाता                                                                                                                                                        | विशेष हाताळणी                                                          |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA, इत्यादी | प्रत्येक प्रदात्यानुसार डायनॅमिक URL/हेडर कॉन्फिगरेशन                  |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                             | कस्टम प्रकल्प/सत्र ID, Retry-After पार्सिंग, 429 अस्पष्टीकरण           |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                   | डिप्लॉयमेंट-आधारित रूटिंग, api-version क्वेरीची सक्ती                  |
-| `BlackboxWebExecutor`     | Blackbox AI (वेब-मोड)                                                                                                                                          | TLS फिंगरप्रिंट एम्युलेशनसह वेब-सत्र रिव्हर्स                          |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH मार्ग)                                                                                                                                          | निर्बंध + टूल-रीमॅप पाइपलाइन, फिंगरप्रिंट शेपिंग                       |
-| `CliProxyApiExecutor`     | CLIProxyAPI-सुसंगत प्रदाते                                                                                                                                     | कस्टम प्रमाणीकरण आणि प्रोटोकॉल हाताळणी                                 |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                          | खाते ID इंजेक्शन, Neurons-आधारित वापर ट्रॅकिंग                         |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                                   | सिस्टम सूचना इंजेक्ट करतो, रीझनिंग प्रयत्नांची सक्ती करतो              |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                            | थ्रेड/टर्न पिनिंगसह ब्राउझर-सत्र Responses API ब्रिज                   |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                                   | OAuth + प्रत्येक सत्रासाठी हेडर रोटेशन                                 |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                     | ConnectRPC प्रोटोकॉल, Protobuf एन्कोडिंग, चेकसमद्वारे विनंती स्वाक्षरी |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                      | क्लाउड एजंट मॉड्यूलद्वारे Devin कार्य जीवनचक्र ब्रिजिंग                |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                                 | Copilot टोकन रिफ्रेश, VSCode-सदृश हेडर                                 |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                     | GitLab OAuth + प्रकल्प-व्याप्त रूटिंग                                  |
-| `GlmExecutor`             | Z.AI GLM (`glmt` प्रीसेटसह)                                                                                                                                    | थिंकिंग-बजेट-जागरूक, GLMT प्रीसेट स्थिरांक                             |
-| `GrokWebExecutor`         | xAI Grok वेब                                                                                                                                                   | वेब-सत्र रिव्हर्स, मोड निवड (विचार/मानक)                               |
-| `KieExecutor`             | KIE                                                                                                                                                            | फिरत्या सत्र अँकरसह कस्टम टोकन जारी करणे                               |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                         | AWS EventStream बायनरी स्वरूप → SSE रूपांतरण                           |
-| `MuseSparkWebExecutor`    | Muse Spark (वेब)                                                                                                                                               | प्रतिमा-संदेश ब्रिजिंगसह वेब-सत्र रिव्हर्स                             |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                      | प्रदाता-विशिष्ट विनंती बॉडीची रचना                                     |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                       | AI SDK-सुसंगत प्रदाता सेटअप                                            |
-| `PerplexityWebExecutor`   | Perplexity वेब                                                                                                                                                 | चॅट पुढे सुरू ठेवण्यासाठी वेब-सत्र रिव्हर्स                            |
-| `PetalsExecutor`          | Petals वितरित इन्फरन्स                                                                                                                                         | विकेंद्रीकृत स्वॉर्म रूटिंग                                            |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                                | API की आवश्यक नाही, दर-मर्यादित विनंत्या                               |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                       | PAT आणि OAuth समर्थन, बहु-मॉडेल विनामूल्य स्तर                         |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                               | सेवा खाते प्रमाणीकरण, प्रदेश-आधारित एंडपॉइंट                           |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                                  | आयात केलेली API की + Connect-protobuf चॅट स्ट्रीमिंग                   |
+| एक्झिक्युटर               | प्रदाता                                                                                                                                                     | विशेष हाताळणी                                                                      |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA, etc. | प्रदात्यासाठी डायनॅमिक URL/header कॉन्फिगरेशन                                      |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                          | सानुकूल project/session IDs, पुन्हा प्रयत्न करा-विश्लेषण केल्यानंतर, 429 अस्पष्टता |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                | उपयोजन-आधारित राउटिंग, एपीआय-आवृत्ती क्वेरी अंमलबजावणी                             |
+| `BlackboxWebExecutor`     | ब्लॅकबॉक्स AI (वेब-मोड)                                                                                                                                     | TLS फिंगरप्रिंट इम्युलेशनसह वेब-सत्र उलट                                           |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH मार्ग)                                                                                                                                       | कंस्ट्रेंट + टूल-रीमॅप पाइपलाइन, फिंगरप्रिंट आकार देणे                             |
+| `CliProxyApiExecutor`     | CLIProxyAPI-सुसंगत प्रदाता                                                                                                                                  | सानुकूल प्रमाणीकरण आणि प्रोटोकॉल हाताळणी                                           |
+| `CloudflareAiExecutor`    | Cloudflare कामगार AI                                                                                                                                        | खाते ID इंजेक्शन, न्यूरॉन्स-आधारित वापर ट्रॅकिंग                                   |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                                | सिस्टम सूचना इंजेक्ट करते, तर्कशक्तीच्या प्रयत्नांना भाग पाडते                     |
+| `ChatGptWebCodexExecutor` | ChatGPT वेब (Codex)                                                                                                                                         | ब्राउझर-सत्र API ब्रिजला thread/turn पिनिंगसह प्रतिसाद देते                        |
+| `CommandCodeExecutor`     | कमांड कोड                                                                                                                                                   | OAuth + प्रति-सत्र शीर्षलेख रोटेशन                                                 |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                  | ConnectRPC प्रोटोकॉल, प्रोटोबफ एन्कोडिंग, चेकसमद्वारे स्वाक्षरी करण्याची विनंती    |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                   | क्लाउड एजंट मॉड्यूलद्वारेDevin टास्क लाइफसायकल ब्रिजिंग                            |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                              | Copilot टोकन रिफ्रेश, VSCode-नक्कल शीर्षलेख                                        |
+| `GitlabExecutor`          | GitLab जोडी                                                                                                                                                 | GitLab OAuth + प्रोजेक्ट-स्कोप्ड राउटिंग                                           |
+| `GlmExecutor`             | Z.AI GLM ( `glmt` प्रीसेटसह)                                                                                                                                | विचार-बजेट जागरूक, GLMT प्रीसेट स्थिरांक                                           |
+| `GrokWebExecutor`         | xAI Grok वेब                                                                                                                                                | वेब-सत्र उलट, मोड निवड (think/standard)                                            |
+| `KieExecutor`             | KIE                                                                                                                                                         | फिरत्या सत्र अँकरसह सानुकूल टोकन जारी करणे                                         |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                      | AWS EventStream बायनरी स्वरूप → SSE रूपांतरण                                       |
+| `MuseSparkWebExecutor`    | म्यूज स्पार्क (वेब)                                                                                                                                         | प्रतिमा-संदेश ब्रिजिंगसह वेब-सत्र उलट                                              |
+| `NlpCloudExecutor`        | NLP ढग                                                                                                                                                      | प्रदाता-विशिष्ट विनंती शरीर आकार                                                   |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                    | AI SDK सुसंगत प्रदाता सेटअप                                                        |
+| `PerplexityWebExecutor`   | गोंधळ जाला                                                                                                                                                  | चॅट सुरू ठेवण्यासाठी वेब-सत्र उलट                                                  |
+| `PetalsExecutor`          | पाकळ्या वितरीत अनुमान                                                                                                                                       | विकेंद्रित झुंड मार्ग                                                              |
+| `PollinationsExecutor`    | परागण AI                                                                                                                                                    | API की आवश्यक नाही, दर-मर्यादित विनंत्या                                           |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                    | PAT आणि OAuth सपोर्ट, मल्टी-मॉडेल फ्री टियर                                        |
+| `VertexExecutor`          | Google व्हर्टेक्स AI                                                                                                                                        | सेवा खाते प्रमाणीकरण, प्रदेश-आधारित अंत्यबिंदू                                     |
+| `DevinDesktopExecutor`    | Devin डेस्कटॉप                                                                                                                                              | आयातित API की + कनेक्ट-प्रोटोबफ चॅट स्ट्रीमिंग                                     |
 
-इतर सर्व प्रदाते (`custom compatible nodes`सह) `DefaultExecutor` वापरतात.
+इतर सर्व प्रदाते (सानुकूल सुसंगत नोड्ससह) `DefaultExecutor` वापरतात.
+
+### स्वयंचलित चौकशी आणि वेब-सत्र खाती
+
+मॉडेल चाचण्या, सर्व चाचणी, कॉम्बो चाचण्या आणि मूल्यांकन वास्तविक चॅट विनंत्या पाठवतात. वेब-सत्र प्रदाता साइन-इन केलेला वापरकर्ता म्हणून कार्य करतो, म्हणून त्या प्रत्येक विनंत्या त्या खात्यावरील संभाषण म्हणून जतन केल्या जातील; अशा संभाषणे सोडलेल्या स्वयंचलित तपासांना खाते निलंबित केले गेले (#14780). म्हणून चॅट पाइपलाइन प्रत्येक लक्ष्याला नकार देते स्वयंचलित प्रोब पोहोचते ज्याचा प्रदाता वेब-सत्र क्रेडेन्शियल घेतो, एकदा लक्ष्याचा प्रदाता निराकरण झाल्यानंतर आणि क्रेडेंशियल निवडण्यापूर्वी (`src/lib/providers/chatProbePolicy.ts`). नकार हे `error.code` `chat_probe_not_isolated` सह `422` आहे, आणि प्रोब रनर्स ते वगळले म्हणून नोंदवतात, अपयश नाही.
+
+प्रदात्याच्या स्वतःच्या नो-हिस्ट्री मोडमध्ये प्रत्येक चॅट चालवणारा एक एक्झिक्यूटर तो `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`) सह घोषित करतो; त्यानंतर त्या प्रदात्याकडे चौकशी करण्याची परवानगी आहे. ChatGPT वेब `temporary-chat` घोषित करते. चाचणीसह त्याच्या यंत्रणेवर घोषणा पिन करा, त्यामुळे दावा सत्य बनवणाऱ्या कोडपेक्षा जास्त काळ टिकू शकत नाही.
 
 ## प्रदाता सुसंगतता मॅट्रिक्स
 

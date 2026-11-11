@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 modulu eżekutur tal-ogħla livell (`*.ts` nieqes `base.ts`, `index.ts` u testijiet — l-għadd `npm run check:docs-counts` miżuri). Kull klassi ta' eżekutur testendi `BaseExecutor` (`base.ts`), direttament jew permezz `DefaultExecutor` jew eżekutur ieħor; il-moduli li jifdal huma helpers għal kull fornitur (skemi ta 'għodda, adapters fetch/TTS, quirk handlers). L-eżekuturi jinkludu:
+159 modulu eżekutur tal-ogħla livell (`*.ts` nieqes `base.ts`, `index.ts` u testijiet — l-għadd `npm run check:docs-counts` miżuri). Kull klassi ta 'eżekutur testendi `BaseExecutor` (`base.ts`), direttament jew permezz `DefaultExecutor` jew eżekutur ieħor; il-moduli li jifdal huma helpers għal kull fornitur (skemi ta 'għodda, adapters fetch/TTS, quirk handlers). L-eżekuturi jinkludu:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `opencode`, `nlpcloud`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop` flimkien ma `claudeIdentity.ts` (helper ta’ identità kondiviża) u `index.ts` (reġistru).
 
-> Nota: fornituri mhux elenkati hawn huma moqdija minn `default.ts` bl-użu tal-eżekutur ġeneriku kompatibbli mal-OpenAI. Il-katalgu sħiħ tal-fornituri (381 fornitur) jgħix fi `src/shared/constants/providers.ts`.
+> Nota: fornituri mhux elenkati hawn huma moqdija minn `default.ts` bl-użu tal-eżekutur ġeneriku kompatibbli mal-OpenAI. Il-katalgu sħiħ tal-fornituri (388 fornitur) jgħix fi `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 
@@ -541,7 +541,7 @@ Provider registries (`providerRegistry.ts`, `providerModels.ts`, `providerHeader
 
 ### 4.8 `open-sse/utils/`
 
-Streaming primitives u provider helpers: `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `tlsClient.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts` `aiSdkCompat.ts`, `thinkTagParser.ts`, `requestLogger.ts` `urlSanitize.ts` `usageTracking.ts`, `progressTracker.ts`, `cors.ts`, `error.ts`, `logger.ts`, `sleep.ts`, `ollamaTransform.ts`.
+Streaming primitives u provider helpers: `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `tlsClient.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts`, `aiSdkCompat.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `requestLogger.ts`, `progressTracker.ts`, `cors.ts`, `error.ts`, `logger.ts`, `sleep.ts`, `ollamaTransform.ts`.
 
 ---
 

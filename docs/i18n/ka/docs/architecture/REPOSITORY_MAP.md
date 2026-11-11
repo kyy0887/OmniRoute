@@ -143,7 +143,7 @@ src/
 | `app/api/v1beta/`                                                            | ტყუპების სტილის API ბოლო წერტილები                                                                                                                                                                                                                                                                                              |
 | `app/api/playground/`                                                        | Playground Studio მარშრუტები: `improve-prompt/` (POST — LLM სწრაფი გადამწერი), `presets/` (GET სია / POST შექმნა), `presets/[id]/` (GET / PUT / DELETE) — იხილეთ `docs/frameworks/PLAYGROUND_STUDIO.md`                                                                                                                         |
 | `app/api/` (non-v1)                                                          | Management/admin მარშრუტები (~ 60 დირექტორიები: პროვაიდერები, კომბინაციები, პარამეტრები, mcp, a2a, evals, მეხსიერება, უნარები, ვებჰუკები, შესაბამისობა, გამძლეობა, მონიტორინგი, გვირაბები, cli-ინსტრუმენტები და ა.შ.)                                                                                                           |
-| `app/api/tools/agent-bridge/`                                                | AgentBridge REST API — 12 მარშრუტი (სერვერის კონტროლი, აგენტი state/DNS/mappings, შემოვლითი გზა, სერთიფიკატი, ზემო დინებაში-CA). LOCAL_ONLY + SPAWN_CAPABLE. იხილეთ `docs/frameworks/AGENTBRIDGE.md §7`.                                                                                                                        |
+| `app/api/tools/agent-bridge/`                                                | AgentBridge REST API — 12 მარშრუტი (სერვერის კონტროლი, აგენტი state/DNS/mappings, შემოვლითი გზა, სერტიფიკატი, ზემო დინებაში-CA). LOCAL_ONLY + SPAWN_CAPABLE. იხილეთ `docs/frameworks/AGENTBRIDGE.md §7`.                                                                                                                        |
 | `app/api/tools/traffic-inspector/`                                           | Traffic Inspector REST + WS API — 16 + მარშრუტი (მოთხოვნები, სესიები, მასპინძლები, გადაღების რეჟიმი, ექსპორტი, ws). LOCAL_ONLY + SPAWN_CAPABLE. იხილეთ `docs/frameworks/TRAFFIC_INSPECTOR.md §8`.                                                                                                                               |
 | `app/a2a/`                                                                   | A2A JSON-RPC 2.0 შესვლის წერტილი (`POST /a2a`)                                                                                                                                                                                                                                                                                  |
 | `app/.well-known/agent.json/`                                                | A2A აგენტის ბარათი (აღმოჩენა)                                                                                                                                                                                                                                                                                                   |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `components/`                    | დაფის კომპონენტი API: ადაპტერები `packages/ui-kit` — ზე იხილეთ `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ეკრანის მიერ გამოყენებული ხატების სახელები → Lucide კომპონენტები (`<Icon>`)             |
-| `constants/providers.ts`         | **381 პროვაიდერი** Zod დადასტურებით (სიმართლის წყარო)                                               |
+| `constants/providers.ts`         | **388 პროვაიდერი** Zod დადასტურებით (სიმართლის წყარო)                                               |
 | `constants/cliTools.ts`          | გარე CLI ინსტრუმენტის რეესტრი                                                                       |
 | `constants/routingStrategies.ts` | **20 მარშრუტიზაციის სტრატეგია** პრიორიტეტებით                                                       |
 | `constants/publicApiRoutes.ts`   | მარშრუტები, რომლებიც საჭიროებენ Bearer (მმართველობის წინააღმდეგ) ავტორიზაციას                       |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | გარე CLI ინტეგრაციები + შიდა OmniRoute CLI                                                       |
 | `I18N.md`                   | i18n არქიტექტურა, ენის დამატება, 67 ლოკალი                                                       |
 | `UNINSTALL.md`              | დეინსტალაციის ნაბიჯების გასუფთავება                                                              |
-| `PROVIDER_REFERENCE.md`     | **ავტომატურად გენერირებული** 381 პროვაიდერის კატალოგი (რეგენი: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ავტომატურად გენერირებული** 388 პროვაიდერის კატალოგი (რეგენი: `npm run gen:provider-reference`) |
 
 ### ღრმა ჩაყვინთვის ქვესისტემა
 
@@ -450,7 +450,7 @@ open-sse/
 | დოქ                          | მიზანი                                                             |
 | ---------------------------- | ------------------------------------------------------------------ |
 | `DOCKER_GUIDE.md`            | Docker build, პროფილები (base/cli/host/cliproxyapi), Redis sidecar |
-| `VM_DEPLOYMENT_GUIDE.md`     | ზოგადი VM/VPS განლაგება (Ubuntu/Debian + nginx + systemd)          |
+| `VM_DEPLOYMENT_GUIDE.md`     | ზოგადი VM/VPS დანერგვა (Ubuntu/Debian + nginx + systemd)           |
 | `FLY_IO_DEPLOYMENT_GUIDE.md` | Fly.io განლაგება (ამჟამად მხოლოდ ჩინური)                           |
 | `TERMUX_GUIDE.md`            | ანდროიდი უთავო Termux-ის საშუალებით                                |
 | `PWA_GUIDE.md`               | პროგრესული ვებ აპლიკაციის ინსტალაცია + სერვისის მუშაკი             |
@@ -460,11 +460,11 @@ open-sse/
 
 ### ქვედირექტორიები
 
-| ქვედირეჟი             | მიზანი                                                                                                                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/i18n/`          | დოკუმენტების ლოკალიზებული თარგმანი (41 ლოკალი)                                                                                                                                                    |
-| `docs/screenshots/`   | გამოსახულების აქტივები გიდებისთვის                                                                                                                                                                |
-| `_tasks/superpowers/` | Plans/specs ზესახელმწიფოებიდან (`writing-plans`/`brainstorming`) + კვლევა — იზოლირებული, ცალკე ვერსიით რეპო, იგნორირებული მთავარი ხის მიერ. იხილეთ CLAUDE.md → "დაგეგმვა და კვლევის არტეფაქტები". |
+| ქვედირეჟი             | მიზანი                                                                                                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docs/i18n/`          | დოკუმენტების ლოკალიზებული თარგმანი (41 ლოკალი)                                                                                                                                                     |
+| `docs/screenshots/`   | გამოსახულების აქტივები გიდებისთვის                                                                                                                                                                 |
+| `_tasks/superpowers/` | Plans/specs ზესახელმწიფოებიდან (`writing-plans`/`brainstorming`) + კვლევის — იზოლირებული, ცალკე ვერსიით რეპო, იგნორირებული მთავარი ხის მიერ. იხილეთ CLAUDE.md → "დაგეგმვა და კვლევის არტეფაქტები". |
 
 ---
 

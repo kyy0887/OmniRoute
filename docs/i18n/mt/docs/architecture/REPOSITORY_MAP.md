@@ -154,7 +154,7 @@ src/
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | It-traffic Inspector dashboard page — DevTools split, 7 tabs dettall, 4 toggles mode capture, recorder tas-sessjoni, colorization tal-kuntest. i18n PT-BR + EN. Ara `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                                     |
 | `app/(dashboard)/dashboard/activity/`                                        | Paġna tal-għalf tal-attività (Grupp B): `page.tsx` (server) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — ara `docs/architecture/MONITORING_SECTIONS.md`                                                                                                |
 | `app/(dashboard)/dashboard/costs/quota-share/`                               | Il-paġna tal-Qsim tal-Kwoti (Grupp B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                              |
-| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Paġna tal-konfigurazzjoni tal-pjan tal-fornitur (Grupp B): `page.tsx` + `ProviderPlanConfigClient.tsx` — dimensjonijiet tal-kwota għal kull konnessjoni override                                                                                                                                                |
+| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Il-paġna tal-konfigurazzjoni tal-pjan tal-fornitur (Grupp B): `page.tsx` + `ProviderPlanConfigClient.tsx` — dimensjonijiet tal-kwota għal kull konnessjoni override                                                                                                                                             |
 | `app/docs/`                                                                  | Telespettatur tad-dokumentazzjoni inkorporat (renders `docs/*.md`)                                                                                                                                                                                                                                              |
 | `app/landing/`                                                               | Paġna ta 'destinazzjoni tal-marketing                                                                                                                                                                                                                                                                           |
 | `app/login/`, `forgot-password/`, `forbidden/`                               | Paġni relatati mal-awth                                                                                                                                                                                                                                                                                         |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `components/`                    | Dashboard komponent API: adapters fuq `packages/ui-kit` — ara `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ismijiet tal - ikoni użati mill - iskrins → Lucide components (`<Icon>`)               |
-| `constants/providers.ts`         | **381 fornitur** bil-validazzjoni Zod (sors tal-verità)                                            |
+| `constants/providers.ts`         | **388 fornitur** bil-validazzjoni Zod (sors tal-verità)                                            |
 | `constants/cliTools.ts`          | Reġistru estern tal-għodda CLI                                                                     |
 | `constants/routingStrategies.ts` | **20 strateġija ta' rotta** bi prijoritajiet                                                       |
 | `constants/publicApiRoutes.ts`   | Rotot li jeħtieġu awtifikazzjoni Bearer (vs management).                                           |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Integrazzjonijiet esterni CLI + Intern OmniRoute CLI                                          |
 | `I18N.md`                   | arkitettura i18n, li żżid lingwa, 67 lokali                                                   |
 | `UNINSTALL.md`              | Naddaf passi tad-diżinstalla                                                                  |
-| `PROVIDER_REFERENCE.md`     | **Ġenerat awtomatikament** katalgu ta' 381 fornitur (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Ġenerat awtomatikament** katalgu ta' 388 fornitur (regen: `npm run gen:provider-reference`) |
 
 ### Subsistema deep-dives
 

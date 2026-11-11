@@ -488,11 +488,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 უმაღლესი დონის შემსრულებელი მოდული (`*.ts` მინუს `base.ts`, `index.ts` და ტესტები — დათვლა `npm run check:docs-counts` ზომები). თითოეული შემსრულებელი კლასი ვრცელდება `BaseExecutor` (`base.ts`), პირდაპირ ან `DefaultExecutor` ან სხვა შემსრულებლის მეშვეობით; დარჩენილი მოდულები არის თითო პროვაიდერის დამხმარეები (ინსტრუმენტების სქემები, fetch/TTS გადამყვანები, უცნაურობის დამმუშავებლები). შემსრულებლები მოიცავს:
+159 უმაღლესი დონის შემსრულებელი მოდული (`*.ts` მინუს `base.ts`, `index.ts` და ტესტები — დათვლა `npm run check:docs-counts` ზომები). თითოეული შემსრულებელი კლასი ვრცელდება `BaseExecutor` (`base.ts`), პირდაპირ ან `DefaultExecutor` ან სხვა შემსრულებლის მეშვეობით; დანარჩენი მოდულები არის თითო პროვაიდერის დამხმარეები (ინსტრუმენტების სქემები, fetch/TTS გადამყვანები, უცნაურობის დამმუშავებლები). შემსრულებლები მოიცავს:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex` `devin-desktop` `claudeIdentity.ts` იდენტობა ( `index.ts` ) დახმარება.
 
-> შენიშვნა: პროვაიდერებს, რომლებიც აქ არ არის ჩამოთვლილი, ემსახურებიან `default.ts` ზოგადი OpenAI-თან თავსებადი შემსრულებელის გამოყენებით. პროვაიდერების სრული კატალოგი (381 პროვაიდერი) ცხოვრობს `src/shared/constants/providers.ts` ში.
+> შენიშვნა: პროვაიდერებს, რომლებიც აქ არ არის ჩამოთვლილი, ემსახურებიან `default.ts` ზოგადი OpenAI-თან თავსებადი შემსრულებელის გამოყენებით. პროვაიდერების სრული კატალოგი (388 პროვაიდერი) ცხოვრობს `src/shared/constants/providers.ts` ში.
 
 ### 4.3 `open-sse/translator/`
 

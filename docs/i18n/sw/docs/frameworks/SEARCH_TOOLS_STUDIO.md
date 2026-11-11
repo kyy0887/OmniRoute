@@ -98,15 +98,15 @@ Huendesha hoja/URL ileile kwa hadi **watoa huduma 4 kwa sambamba** (D22):
 
 ---
 
-## Katalogi ya Watoa Huduma
+## Katalogi ya Mtoa Huduma
 
-`ProviderCatalog.tsx` huonyesha orodha kamili ya watoa huduma kutoka `GET /api/search/providers`
-(iliyopanuliwa katika F4 ili kujumuisha watoa huduma wa fetch):
+`ProviderCatalog.tsx` inafichua orodha kamili ya watoa huduma kutoka `GET /api/search/providers` (iliyopanuliwa katika F4 ili kujumuisha watoa huduma wa kuleta):
 
-| `kind` | `"search"` (watoa huduma 20) au `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (watoa huduma 23) au `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, tafuta-sambamba) |
 
-Hali **hubainishwa wakati wa ombi** kwa kuangalia ikiwa vitambulisho vipo na ikiwa
-funguo zote ziko katika kipindi cha kusubiri kwa sasa.
+Hali ni** inayotokana na wakati wa ombi** kwa kuangalia kama vitambulisho vipo na ikiwa funguo zote ziko katika hali tulivu kwa sasa.
+
+`codex-search` (Codex Web Search) haina ufunguo wake mwenyewe: inatumia tena akaunti iliyounganishwa ya Codex (ChatGPT), kwa hivyo kila utafutaji hutumia kiasi cha usajili ChatGPT na huchukua takriban 10–40 s. Inaendeshwa wakati ombi likiita jina; uteuzi otomatiki unahitaji bendera ya kipengele cha `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (kuzimwa kwa chaguo-msingi).
 
 ---
 

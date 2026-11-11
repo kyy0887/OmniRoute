@@ -14,7 +14,7 @@ OmniRoute Next.js üzerine kurulu yerel bir AI yönlendirme ağ geçidi ve kontr
 
 Çekirdek yetenekler:
 
-- CLI/tools için OpenAI uyumlu API yüzeyi (381 sağlayıcı, 159 yürütücü modül)
+- CLI/tools için OpenAI uyumlu API yüzeyi (388 sağlayıcı, 159 yürütücü modül)
 - sağlayıcı formatları arasında Request/response çevirisi
 - Model birleşimi geri dönüşü (çoklu model sırası)
 - `compositeTiers` tarafından çalışma zamanı sıralamasıyla yapılandırılmış birleşik adımlar (`provider + model + connection`)
@@ -42,7 +42,7 @@ OmniRoute Next.js üzerine kurulu yerel bir AI yönlendirme ağ geçidi ve kontr
 - Küresel sistem istemi enjeksiyonu
 - Oturum izleme ve parmak izi alma
 - Sağlayıcıya özel profillerle hesap başına geliştirilmiş oran sınırlaması
-- Sağlayıcı esnekliği için devre kesici düzeni
+- Sağlayıcı esnekliği için devre kesici modeli
 - Mutex kilitleme ile gök gürültüsüne karşı sürü koruması
 - İmza tabanlı istek tekilleştirme önbelleği
 - Etki alanı katmanı: maliyet kuralları, geri dönüş politikası, kilitleme politikası
@@ -859,41 +859,47 @@ flowchart LR
 - `src/lib/db/*`: belirli modülleri doğrudan içe aktarın — barrel kullanmayın (eski `localDb.ts` yeniden dışa aktarma katmanı kaldırıldı)
 - `src/lib/usageDb.ts`: SQLite tabloları üzerinde kullanım geçmişi/çağrı günlükleri cephesi
 
-## Sağlayıcı Yürütücü Kapsamı (Strateji Kalıbı)
+## Sağlayıcı Yürütücü Kapsamı (Strateji Modeli)
 
-Her sağlayıcı, URL oluşturma, üstbilgi yapılandırma, üstel geri çekilmeli yeniden deneme, kimlik bilgilerini yenileme kancaları ve `execute()` orkestrasyon yöntemini sağlayan `BaseExecutor` sınıfını (`open-sse/executors/base.ts` içinde) genişleten özelleştirilmiş bir yürütücüye sahiptir.
+Her sağlayıcının `BaseExecutor` ( `open-sse/executors/base.ts` cinsinden) genişleten özel bir yürütücüsü vardır; bu, URL oluşturma, başlık oluşturma, üstel geri alma ile yeniden deneme, kimlik bilgisi yenileme kancaları ve `execute()` düzenleme yöntemini sağlar.
 
-| Yürütücü                  | Sağlayıcı(lar)                                                                                                                                            | Özel İşleme                                                               |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA vb. | Sağlayıcı başına dinamik URL/başlık yapılandırması                        |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                        | Özel proje/oturum kimlikleri, Retry-After ayrıştırma, 429 gizleme         |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                              | Dağıtım tabanlı yönlendirme, api-version sorgusu zorunluluğu              |
-| `BlackboxWebExecutor`     | Blackbox AI (web modu)                                                                                                                                    | TLS parmak izi öykünmeli web oturumu tersine mühendisliği                 |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH yolu)                                                                                                                                      | Kısıtlama + araç yeniden eşleme işlem hatları, parmak izi şekillendirme   |
-| `CliProxyApiExecutor`     | CLIProxyAPI uyumlu sağlayıcılar                                                                                                                           | Özel kimlik doğrulama ve protokol işleme                                  |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                     | Hesap kimliği ekleme, Neurons tabanlı kullanım izleme                     |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                              | Sistem talimatlarını ekler, akıl yürütme düzeyini zorunlu kılar           |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                       | İş parçacığı/etkileşim sabitlemeli tarayıcı oturumu Responses API köprüsü |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                              | OAuth + oturum başına başlık rotasyonu                                    |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                | ConnectRPC protokolü, Protobuf kodlama, sağlama toplamıyla istek imzalama |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                 | Bulut aracısı modülü üzerinden Devin görev yaşam döngüsü köprüleme        |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                            | Copilot belirteci yenileme, VSCode'u taklit eden başlıklar                |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                | GitLab OAuth + proje kapsamlı yönlendirme                                 |
-| `GlmExecutor`             | Z.AI GLM (`glmt` ön ayarı dâhil)                                                                                                                          | Düşünme bütçesine duyarlı, GLMT ön ayar sabitleri                         |
-| `GrokWebExecutor`         | xAI Grok web                                                                                                                                              | Web oturumu tersine mühendisliği, mod seçimi (düşünme/standart)           |
-| `KieExecutor`             | KIE                                                                                                                                                       | Dönen oturum dayanaklarıyla özel belirteç oluşturma                       |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                    | AWS EventStream ikili biçimi → SSE dönüştürme                             |
-| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                          | Görüntülü mesaj köprülemeli web oturumu tersine mühendisliği              |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                 | Sağlayıcıya özgü istek gövdesi yapısı                                     |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                  | AI SDK uyumlu sağlayıcı kurulumu                                          |
-| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                            | Sohbet devamlılığı için web oturumu tersine mühendisliği                  |
-| `PetalsExecutor`          | Petals dağıtık çıkarımı                                                                                                                                   | Merkeziyetsiz sürü yönlendirmesi                                          |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                           | API anahtarı gerektirmez, hız sınırlamalı istekler                        |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                  | PAT ve OAuth desteği, çok modelli ücretsiz katman                         |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                          | Hizmet hesabı kimlik doğrulaması, bölge tabanlı uç noktalar               |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                             | İçe aktarılan API anahtarı + Connect-protobuf sohbet akışı                |
+| İcracı                    | Sağlayıcı(lar)                                                                                                                                            | Özel İşleme                                                                        |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Şaşkınlık, Together, Fireworks, Cerebras, Cohere, NVIDIA, vb. | Sağlayıcı başına dinamik URL/header yapılandırması                                 |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                        | Özel project/session IDs, Yeniden Dene-Ayrıştırma sonrası, 429 karartma            |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                              | Dağıtım tabanlı yönlendirme, API sürümü sorgu uygulaması                           |
+| `BlackboxWebExecutor`     | Blackbox AI (web modu)                                                                                                                                    | TLS parmak izi emülasyonu ile web oturumu tersine çevrildi                         |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH yolu)                                                                                                                                      | Kısıtlama + aracı-yeniden eşleme ardışık düzenleri, parmak izi şekillendirme       |
+| `CliProxyApiExecutor`     | CLIProxyAPI uyumlu sağlayıcılar                                                                                                                           | Özel kimlik doğrulama ve protokol yönetimi                                         |
+| `CloudflareAiExecutor`    | Cloudflare İşçiler AI                                                                                                                                     | Hesap ID enjeksiyonu, Nöron tabanlı kullanım takibi                                |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                              | Sistem talimatlarını enjekte eder, muhakeme çabasını zorlar                        |
+| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                       | thread/turn sabitlemeli Tarayıcı oturumu Yanıtları API köprüsü                     |
+| `CommandCodeExecutor`     | Komut Kodu                                                                                                                                                | OAuth + oturum başına başlık dönüşü                                                |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                | ConnectRPC protokolü, Protobuf kodlaması, sağlama toplamı aracılığıyla imza isteği |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                 | Bulut aracısı modülü aracılığıyla Devin görev yaşam döngüsü köprüleme              |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                            | Copilot belirteci yenileme, VSCode'u taklit eden başlıklar                         |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                | GitLab OAuth + proje kapsamlı yönlendirme                                          |
+| `GlmExecutor`             | Z.AI GLM ( `glmt` ön ayarı dahil)                                                                                                                         | Bütçe odaklı düşünme, GLMT önceden ayarlanmış sabitler                             |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                              | Web oturumu tersine çevirme, mod seçimi (think/standard)                           |
+| `KieExecutor`             | KIE                                                                                                                                                       | Dönen oturum bağlantılarıyla özel jeton ihracı                                     |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                    | AWS EventStream ikili format → SSE dönüşümü                                        |
+| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                          | Görüntü-mesaj köprülemeyle web oturumu tersine çevrildi                            |
+| `NlpCloudExecutor`        | NLP Bulut                                                                                                                                                 | Sağlayıcıya özel istek vücut şekli                                                 |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                  | AI SDK uyumlu sağlayıcı kurulumu                                                   |
+| `PerplexityWebExecutor`   | Şaşkınlık ağı                                                                                                                                             | Sohbetin devamı için web oturumu tersine çevrildi                                  |
+| `PetalsExecutor`          | Yapraklar dağıtılmış çıkarım                                                                                                                              | Merkezi olmayan sürü yönlendirme                                                   |
+| `PollinationsExecutor`    | Tozlaşma AI                                                                                                                                               | API anahtarı gerekmez, hız sınırlı istekler                                        |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                  | PAT ve OAuth desteği, çoklu model ücretsiz katman                                  |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                          | Hizmet hesabı kimlik doğrulaması, bölge tabanlı uç noktalar                        |
+| `DevinDesktopExecutor`    | Devin Masaüstü                                                                                                                                            | İçe aktarılan API anahtarı + Connect-protobuf sohbet akışı                         |
 
 Diğer tüm sağlayıcılar (özel uyumlu düğümler dahil) `DefaultExecutor` kullanır.
+
+### Otomatik yoklamalar ve web oturumu hesapları
+
+Model testleri, Tümünü Test Et, birleşik testler ve değerlendirmeler gerçek sohbet istekleri gönderir. Bir web oturumu sağlayıcısı oturum açmış kullanıcı olarak hareket eder, böylece bu isteklerin her biri o hesapta bir görüşme olarak kaydedilir; Bu tür konuşmaları bırakan otomatik araştırmaların hesabı askıya alındı (#14780). Bu nedenle sohbet hattı, hedefin sağlayıcısı çözümlendikten sonra ve bir kimlik bilgisi seçilmeden önce (`src/lib/providers/chatProbePolicy.ts`) sağlayıcısı bir web oturumu kimlik bilgisi alan otomatik bir incelemenin ulaştığı her hedefi reddeder. Reddetme, `error.code` ile `422` `chat_probe_not_isolated` ve araştırma yürütücüleri bunu bir başarısızlık olarak değil, bir atlama olarak rapor eder.
+
+Her sohbeti sağlayıcının kendi geçmiş yok modunda çalıştıran bir yürütücü, bunu `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`) ile bildirir; Daha sonra bu sağlayıcıya yönelik incelemelere izin verilir. ChatGPT Web `temporary-chat` bildirir. Bir beyanı bir testle mekanizmasına sabitleyin, böylece iddia, onu doğrulayan koddan daha uzun süre dayanamaz.
 
 ## Sağlayıcı Uyumluluk Matrisi
 

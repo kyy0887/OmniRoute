@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------- |
 | `components/`                    | ડેશબોર્ડ ઘટક API: `packages/ui-kit` — એડેપ્ટર જુઓ `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: સ્ક્રીનો દ્વારા ઉપયોગમાં લેવાતા આઇકોન નામો → લ્યુસાઇડ ઘટકો (`<Icon>`)      |
-| `constants/providers.ts`         | **381 પ્રદાતાઓ** Zod માન્યતા સાથે (સત્યનો સ્ત્રોત)                                     |
+| `constants/providers.ts`         | **388 પ્રદાતાઓ** Zod માન્યતા સાથે (સત્યનો સ્ત્રોત)                                     |
 | `constants/cliTools.ts`          | બાહ્ય CLI ટૂલ રજિસ્ટ્રી                                                                |
 | `constants/routingStrategies.ts` | **20 રૂટીંગ વ્યૂહરચના** પ્રાથમિકતાઓ સાથે                                               |
 | `constants/publicApiRoutes.ts`   | રૂટ્સ કે જેને બેરર (વિ મેનેજમેન્ટ) ઓથની જરૂર હોય છે                                    |
@@ -400,7 +400,7 @@ open-sse/
 | `ARCHITECTURE.md`           | ઉચ્ચ-સ્તરની આર્કિટેક્ચર, સબસિસ્ટમ નકશો, ડેશબોર્ડ સપાટી                       |
 | `CODEBASE_DOCUMENTATION.md` | એન્જિનિયરિંગ સંદર્ભ: ડિરેક્ટરીઓ, મોડ્યુલો, સંમેલનો                           |
 | `FEATURES.md`               | v3.8 હાઇલાઇટ્સ સાથે ફીચર મેટ્રિક્સ                                           |
-| `USER_GUIDE.md`             | અંતિમ-વપરાશકર્તા માર્ગદર્શિકા (સેટઅપ, મોડલ્સ, કોમ્બોઝ, CLIs, ઑડિઓ, વગેરે)    |
+| `USER_GUIDE.md`             | અંતિમ-વપરાશકર્તા માર્ગદર્શિકા (સેટઅપ, મોડલ, કોમ્બોઝ, CLIs, ઓડિયો, વગેરે)     |
 | `API_REFERENCE.md`          | ઓથ મોડેલ સાથેAPI એન્ડપોઇન્ટ સંદર્ભ                                           |
 | `openapi.yaml`              | OpenAPI 3.0 સ્પેક (121 પાથ)                                                  |
 | `SETUP_GUIDE.md`            | ઇન્સ્ટોલ પદ્ધતિઓ (npm, npx, Docker, Electron, Termux, સ્ત્રોત)               |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | બાહ્ય CLI એકીકરણ + આંતરિક OmniRoute CLI                                      |
 | `I18N.md`                   | i18n આર્કિટેક્ચર, એક ભાષા ઉમેરીને, 67 લોકેલ                                  |
 | `UNINSTALL.md`              | અનઇન્સ્ટોલ કરવાના પગલાં સાફ કરો                                              |
-| `PROVIDER_REFERENCE.md`     | **ઓટો-જનરેટ** 381 પ્રદાતાઓની સૂચિ ( regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ઓટો-જનરેટ** 388 પ્રદાતાઓની સૂચિ ( regen: `npm run gen:provider-reference`) |
 
 ### સબસિસ્ટમ ડીપ-ડાઈવ્સ
 

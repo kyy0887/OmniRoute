@@ -98,15 +98,15 @@ Suorittaa saman kyselyn/URL-osoitteen enintään **4 palveluntarjoajalla rinnakk
 
 ---
 
-## Palveluntarjoajaluettelo
+## Palveluntarjoajan katalogi
 
-`ProviderCatalog.tsx` näyttää täydellisen palveluntarjoajaluettelon rajapinnasta `GET /api/search/providers`
-(laajennettu F4:ssä sisältämään noutopalveluntarjoajat):
+`ProviderCatalog.tsx` paljastaa täyden palveluntarjoajien luettelon `GET /api/search/providers` stä (laajennettu F4:ssä sisältämään hakupalveluntarjoajat):
 
-| `kind` | `"search"` (20 palveluntarjoajaa) tai `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 tarjoajaa) tai `"fetch"` (firecrawl, jina-lukija, tavily-haku, tinyfish, ketterä haku, anysearch-search, rinnakkaishaku) |
 
-Tila **määritetään pyyntöhetkellä** tarkistamalla, ovatko tunnistetiedot olemassa ja ovatko
-kaikki avaimet parhaillaan jäähdytysajalla.
+Tilanne on** johdettu pyynnöstä** tarkistamalla, ovatko tunnistetiedot olemassa ja ovatko kaikki avaimet jäähtymässä.
+
+`codex-search` (Codex Web Search) ei ole omaa avainta: se käyttää uudelleen yhdistettyä Codex (ChatGPT) -tiliä, joten jokainen haku kuluttaa ChatGPT -tilauskiintiön ja kestää noin 10–40 sekuntia. Se suoritetaan, kun pyyntö nimeää sen; automaattinen valinta vaatii `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` -ominaisuuslipun (oletusarvoisesti pois päältä).
 
 ---
 

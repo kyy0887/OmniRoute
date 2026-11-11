@@ -14,7 +14,7 @@ OmniRoute kofa ce ta AI da kuma dashboard da aka gina akan Next.js. Yana ba da m
 
 Babban damar iyawa:
 
-- Buɗe AI mai dacewa da API surface don CLI/tools (Masu samar da 381, 159 masu zartarwa)
+- BudeAI mai dacewa da API surface don CLI/tools (Masu samar da 388, 159 masu aiwatarwa)
 - fassarar Request/response a cikin tsarin mai bayarwa
 - Model combo fallback (jerin samfuri da yawa)
 - Matakan haɗe-haɗe (`provider + model + connection`) tare da oda lokacin aiki ta `compositeTiers`
@@ -31,7 +31,7 @@ Babban damar iyawa:
 - Daidaitawa ta hanyar `/v1/moderations`
 - Reranking via `/v1/rerank`
 - Ka yi tunanin karkatar da alamar (`<think>...</think>`) don ƙirar tunani
-- Tsaftatar amsawa don tsananin dacewa OpenAI SDK
+- Tsabtatar da martani don tsananin dacewa OpenAI SDK
 - Daidaita rawar aiki (tsarin → mai haɓakawa, mai amfani da tsarin →) don daidaitawar mai bayarwa
 - Canjin fitarwa da aka tsara (json_schema → Gemini responseSchema)
 - Dagewar gida don masu samarwa, maɓallai, laƙabi, haɗe-haɗe, saituna, farashi (Modules 122 DB )
@@ -42,7 +42,7 @@ Babban damar iyawa:
 - Tsarin duniya da gaggawa allura
 - Bin sawun zama da buga yatsa
 - Ƙididdigar ƙimar kowane-asusu tare da takamaiman bayanan mai bada sabis
-- Tsarin keɓaɓɓen kewayawa don juriya na mai bayarwa
+- Samfurin keɓewar kewayawa don juriyar mai bayarwa
 - Kariyar garken garken tsawa tare da kulle baki
 - cache na tushen sa hannu
 - Domain Layer: dokokin farashi, manufar koma baya, manufar kullewa
@@ -54,7 +54,7 @@ Babban damar iyawa:
 - Daidaita ID (X-Request-Id) don gano ƙarshen zuwa ƙarshe
 - Bincika rajistan shiga tare da ficewa ta kowane maɓallin API
 - Tsarin kimantawa don tabbatar da ingancin LLM
-- Dashboard na lafiya tare da ainihin mai ba da sabis na keɓancewa
+- Dashboard ɗin lafiya tare da ainihin mai ba da sabis na keɓancewa
 - MCP Server (kayan aikin 110) tare da jigilar kayayyaki 3 (stdio/SSE/Streamable HTTP)
 - uwar garken A2A (JSON-RPC 2.0 + SSE) tare da ƙwarewa da zagayen rayuwa
 - Tsarin ƙwaƙwalwar ajiya (hako, allura, maidowa, taƙaitawa)
@@ -65,16 +65,16 @@ Babban damar iyawa:
 - ACP (Agent Communication Protocol) rajista
 - Masu samar da OAuth na yau da kullun (Modules guda 22 a ƙarƙashin `src/lib/oauth/providers/`)
 - rubutun Uninstall/full-uninstall
-- aikin gyaran muhalli OAuth
+- OAuth aikin gyara muhalli
 - gadar WebSocket don abokan cinikin WS masu jituwa na OpenAI (`/v1/ws`)
 - Gudanar da alamar daidaitawa (issue/revoke, ETag-versioned config bundle download)
 - GLM Tunani (`glmt`) saitaccen mai bada sabis na farko
 - Ƙididdiga masu haɗaka ( `/messages/count_tokens` -gefen mai bayarwa tare da ƙididdige ƙididdiga)
-- Model wanda ake kira auto-seeding (30 + cross-proxy yaren daidaitawa a farawa)
+- Model wanda ake kira auto-seeding (30 + giciye yaren giciye na yau da kullun a farawa)
 - Amintaccen fitar da fita tare da gadin SSRF, toshe URL mai zaman kansa, da sake gwadawa mai daidaitawa
 - Cooldown-sane ta sake yin taɗi tare da daidaitawar `requestRetry` da `maxRetryIntervalSec`
 - Tabbatar da yanayin lokacin aiki tare da Zod a farawa
-- Bincika ƙa'ida v2 tare da pagination, mai bada abubuwan CRUD, da SSRF da aka toshe rajistar tabbatarwa
+- Bincika v2 tare da pagination, mai bada abubuwan CRUD, da SSRF-katange rajistar tabbatarwa
 
 Samfurin lokacin aiki na farko:
 
@@ -858,41 +858,47 @@ flowchart LR
 - `src/lib/db/*`: shigo da takamaiman modula kai tsaye — babu barrel (an cire tsohon shimfiɗar sake-fitarwa ta `localDb.ts`)
 - `src/lib/usageDb.ts`: facade na tarihin amfani/rajistan kira a saman jadawalan SQLite
 
-## Ɗaukar Masu Aiwatar da Mai Bayarwa (Tsarin Dabara)
+## Rubutun Mai Ba da Shafi (Tsarin Dabaru)
 
-Kowane mai bayarwa yana da ƙwararren mai aiwatarwa wanda ya faɗaɗa `BaseExecutor` (a cikin `open-sse/executors/base.ts`), wanda ke samar da gina URL, ƙirƙirar headers, sake gwadawa tare da jinkiri mai ƙaruwa, hooks na sabunta bayanan tabbatar da izini, da kuma hanyar tsara aiwatarwa ta `execute()`.
+Kowane mai bada sabis yana da ƙwararren mai zartarwa wanda ke faɗaɗa `BaseExecutor` (a cikin `open-sse/executors/base.ts`), wanda ke ba da ginin URL, ginin kai, sake gwadawa tare da juzu'i mai fa'ida, ƙugiya masu wartsakewa, da kuma hanyar kaɗe-kaɗe `execute()`.
 
-| Mai Gudanarwa             | Mai/Masu Samarwa                                                                                                                                                    | Gudanarwa ta Musamman                                                      |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA, da sauransu. | Tsarin URL/header mai sauyawa bisa ga kowane mai samarwa                   |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                                  | ID na musamman na project/session, fassarar Retry-After, ɓoye kuskuren 429 |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                        | Tura buƙata bisa deployment, tilasta query na api-version                  |
-| `BlackboxWebExecutor`     | Blackbox AI (yanayin yanar gizo)                                                                                                                                    | Juya zaman yanar gizo tare da kwaikwayon TLS fingerprint                   |
-| `ClaudeIdentityExecutor`  | Claude.ai (hanyar CCH)                                                                                                                                              | Bututun constraint + tool-remap, daidaita fingerprint                      |
-| `CliProxyApiExecutor`     | Masu samarwa masu dacewa da CLIProxyAPI                                                                                                                             | Tabbatarwa da sarrafa protocol na musamman                                 |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                               | Saka Account ID, bin diddigin amfani bisa Neurons                          |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                                        | Yana saka umarnin tsarin, yana tilasta ƙoƙarin reasoning                   |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                                 | Gadar Responses API ta zaman burauza tare da kafe thread/turn              |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                                        | OAuth + juya header ga kowane session                                      |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                          | ConnectRPC protocol, rufaffen Protobuf, sanya hannu kan buƙata ta checksum |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                           | Haɗa tsarin rayuwar aikin Devin ta cloud agent module                      |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                                      | Sabunta Copilot token, headers masu kwaikwayon VSCode                      |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                          | GitLab OAuth + tura buƙata bisa iyakar project                             |
-| `GlmExecutor`             | Z.AI GLM (har da saitin `glmt`)                                                                                                                                     | Mai lura da thinking-budget, ƙayyadaddun constants na saitin GLMT          |
-| `GrokWebExecutor`         | xAI Grok web                                                                                                                                                        | Juya zaman yanar gizo, zaɓin yanayi (think/standard)                       |
-| `KieExecutor`             | KIE                                                                                                                                                                 | Bayar da token na musamman tare da jujjuyawar tushen session               |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                              | Tsarin binary na AWS EventStream → sauyawa zuwa SSE                        |
-| `MuseSparkWebExecutor`    | Muse Spark (yanar gizo)                                                                                                                                             | Juya zaman yanar gizo tare da haɗa saƙonnin hoto                           |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                           | Siffar jikin buƙata ta musamman ga mai samarwa                             |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                            | Saitin mai samarwa mai dacewa da AI SDK                                    |
-| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                                      | Juya zaman yanar gizo don ci gaba da taɗi                                  |
-| `PetalsExecutor`          | Petals distributed inference                                                                                                                                        | Tura buƙata ta hanyar gungun nodes marasa cibiyar gudanarwa                |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                                     | Ba a buƙatar API key, buƙatu masu iyakantaccen adadi                       |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                            | Goyon bayan PAT da OAuth, matakin kyauta mai model da yawa                 |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                                    | Tabbatarwa ta service account, endpoints bisa region                       |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                                       | API key da aka shigo da shi + watsa taɗi ta Connect-protobuf               |
+| Mai zartarwa              | Mai bayarwa(s)                                                                                                                                                      | Gudanarwa na Musamman                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, ruɗani, Together, Fireworks, Cerebras, Cohere, NVIDIA, da dai sauransu. | Saitin URL/header mai ƙarfi ga kowane mai bayarwa                           |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                                  | Custom project/session IDs, Sake gwadawa-Bayan yin nazari, 429 obfuscation  |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                        | Tushen turawa, aiwatar da tambayar api-version                              |
+| `BlackboxWebExecutor`     | Blackbox AI (yanayin yanar gizo)                                                                                                                                    | Juya-zaman gidan yanar gizo tare da kwaikwayi TLS                           |
+| `ClaudeIdentityExecutor`  | Claude.ai ( hanyar CCH )                                                                                                                                            | Ƙuntataccen + kayan aikin-sake taswira, ƙirar sawun yatsa                   |
+| `CliProxyApiExecutor`     | CLIProxyAPI masu dacewa                                                                                                                                             | Tabbacin al'ada da sarrafa ladabi                                           |
+| `CloudflareAiExecutor`    | Cloudflare Ma'aikata AI                                                                                                                                             | allurar ID asusu, bin diddigin amfani da tushen Neuron                      |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                                        | Injects umarnin tsarin, tilasta ƙoƙarin tunani                              |
+| `ChatGptWebCodexExecutor` | ChatGPT gizo (Codex)                                                                                                                                                | Martani-zaman mai lilo yana amsa gadar API tare da liƙa thread/turn         |
+| `CommandCodeExecutor`     | Lambar Umurni                                                                                                                                                       | OAuth + juyi juyi na kowane lokaci                                          |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                          | ConnectRPC protocol, Protobuf encoding, buƙatar sa hannu ta hanyar checksum |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                           | Devin ɗawainiyar hawan keke ta hanyar ƙirar wakilin girgije                 |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                                      | sabunta alamar Copilot, masu kwaikwayi VSCode                               |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                          | GitLab OAuth + tsarin tafiyar da aikin                                      |
+| `GlmExecutor`             | Z.AI GLM (ciki har da saitattun `glmt` )                                                                                                                            | Tunani-kasafin kuɗi sane, GLMT saitattu akai akai                           |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                                        | Juyin zaman gidan yanar gizo, zaɓin yanayi (think/standard)                 |
+| `KieExecutor`             | KIE                                                                                                                                                                 | Bayar da alamar al'ada tare da jujjuyawar zama                              |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                              | AWS EventStream binary format → SSE maida                                   |
+| `MuseSparkWebExecutor`    | Muse Spark (yanar gizo)                                                                                                                                             | Zama yana juyawa tare da haɗin saƙon hoto                                   |
+| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                           | Siffar jiki ta musamman na mai bayarwa                                      |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                            | saitin mai bayarwa AI SDK mai jituwa                                        |
+| `PerplexityWebExecutor`   | Yanar gizo mai ruɗani                                                                                                                                               | Juya zaman gidan yanar gizo don ci gaba da taɗi                             |
+| `PetalsExecutor`          | Petals sun rarraba ra'ayi                                                                                                                                           | Rarraba karkatar da zirga-zirgar zirga-zirga                                |
+| `PollinationsExecutor`    | Pollinations AI                                                                                                                                                     | Babu maɓallin API da ake buƙata, ƙayyadaddun buƙatun ƙima                   |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                            | goyon bayan PAT da OAuth, ƙirar ƙira da yawa                                |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                                    | Tabbacin asusun sabis, ƙarshen tushen yanki                                 |
+| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                                       | Shigo da maɓallin API + Haɗa-protobuf taɗi yawo                             |
 
-Duk sauran masu samarwa (har da nodes masu jituwa na musamman) suna amfani da `DefaultExecutor`.
+Duk sauran masu samarwa (ciki har da nodes masu jituwa na al'ada) suna amfani da `DefaultExecutor`.
+
+### Bincike na atomatik da asusun zaman yanar gizo
+
+Gwaje-gwajen samfuri, Gwaji duka, gwaje-gwajen haɗaka da kimantawa suna aika buƙatun taɗi na gaske. Mai ba da zaman gidan yanar gizo yana aiki azaman mai amfani da ya shiga, don haka kowane ɗayan waɗannan buƙatun za a adana su azaman tattaunawa akan wannan asusun; bincike mai sarrafa kansa wanda ya bar irin waɗannan maganganun sun sami dakatarwar asusu (#14780). Don haka bututun taɗi ya ƙi kowane manufa bincike mai sarrafa kansa ya kai wanda mai ba da sabis ya ɗauki shaidar zaman yanar gizo, da zarar an warware mai ba da manufa kuma kafin a zaɓi takardar shaidar (`src/lib/providers/chatProbePolicy.ts`). Ƙin shine `422` tare da `error.code` `chat_probe_not_isolated`, kuma masu gudu na bincike sun ba da rahoton shi a matsayin tsalle, ba gazawa ba.
+
+Mai zartarwa wanda ke gudanar da kowane taɗi a cikin yanayin ba da tarihin mai bayarwa ya bayyana shi da `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`); Ana ba da izinin bincike ga mai ba da sabis. ChatGPT Gizo yana bayyana `temporary-chat`. Sanya sanarwa zuwa tsarin sa tare da gwaji, don haka da'awar ba za ta iya wuce lambar da ta sa ta zama gaskiya ba.
 
 ## Jadawalin Daidaituwar Masu Bayar da Sabis
 

@@ -100,13 +100,13 @@ Menjalankan kueri/URL yang sama pada hingga **4 penyedia secara paralel** (D22):
 
 ## Katalog Penyedia
 
-`ProviderCatalog.tsx` menampilkan daftar lengkap penyedia dari `GET /api/search/providers`
-(diperluas dalam F4 untuk menyertakan penyedia fetch):
+`ProviderCatalog.tsx` memperlihatkan daftar penyedia lengkap dari `GET /api/search/providers` (diperluas di F4 untuk menyertakan penyedia pengambilan):
 
-| `kind` | `"search"` (20 penyedia) atau `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 penyedia) atau `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-Status **ditentukan pada saat permintaan** dengan memeriksa apakah kredensial tersedia dan apakah
-semua kunci saat ini sedang dalam masa cooldown.
+Statusnya adalah** diperoleh pada waktu permintaan** dengan memeriksa apakah kredensial ada dan apakah semua kunci sedang dalam masa cooldown.
+
+`codex-search` (Codex Web Search) tidak memiliki kuncinya sendiri: ia menggunakan kembali akun Codex (ChatGPT) yang terhubung, sehingga setiap pencarian menghabiskan kuota langganan ChatGPT dan memerlukan waktu sekitar 10–40 detik. Ini berjalan ketika permintaan menamainya; pemilihan otomatis memerlukan tanda fitur `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (dinonaktifkan secara default).
 
 ---
 

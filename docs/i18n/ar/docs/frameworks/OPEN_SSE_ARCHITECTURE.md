@@ -488,11 +488,11 @@ createResponsesApiTransformStream(): TransformStream
 
 | ملف                           | غاية                                          |
 | ----------------------------- | --------------------------------------------- |
-| `providerRegistry.ts`         | تسجيل نموذج الدردشة عبر كتالوج الموفر 381     |
+| `providerRegistry.ts`         | تسجيل نموذج الدردشة عبر كتالوج الموفر 388     |
 | `providerModels.ts`           | الأسماء المستعارة للنموذج، ورسم الخرائط الشكل |
 | `constants.ts`                | المهلات والحدود ورموز الحالة                  |
 | `defaultThinkingSignature.ts` | توقيع التفكير Claude الافتراضي                |
-| `modelStrip.ts` (في الخدمات)  | تجريد الحقول لكل مزود                         |
+| `modelStrip.ts` (في الخدمات)  | تجريد الحقل لكل مزود                          |
 
 ### مخطط تسجيل الموفر
 

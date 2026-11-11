@@ -98,15 +98,15 @@ Na-eme otu ajụjụ/URL ahụ n’ofe ndị na-eweta ọrụ ruru **4 n’otu o
 
 ---
 
-## Katalọgụ Ndị Na-enye Ọrụ
+## Katalọgụ onye na-eweta
 
-`ProviderCatalog.tsx` na-egosi ndepụta zuru ezu nke ndị na-enye ọrụ sitere na `GET /api/search/providers`
-(nke a gbasapụrụ na F4 iji tinye ndị na-enye ọrụ fetch):
+`ProviderCatalog.tsx` na-ekpughere ndepụta ndị na-eweta ihe zuru oke site na `GET /api/search/providers` (gbatịpụrụ na F4 iji tinye ndị na-eweta ihe):
 
-| `kind` | `"search"` (ndị na-enye ọrụ 20) ma ọ bụ `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (ndị na-enye 23) ma ọ bụ `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-A na-**ewepụta ọkwa ahụ n'oge arịrịọ** site n’ịchọpụta ma ozi nzere dị nakwa ma
-igodo niile hà nọ ugbu a n’oge nchere cooldown.
+Ọnọdụ bụ** ewepụtara n'oge arịrịọ** site na ịlele ma nzere dị yana ma igodo niile adịla jụụ ugbu a.
+
+`codex-search` (Codex Ọchụchọ Weebụ) enweghị igodo nke ya: ọ na-eji akaụntụ Codex (ChatGPT) ejikọrọ eme ihe, yabụ ọchụchọ ọ bụla na-eji oke ndenye aha ChatGPT wee were ihe dịka 10–40 s. Ọ na-agba ọsọ mgbe arịrịọ na-akpọ ya; Nhọrọ akpaka chọrọ ọkọlọtọ njirimara `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (gbanyụọ na ndabara).
 
 ---
 

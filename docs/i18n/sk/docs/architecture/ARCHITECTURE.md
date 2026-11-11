@@ -14,7 +14,7 @@ OmniRoute je lokálna smerovacia brána AI a riadiaci panel postavený na Next.j
 
 Základné schopnosti:
 
-- Povrch API kompatibilný s OpenAI pre CLI/tools (381 poskytovateľov, 159 spúšťacích modulov)
+- Povrch API kompatibilný s OpenAI pre CLI/tools (388 poskytovateľov, 159 spúšťacích modulov)
 - preklad Request/response naprieč formátmi poskytovateľov
 - Záložná kombinácia modelov (sekvencia viacerých modelov)
 - Štruktúrované kombinované kroky (`provider + model + connection`) s riadením runtime podľa `compositeTiers`
@@ -47,7 +47,7 @@ Základné schopnosti:
 - Cache deduplikácie požiadaviek na základe podpisu
 - Vrstva domény: cenové pravidlá, záložná politika, politika blokovania
 - Context Relay: súhrny odovzdania relácie pre kontinuitu rotácie účtov
-- Trvalosť stavu domény (SQLite zapisovacia vyrovnávacia pamäť pre záložné zdroje, rozpočty, blokovania, ističe)
+- Trvalosť stavu domény (SQLite zapisovacia vyrovnávacia pamäť pre záložné zdroje, rozpočty, uzamknutia, ističe)
 - Nástroj pravidiel pre centralizované hodnotenie žiadostí (uzamknutie → budget → záložný)
 - Požiadajte o telemetriu s agregáciou latencie p50/p95/p99
 - Kombinovaná cieľová telemetria a historické kombinované cieľové zdravie cez `combo_execution_key` / `combo_step_id`
@@ -58,9 +58,9 @@ Základné schopnosti:
 - MCP Server (110 nástrojov) s 3 transportmi (stdio/SSE/Streamable HTTP)
 - A2A Server (JSON-RPC 2.0 + SSE) so zručnosťami a životným cyklom úloh
 - Pamäťový systém (extrakcia, vstrekovanie, vyhľadávanie, sumarizácia)
-- Systém zručností (register, exekútor, sandbox, vstavané zručnosti)
+- Systém zručností (register, exekútor, karanténa, vstavané zručnosti)
 - MITM proxy so správou certifikátov a spracovaním DNS
-- Prompt vstrekovanie stráž middleware
+- Prompt vstrekovanie stráže middleware
 - Okamžité kompresné potrubie s Caveman, RTK, skladané potrubia, kompresné kombinácie, jazykové balíky a analýzy
 - register ACP (Agent Communication Protocol).
 - Modulárni poskytovatelia OAuth (22 samostatných modulov pod `src/lib/oauth/providers/`)
@@ -858,41 +858,47 @@ flowchart LR
 - `src/lib/db/*`: importujte konkrétne moduly priamo — bez súhrnného exportu (stará vrstva opätovného exportu `localDb.ts` bola odstránená)
 - `src/lib/usageDb.ts`: fasáda histórie používania/protokolov volaní nad tabuľkami SQLite
 
-## Pokrytie vykonávačov poskytovateľov (návrhový vzor Strategy)
+## Pokrytie vykonávateľa poskytovateľa (vzor stratégie)
 
-Každý poskytovateľ má špecializovaný vykonávač rozširujúci `BaseExecutor` (v súbore `open-sse/executors/base.ts`), ktorý poskytuje zostavovanie URL, vytváranie hlavičiek, opakovanie pokusov s exponenciálnym oneskorením, hooky na obnovenie prihlasovacích údajov a metódu orchestrácie `execute()`.
+Každý poskytovateľ má špecializovaný spúšťač rozširujúci `BaseExecutor` (v `open-sse/executors/base.ts`), ktorý poskytuje vytváranie URL, konštrukciu hlavičky, opakovanie s exponenciálnym stiahnutím, háky obnovenia poverení a metódu orchestrácie `execute()`.
 
-| Vykonávateľ               | Poskytovateľ(-ia)                                                                                                                                          | Špeciálne spracovanie                                                                       |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA atď. | Dynamická konfigurácia URL/hlavičiek pre jednotlivých poskytovateľov                        |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                         | Vlastné ID projektov/relácií, spracovanie Retry-After, maskovanie 429                       |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                               | Smerovanie podľa nasadenia, vynútenie parametra api-version v dotaze                        |
-| `BlackboxWebExecutor`     | Blackbox AI (webový režim)                                                                                                                                 | Reverzné spracovanie webovej relácie s emuláciou odtlačku TLS                               |
-| `ClaudeIdentityExecutor`  | Claude.ai (cesta CCH)                                                                                                                                      | Kanály obmedzení a premapovania nástrojov, tvarovanie odtlačku                              |
-| `CliProxyApiExecutor`     | Poskytovatelia kompatibilní s CLIProxyAPI                                                                                                                  | Vlastné spracovanie autentifikácie a protokolu                                              |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                      | Vloženie ID účtu, sledovanie využitia založené na Neurons                                   |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                               | Vkladá systémové pokyny, vynucuje mieru úsilia pri uvažovaní                                |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                        | Most rozhrania Responses API pre reláciu prehliadača s pripnutím vlákna/ťahu                |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                               | OAuth + rotácia hlavičiek pre každú reláciu                                                 |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                 | Protokol ConnectRPC, kódovanie Protobuf, podpisovanie požiadaviek pomocou kontrolného súčtu |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                  | Premostenie životného cyklu úloh Devin prostredníctvom modulu cloudového agenta             |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                             | Obnova tokenu Copilot, hlavičky napodobňujúce VSCode                                        |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                 | GitLab OAuth + smerovanie v rozsahu projektu                                                |
-| `GlmExecutor`             | Z.AI GLM (vrátane predvoľby `glmt`)                                                                                                                        | Zohľadnenie rozpočtu na uvažovanie, konštanty predvoľby GLMT                                |
-| `GrokWebExecutor`         | Web xAI Grok                                                                                                                                               | Reverzné spracovanie webovej relácie, výber režimu (uvažovanie/štandardný)                  |
-| `KieExecutor`             | KIE                                                                                                                                                        | Vlastné vydávanie tokenov s rotujúcimi kotvami relácie                                      |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                     | Binárny formát AWS EventStream → konverzia na SSE                                           |
-| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                           | Reverzné spracovanie webovej relácie s premostením obrazových správ                         |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                  | Tvar tela požiadavky špecifický pre poskytovateľa                                           |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                   | Nastavenie poskytovateľa kompatibilné s AI SDK                                              |
-| `PerplexityWebExecutor`   | Web Perplexity                                                                                                                                             | Reverzné spracovanie webovej relácie na pokračovanie konverzácie                            |
-| `PetalsExecutor`          | Distribuovaná inferencia Petals                                                                                                                            | Decentralizované smerovanie v roji                                                          |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                            | Nevyžaduje sa kľúč API, požiadavky s obmedzenou frekvenciou                                 |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                   | Podpora PAT a OAuth, bezplatná úroveň s viacerými modelmi                                   |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                           | Autentifikácia servisného účtu, koncové body podľa regiónu                                  |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                              | Importovaný kľúč API + streamovanie chatu cez Connect-protobuf                              |
+| Exekútor                  | Poskytovatelia                                                                                                                                             | Špeciálna manipulácia                                                              |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA atď. | Dynamická konfigurácia URL/header na poskytovateľa                                 |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                         | Vlastné project/session IDs, Opakovať po analýze, 429 zahmlievanie                 |
+| `AzureOpenAIExecutor`     | Azúrová OpenAI                                                                                                                                             | Smerovanie založené na nasadení, vynútenie dotazu verzie API                       |
+| `BlackboxWebExecutor`     | Blackbox AI (webový režim)                                                                                                                                 | Reverzná webová relácia s emuláciou odtlačkov prstov TLS                           |
+| `ClaudeIdentityExecutor`  | Claude.ai (cesta CCH )                                                                                                                                     | Obmedzenie kanálov na premapovanie nástrojov +, tvarovanie odtlačkov prstov        |
+| `CliProxyApiExecutor`     | Poskytovatelia kompatibilný s CLIProxyAPI                                                                                                                  | Vlastné overovanie a spracovanie protokolov                                        |
+| `CloudflareAiExecutor`    | Cloudflare Pracovníci AI                                                                                                                                   | Injekcia ID účtu, sledovanie používania založené na neurónoch                      |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                               | Vkladá systémové pokyny, núti snahu o uvažovanie                                   |
+| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                        | Browser-session Odpovedá API bridge s pripnutím thread/turn                        |
+| `CommandCodeExecutor`     | Príkazový kód                                                                                                                                              | OAuth + rotácia hlavičky za reláciu                                                |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                 | protokol ConnectRPC, kódovanie Protobuf, podpísanie požiadavky cez kontrolný súčet |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                  | premostenie životného cyklu úloh Devin prostredníctvom modulu cloudového agenta    |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                             | obnovenie tokenu Copilot, hlavičky napodobňujúce VSCode                            |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                 | GitLab OAuth + smerovanie v rozsahu projektu                                       |
+| `GlmExecutor`             | Z.AI GLM (vrátane prednastavenia `glmt` )                                                                                                                  | Myslenie s ohľadom na rozpočet, GLMT prednastavené konštanty                       |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                               | Obrátenie webovej relácie, výber režimu (think/standard)                           |
+| `KieExecutor`             | KIE                                                                                                                                                        | Vydávanie vlastných tokenov s rotujúcimi kotvami relácie                           |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                     | Konverzia binárneho formátu AWS EventStream → SSE                                  |
+| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                           | Reverzná strana webovej relácie s premostením medzi obrázkom a správou             |
+| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                  | Tvar tela podľa požiadavky poskytovateľa                                           |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                   | nastavenie poskytovateľa kompatibilného AI SDK                                     |
+| `PerplexityWebExecutor`   | Web zmätenosti                                                                                                                                             | Spätný chod webovej relácie pre pokračovanie chatu                                 |
+| `PetalsExecutor`          | Okvetné lístky distribuovaný záver                                                                                                                         | Decentralizované smerovanie roja                                                   |
+| `PollinationsExecutor`    | Opeľovanie AI                                                                                                                                              | Nevyžaduje sa žiadny kľúč API, požiadavky s obmedzenou sadzbou                     |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                   | Podpora PAT a OAuth, bezplatná úroveň viacerých modelov                            |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                           | Autentifikácia servisného účtu, regionálne koncové body                            |
+| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                              | Importovaný kľúč API + Connect-protobuf chat streaming                             |
 
 Všetci ostatní poskytovatelia (vrátane vlastných kompatibilných uzlov) používajú `DefaultExecutor`.
+
+### Automatizované sondy a účty webových relácií
+
+Modelové testy, Test All, kombinované testy a hodnotenia posielajú skutočné žiadosti o chat. Poskytovateľ webovej relácie vystupuje ako prihlásený používateľ, takže každá z týchto žiadostí bude uložená ako konverzácia v tomto účte. automatickým sondám, ktoré opustili takéto konverzácie, bol pozastavený účet (#14780). Po vyriešení cieľového poskytovateľa a pred výberom poverenia (`src/lib/providers/chatProbePolicy.ts`) kanál četu odmietne každý cieľ, ku ktorému sa dostane automatizovaná sonda, ktorej poskytovateľ získa poverenie na webovú reláciu. Odmietnutie je `422` s `error.code` `chat_probe_not_isolated` a bežci sondy to hlásia ako preskočenie, nie ako zlyhanie.
+
+Exekútor, ktorý spúšťa každý chat vo vlastnom režime bez histórie poskytovateľa, to deklaruje pomocou `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`); sondy k tomuto poskytovateľovi sú potom povolené. ChatGPT Web deklaruje `temporary-chat`. Pripevnite vyhlásenie k jeho mechanizmu pomocou testu, takže nárok nemôže prežiť kód, ktorý ho robí pravdivým.
 
 ## Matica kompatibility poskytovateľov
 

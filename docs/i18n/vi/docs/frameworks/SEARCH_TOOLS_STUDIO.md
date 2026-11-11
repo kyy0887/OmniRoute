@@ -100,13 +100,13 @@ Chạy cùng một truy vấn/URL song song trên tối đa **4 nhà cung cấp*
 
 ## Danh mục nhà cung cấp
 
-`ProviderCatalog.tsx` hiển thị danh sách đầy đủ các nhà cung cấp từ `GET /api/search/providers`
-(được mở rộng trong F4 để bao gồm các nhà cung cấp truy xuất):
+`ProviderCatalog.tsx` hiển thị danh sách nhà cung cấp đầy đủ từ `GET /api/search/providers` (được mở rộng trong F4 để bao gồm các nhà cung cấp tìm nạp):
 
-| `kind` | `"search"` (20 nhà cung cấp) hoặc `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 nhà cung cấp) hoặc `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, Anysearch-search, Parallel-search) |
 
-Trạng thái được **xác định tại thời điểm yêu cầu** bằng cách kiểm tra xem thông tin xác thực có tồn tại hay không và liệu
-tất cả các khóa hiện có đang trong thời gian chờ hay không.
+Tình trạng là** xuất phát vào thời điểm yêu cầu** bằng cách kiểm tra xem thông tin xác thực có tồn tại hay không và liệu tất cả các khóa hiện có đang trong thời gian hồi chiêu hay không.
+
+`codex-search` (Codex Web Search) không có khóa riêng: nó sử dụng lại tài khoản Codex (ChatGPT) được kết nối, do đó mỗi tìm kiếm sẽ tiêu tốn hạn ngạch đăng ký ChatGPT và mất khoảng 10–40 giây. Nó chạy khi có yêu cầu đặt tên cho nó; lựa chọn tự động cần có cờ tính năng `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (tắt theo mặc định).
 
 ---
 

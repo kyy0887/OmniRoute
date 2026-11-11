@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode` `cursor` `default` `devin-cli` `muse-spark-web` `nlpcloud` `opencode` `perplexity-web` `petals` `pollinations` `devin-desktop` `claudeIdentity.ts` `qoder` రిజిస్ట్రీ) `index.ts`
 
-> గమనిక: ఇక్కడ జాబితా చేయని ప్రొవైడర్లు జెనరిక్ OpenAI-అనుకూల కార్యనిర్వాహకుడిని ఉపయోగించి `default.ts` ద్వారా సేవలు అందిస్తారు. పూర్తి ప్రొవైడర్ కేటలాగ్ (381 ప్రొవైడర్లు) `src/shared/constants/providers.ts` లో నివసిస్తుంది.
+> గమనిక: ఇక్కడ జాబితా చేయని ప్రొవైడర్లు జెనరిక్ OpenAI-అనుకూల కార్యనిర్వాహకుడిని ఉపయోగించి `default.ts` ద్వారా సేవలు అందిస్తారు. పూర్తి ప్రొవైడర్ కేటలాగ్ (388 ప్రొవైడర్లు) `src/shared/constants/providers.ts` లో నివసిస్తుంది.
 
 ### 4.3 `open-sse/translator/`
 
@@ -541,7 +541,7 @@ open-sse/
 
 ### 4.8 `open-sse/utils/`
 
-స్ట్రీమింగ్ ప్రిమిటివ్లు మరియు ప్రొవైడర్ సహాయకులు: `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `tlsClient.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts` `ollamaTransform.ts` `aiSdkCompat.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `progressTracker.ts` `error.ts` `cors.ts` `logger.ts` `requestLogger.ts`, `sleep.ts`.
+స్ట్రీమింగ్ ప్రిమిటివ్లు మరియు ప్రొవైడర్ సహాయకులు: `stream.ts`, `streamHandler.ts`, `streamHelpers.ts`, `streamPayloadCollector.ts`, `streamReadiness.ts`, `sseHeartbeat.ts`, `proxyFetch.ts`, `proxyDispatcher.ts`, `tlsClient.ts`, `networkProxy.ts`, `awsSigV4.ts`, `cacheControlPolicy.ts`, `cursorChecksum.ts`, `cursorAgentProtobuf.ts`, `cursorVersionDetector.ts`, `comfyuiClient.ts`, `kieTask.ts`, `bypassHandler.ts`, `aiSdkCompat.ts`, `thinkTagParser.ts`, `urlSanitize.ts`, `usageTracking.ts`, `progressTracker.ts` `error.ts` `cors.ts` `logger.ts` `requestLogger.ts`, `sleep.ts` `ollamaTransform.ts`
 
 ---
 

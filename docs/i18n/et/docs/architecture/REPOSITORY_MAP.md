@@ -144,7 +144,7 @@ src/
 | `app/api/playground/`                                                        | Playground Studio marsruudid: `improve-prompt/` (POST — LLM viipade ümberkirjutaja), `presets/` (GET list / POST create), `presets/[id]/` (GET / PUT / DELETE) — vaata `docs/frameworks/PLAYGROUND_STUDIO.md`                                                                                                         |
 | `app/api/` (non-v1)                                                          | Management/admin marsruudid (~ 60 kataloogid: pakkujad, kombod, seaded, mcp, a2a, evals, mälu, oskused, veebihaagid, vastavus, vastupidavus, jälgimine, tunnelid, kliiritööriistad jne)                                                                                                                               |
 | `app/api/tools/agent-bridge/`                                                | AgentBridge REST API — 12 marsruuti (serveri juhtimine, agent state/DNS/mappings, ümbersõit, sert, ülesvoolu CA). LOCAL_ONLY + SPAWN_CAPABLE. Vaata `docs/frameworks/AGENTBRIDGE.md §7`.                                                                                                                              |
-| `app/api/tools/traffic-inspector/`                                           | Liiklusinspektor REST + WS API — 16 + marsruuti (päringud, seansid, hostid, püüdmisrežiimid, eksport, ws). LOCAL_ONLY + SPAWN_CAPABLE. Vaata `docs/frameworks/TRAFFIC_INSPECTOR.md §8`.                                                                                                                               |
+| `app/api/tools/traffic-inspector/`                                           | Liiklusinspektor REST + WS API — 16 + marsruuti (päringud, seansid, hostid, püüdmisrežiimid, eksport, ws). LOCAL_ONLY + SPAWN_CAPABLE. Vaadake `docs/frameworks/TRAFFIC_INSPECTOR.md §8`.                                                                                                                             |
 | `app/a2a/`                                                                   | A2A JSON-RPC 2.0 sisendpunkt (`POST /a2a`)                                                                                                                                                                                                                                                                            |
 | `app/.well-known/agent.json/`                                                | A2A agendikaart (avastus)                                                                                                                                                                                                                                                                                             |
 | `app/(dashboard)/dashboard/`                                                 | Armatuurlaua UI lehed (50 + jaotist, ~ 118 page.tsx -faili: pakkujad, kombinatsioonid, seaded, mälu, oskused, veebihaagid, evals, audit, pakett, vahemälu, kulud, tervis, süsteem, tegevus jne)                                                                                                                       |
@@ -193,7 +193,7 @@ src/
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 ümbris — KNN brute-force + hübriid RRF (FTS5 + vektor, k = 60). Lazy-init, laguneb graatsiliselt, kui sqlite-vec pole saadaval. (plaan 21)                                                                                                                                                             |
 | `memory/reindex.ts`                      | `runReindexBatch()` — töötleb mälestusi `needs_reindex=1` taustal; kutsutakse `POST /api/memory/reindex` ja lazy-backfill path poolt. (plaan 21)                                                                                                                                                                         |
 | `monitoring/`                            | Tervisekontroll, mõõdikud heide                                                                                                                                                                                                                                                                                          |
-| `oauth/`                                 | OAuth/import vood 22 pakkuja mooduli jaoks (agy, antigravity, claude, cline, codebuddy-cn, codex, kursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilokood, kimi-kodeerimine, traqo, xaioference, kiro, xaioference zed-hosted, zed)                                                   |
+| `oauth/`                                 | OAuth/import vood 22 pakkuja mooduli jaoks (agy, antigravity, claude, cline, codebuddy-cn, codex, kursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilokood, kimi-kodeerimine, traqo, xau-oference, kiro, xai-oference zed-hosted, zed)                                                 |
 | `plugins/`                               | Pluginate register                                                                                                                                                                                                                                                                                                       |
 | `promptCache/`                           | Antroopilises stiilis kiire vahemälu katkestuspunktid                                                                                                                                                                                                                                                                    |
 | `skills/`                                | Oskuste raamistik (sisseehitatud + turg + SkillsSH) — vt `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                                     |
@@ -226,7 +226,7 @@ src/
 | `tagRouter.ts`         | Sildipõhine marsruutimine                                 |
 | `comboResolver.ts`     | Kombineeritud eraldusvõime (kasutab kombineeritud mootor) |
 | `modelAvailability.ts` | Mudeli saadavuse kontroll                                 |
-| `assessment/`          | Mudeli hindamine (RFC-AUTO-HINDAMISE 1. etapp)            |
+| `assessment/`          | Mudeli hindamine (RFC-AUTO-ASSESSMENT 1. etapp)           |
 
 ### `src/server/`
 
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `components/`                    | Armatuurlaua komponent API: `packages/ui-kit` adapterid — vt `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ekraanidel kasutatavad ikooninimed → Lucide'i komponendid (`<Icon>`)                  |
-| `constants/providers.ts`         | **381 pakkujat** Zod valideerimisega (tõe allikas)                                                |
+| `constants/providers.ts`         | **388 pakkujat** Zod valideerimisega (tõe allikas)                                                |
 | `constants/cliTools.ts`          | Väline CLI tööriista register                                                                     |
 | `constants/routingStrategies.ts` | **20 marsruutimisstrateegiat** prioriteetidega                                                    |
 | `constants/publicApiRoutes.ts`   | Marsruudid, mis nõuavad kandja (vs haldamise) autentimist                                         |
@@ -395,24 +395,24 @@ open-sse/
 
 ### Tipptasemel juhendid
 
-| Doc                         | Eesmärk                                                                                        |
-| --------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ARCHITECTURE.md`           | Kõrgetasemeline arhitektuur, alamsüsteemi kaart, armatuurlaua pind                             |
-| `CODEBASE_DOCUMENTATION.md` | Tehniline viide: kataloogid, moodulid, kokkulepped                                             |
-| `FEATURES.md`               | Funktsioonimaatriks koos v3.8 esiletõstmistega                                                 |
-| `USER_GUIDE.md`             | Lõppkasutaja käsiraamat (seadistus, mudelid, kombinatsioonid, CLIs, heli jne)                  |
-| `API_REFERENCE.md`          | API lõpp-punkti viide autentimismudeliga                                                       |
-| `openapi.yaml`              | OpenAPI 3.0 spetsifikatsioon (121 rada)                                                        |
-| `SETUP_GUIDE.md`            | Installimismeetodid (npm, npx, Docker, Electron, Termux, allikas)                              |
-| `ENVIRONMENT.md`            | Kõik env-vars (dokumenteeritud ~ 800, ~ 3050 rida `.env.example`)                              |
-| `TROUBLESHOOTING.md`        | Levinud vead + v3.8.0 teadaolevad probleemid                                                   |
-| `RELEASE_CHECKLIST.md`      | Täielik vabastamise voog (oskused, husky, tavapärased kohustused, juurutamine)                 |
-| `COVERAGE_PLAN.md`          | Katvuse eesmärgid ja hetkeseis                                                                 |
-| `FREE_TIERS.md`             | Kureeritud vabataseme pakkujad (48 + tasuta + 11 OAuth)                                        |
-| `CLI-TOOLS.md`              | Välised CLI integratsioonid + Sisemine OmniRoute CLI                                           |
-| `I18N.md`                   | i18n arhitektuur, keele lisamine, 67 lokaali                                                   |
-| `UNINSTALL.md`              | Puhastage desinstalli sammud                                                                   |
-| `PROVIDER_REFERENCE.md`     | **Automaatselt genereeritud** kataloog 381 pakkujast (regen: `npm run gen:provider-reference`) |
+| Doc                         | Eesmärk                                                                                      |
+| --------------------------- | -------------------------------------------------------------------------------------------- |
+| `ARCHITECTURE.md`           | Kõrgetasemeline arhitektuur, alamsüsteemi kaart, armatuurlaua pind                           |
+| `CODEBASE_DOCUMENTATION.md` | Tehniline viide: kataloogid, moodulid, kokkulepped                                           |
+| `FEATURES.md`               | Funktsioonimaatriks koos v3.8 esiletõstmistega                                               |
+| `USER_GUIDE.md`             | Lõppkasutaja käsiraamat (seadistus, mudelid, kombinatsioonid, CLIs, heli jne)                |
+| `API_REFERENCE.md`          | API lõpp-punkti viide autentimismudeliga                                                     |
+| `openapi.yaml`              | OpenAPI 3.0 spetsifikatsioon (121 rada)                                                      |
+| `SETUP_GUIDE.md`            | Installimismeetodid (npm, npx, Docker, Electron, Termux, allikas)                            |
+| `ENVIRONMENT.md`            | Kõik env-vars (dokumenteeritud ~ 800, ~ 3050 rida `.env.example`)                            |
+| `TROUBLESHOOTING.md`        | Levinud vead + v3.8.0 teadaolevad probleemid                                                 |
+| `RELEASE_CHECKLIST.md`      | Täielik vabastamise voog (oskused, husky, tavapärased kohustused, juurutamine)               |
+| `COVERAGE_PLAN.md`          | Katvuse eesmärgid ja hetkeseis                                                               |
+| `FREE_TIERS.md`             | Kureeritud vabataseme pakkujad (48 + tasuta + 11 OAuth)                                      |
+| `CLI-TOOLS.md`              | Välised CLI integratsioonid + Sisemine OmniRoute CLI                                         |
+| `I18N.md`                   | i18n arhitektuur, keele lisamine, 67 lokaali                                                 |
+| `UNINSTALL.md`              | Puhastage desinstalli sammud                                                                 |
+| `PROVIDER_REFERENCE.md`     | **Automaatselt genereeritud** 388 pakkuja kataloog (regen: `npm run gen:provider-reference`) |
 
 ### Alamsüsteemi süvasukeldumised
 

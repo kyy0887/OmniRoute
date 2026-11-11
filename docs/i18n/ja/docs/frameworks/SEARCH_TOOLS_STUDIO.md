@@ -100,13 +100,13 @@ Web 検索、Web スクレイピング、プロバイダーの並列比較を統
 
 ## プロバイダーカタログ
 
-`ProviderCatalog.tsx` は、`GET /api/search/providers` から取得したプロバイダーの完全な一覧を公開します
-（F4 で取得プロバイダーも含むように拡張）：
+`ProviderCatalog.tsx` `GET /api/search/providers`からの完全なプロバイダー リストを公開します (フェッチ プロバイダーを含めるために F4 で拡張されます)。
 
-| `kind` | `"search"`（20 プロバイダー）または `"fetch"`（firecrawl、jina-reader、tavily-search、tinyfish、nimble-search、anysearch-search、parallel-search） |
+| `kind` | `"search"` (23 プロバイダー) または`"fetch"` (firecrawl、jina-reader、tavily-search、tinyfish、nimble-search、anysearch-search、Parallel-search) |
 
-ステータスは、認証情報が存在するかどうか、および
-すべてのキーが現在クールダウン中かどうかを確認することで、**リクエスト時に算出**されます。
+ステータスは**リクエスト時に導出される**資格情報が存在するかどうか、およびすべてのキーが現在クールダウン中かどうかを確認します。
+
+`codex-search` (Codex Web Search) には独自のキーがありません。接続されたCodex (ChatGPT) アカウントを再利用するため、各検索にはChatGPTサブスクリプション クォータが消費され、約 10 ～ 40 秒かかります。リクエストによって名前が付けられると実行されます。自動選択には`CODEX_SEARCH_AUTO_FALLBACK_ENABLED`機能フラグが必要です (デフォルトではオフ)。
 
 ---
 

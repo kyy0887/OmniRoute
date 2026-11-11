@@ -16,7 +16,7 @@ OmniRoute je lokalni AI pristupnik za usmjeravanje i nadzorna ploča izgrađena 
 
 Osnovne mogućnosti:
 
-- OpenAI-kompatibilna API površina za CLI/tools (381 pružatelj, 159 izvršnih modula)
+- OpenAI-kompatibilna API površina za CLI/tools (388 pružatelja usluga, 159 izvršnih modula)
 - Request/response prijevod preko formata pružatelja usluga
 - Rezervni kombinirani model (slijed više modela)
 - Strukturirani kombinirani koraci (`provider + model + connection`) s redoslijedom vremena izvođenja prema `compositeTiers`
@@ -81,7 +81,7 @@ Osnovne mogućnosti:
 Primarni model vremena izvođenja:
 
 - rute aplikacije Next.js pod `src/app/api/*` implementiraju i nadzornu ploču APIs i kompatibilnost APIs
-- Zajednička SSE/routing jezgra u `src/sse/*` + `open-sse/*` upravlja izvršavanjem pružatelja usluga, prijevodom, strujanjem, zamjenom i upotrebom
+- Zajednička SSE/routing jezgra u `src/sse/*` + `open-sse/*` upravlja izvršavanjem pružatelja usluga, prijevodom, strujanjem, povratnim informacijama i upotrebom
 
 ## Referentni dijagrami
 
@@ -860,41 +860,47 @@ flowchart LR
 - `src/lib/db/*`: uvozite konkretne module izravno — bez barrel datoteke (stari sloj ponovnog izvoza `localDb.ts` je uklonjen)
 - `src/lib/usageDb.ts`: fasada za povijest korištenja/zapise poziva na temelju SQLite tablica
 
-## Podrška izvršitelja za pružatelje usluga (Strategy Pattern)
+## Pokrivenost dobavljača izvršitelja (strateški obrazac)
 
-Svaki pružatelj usluga ima specijalizirani izvršitelj koji proširuje `BaseExecutor` (u `open-sse/executors/base.ts`), koji omogućuje izgradnju URL-a, konstrukciju zaglavlja, ponovne pokušaje s eksponencijalnim odgađanjem, mehanizme za obnovu vjerodajnica i metodu orkestracije `execute()`.
+Svaki pružatelj ima specijaliziranog izvršitelja koji proširuje `BaseExecutor` (u `open-sse/executors/base.ts`), koji pruža URL izgradnju, konstrukciju zaglavlja, ponovni pokušaj s eksponencijalnim odmakom, kuke za osvježavanje vjerodajnica i metodu `execute()` orkestracije.
 
-| Izvršitelj                | Pružatelj(i) usluga                                                                                                                                         | Posebno rukovanje                                                                        |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA, itd. | Dinamična konfiguracija URL-a/zaglavlja po pružatelju                                    |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                          | Prilagođeni ID-ovi projekta/sesije, parsiranje Retry-After, obfuskacija 429              |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                | Usmjeravanje na temelju implementacije, provođenje upitnog parametra api-version         |
-| `BlackboxWebExecutor`     | Blackbox AI (web-mode)                                                                                                                                      | Reverzija web-sesije s emulacijom TLS otiska                                             |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH path)                                                                                                                                        | Cjevovodi za ograničenja + preslikavanje alata, oblikovanje otiska                       |
-| `CliProxyApiExecutor`     | Pružatelji kompatibilni s CLIProxyAPI                                                                                                                       | Prilagođena autentifikacija i rukovanje protokolom                                       |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                       | Ubrizgavanje ID-a računa, praćenje uporabe na temelju Neurons                            |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                                | Ubrizgava sistemske instrukcije, prisilno postavlja razinu zaključivanja                 |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                         | Mostovni spoj Responses API za pretraživač-sesiju s fiksiranjem niti/poteza              |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                                | OAuth + rotacija zaglavlja po sesiji                                                     |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                  | ConnectRPC protokol, Protobuf enkodiranje, potpisivanje zahtjeva putem kontrolnog zbroja |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                   | Povezivanje životnog ciklusa Devin zadatka putem modula cloud agenta                     |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                              | Obnova Copilot tokena, zaglavlja koja oponašaju VSCode                                   |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                  | GitLab OAuth + usmjeravanje ograničeno na projekt                                        |
-| `GlmExecutor`             | Z.AI GLM (uklj. `glmt` predpostavku)                                                                                                                        | Svjesnost o budžetu razmišljanja, konstante GLMT predpostavke                            |
-| `GrokWebExecutor`         | xAI Grok web                                                                                                                                                | Reverzija web-sesije, odabir načina rada (razmišljanje/standardni)                       |
-| `KieExecutor`             | KIE                                                                                                                                                         | Prilagođeno izdavanje tokena s rotirajućim sidrima sesije                                |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                      | Pretvorba AWS EventStream binarnog formata → SSE                                         |
-| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                            | Reverzija web-sesije s povezivanjem poruka slika                                         |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                   | Oblik tijela zahtjeva specifičan za pružatelja usluge                                    |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                    | Postavljanje pružatelja usluga kompatibilnih s AI SDK                                    |
-| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                              | Reverzija web-sesije za nastavak razgovora                                               |
-| `PetalsExecutor`          | Petals distribuirano zaključivanje                                                                                                                          | Decentralizirano usmjeravanje roja                                                       |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                             | Nije potreban API ključ, ograničena stopa zahtjeva                                       |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                    | Podrška za PAT i OAuth, besplatna razina s više modela                                   |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                            | Autentifikacija putem uslužnog računa, krajnje točke na temelju regije                   |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                               | Uvezeni API ključ + strujanje razgovora putem Connect-protobuf                           |
+| Izvršitelj                | Davatelj(i)                                                                                                                                                | Posebno rukovanje                                                                   |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA itd. | Dinamička URL/header konfiguracija po pružatelju usluga                             |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                         | Prilagođeni project/session IDs, Pokušaj ponovno nakon analiziranja, 429 maskiranje |
+| `AzureOpenAIExecutor`     | Azurno OpenAI                                                                                                                                              | Usmjeravanje temeljeno na implementaciji, provedba upita u api verziji              |
+| `BlackboxWebExecutor`     | Blackbox AI (web-način)                                                                                                                                    | Preokret web-sesije sa TLS emulacijom otiska prsta                                  |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH put)                                                                                                                                        | Ograničenje + alata za ponovno mapiranje cjevovoda, oblikovanje otiska prsta        |
+| `CliProxyApiExecutor`     | CLIProxyAPI-kompatibilni pružatelji usluga                                                                                                                 | Prilagođena autorizacija i rukovanje protokolom                                     |
+| `CloudflareAiExecutor`    | Cloudflare Radnici AI                                                                                                                                      | Račun ID injekcija, praćenje upotrebe na temelju neurona                            |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                               | Unosi upute sustava, prisiljava na razmišljanje                                     |
+| `ChatGptWebCodexExecutor` | ChatGPT web (Codex)                                                                                                                                        | Odgovori sesije preglednika API most sa thread/turn pričvršćivanjem                 |
+| `CommandCodeExecutor`     | Kod naredbe                                                                                                                                                | OAuth + rotacija zaglavlja po sesiji                                                |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                 | ConnectRPC protokol, Protobuf kodiranje, potpisivanje zahtjeva putem kontrolne sume |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                  | premošćivanje životnog ciklusa zadatka Devin putem modula agenta u oblaku           |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                             | Copilot token refresh, zaglavlja koja oponašaju VSCode                              |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                 | GitLab OAuth + projektno usmjeravanje                                               |
+| `GlmExecutor`             | Z.AI GLM (uklj. `glmt` unaprijed postavljeno)                                                                                                              | Razmišljanje o proračunu, GLMT unaprijed postavljene konstante                      |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                               | Obratna web-sesija, odabir načina (think/standard)                                  |
+| `KieExecutor`             | KIE                                                                                                                                                        | Prilagođeno izdavanje tokena s rotirajućim sidrima sesije                           |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                     | AWS EventStream binarni format → SSE pretvorba                                      |
+| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                           | Preokret web-sesije s premošćivanjem slika-poruka                                   |
+| `NlpCloudExecutor`        | NLP Oblak                                                                                                                                                  | Oblik tijela zahtjeva specifičan za pružatelja usluge                               |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                   | AI SDK kompatibilno postavljanje pružatelja usluga                                  |
+| `PerplexityWebExecutor`   | Mreža nedoumica                                                                                                                                            | Preokret web-sesije za nastavak razgovora                                           |
+| `PetalsExecutor`          | Latice raspoređeni zaključak                                                                                                                               | Decentralizirano usmjeravanje rojeva                                                |
+| `PollinationsExecutor`    | Oprašivanje AI                                                                                                                                             | Nije potreban API ključ, ograničeni zahtjevi                                        |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                   | podrška PAT i OAuth, besplatni sloj za više modela                                  |
+| `VertexExecutor`          | Google Vrh AI                                                                                                                                              | Autentifikacija računa usluge, krajnje točke temeljene na regiji                    |
+| `DevinDesktopExecutor`    | Devin radna površina                                                                                                                                       | Uvezeni API ključ + Connect-protobuf strujanje chata                                |
 
 Svi ostali pružatelji usluga (uključujući prilagođene kompatibilne čvorove) koriste `DefaultExecutor`.
+
+### Automatizirana ispitivanja i računi web-sesija
+
+Testovi modela, Testiraj sve, kombinirani testovi i procjene šalju stvarne zahtjeve za chat. Pružatelj web-sesije djeluje kao prijavljeni korisnik, tako da bi svaki od tih zahtjeva bio spremljen kao razgovor na tom računu; automatizirane sonde koje su napustile takve razgovore dobile su obustavu računa (#14780). Cjevovod chata stoga odbija svaku metu do koje dođe automatizirana sonda čiji pružatelj uzima vjerodajnicu web-sesije, nakon što se ciljni pružatelj riješi i prije nego što se odabere vjerodajnica (`src/lib/providers/chatProbePolicy.ts`). Odbijanje je `422` sa `error.code` `chat_probe_not_isolated`, a pokretači sonde to prijavljuju kao preskakanje, a ne kao neuspjeh.
+
+Izvršitelj koji pokreće svaki chat u davateljevom vlastitom načinu rada bez povijesti deklarira ga sa `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`); tada su dopuštena ispitivanja tom pružatelju. ChatGPT Web izjavljuje `temporary-chat`. Prikvačite deklaraciju na njen mehanizam pomoću testa, tako da tvrdnja ne može nadživjeti kod koji je čini istinitom.
 
 ## Matrica kompatibilnosti pružatelja usluga
 

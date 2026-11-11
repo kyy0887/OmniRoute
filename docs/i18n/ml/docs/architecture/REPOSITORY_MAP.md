@@ -207,13 +207,13 @@ src/
 
 ### `src/lib/db/` — ഡാറ്റാബേസ് (147 മൊഡ്യൂളുകൾ + 208 മൈഗ്രേഷനുകൾ)
 
-| സബ്ദിർ                    | ഉദ്ദേശം                                                                                                                                                                                                  |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `db/core.ts`              | WAL ജേണലിംഗ് ഉള്ള `getDbInstance()` singleton                                                                                                                                                            |
-| `db/migrations/`          | പതിപ്പ് ചെയ്ത SQL ഫയലുകൾ (idempotent, ഇടപാട്). `073_memory_vec.sql` `memory_vec_meta` + `needs_reindex` കോളം ചേർക്കുന്നു (പ്ലാൻ 21).                                                                     |
-| `db/playgroundPresets.ts` | പ്ലേഗ്രൗണ്ട് സ്റ്റുഡിയോ പ്രീസെറ്റുകൾക്കുള്ള CRUD മൊഡ്യൂൾ (`listPlaygroundPresets`, `getPlaygroundPreset`, `createPlaygroundPreset`, `updatePlaygroundPreset`, `deletePlaygroundPreset`)                  |
-| `db/memoryVec.ts`         | `memory_vec_meta` നുള്ള CRUD (active_dim, embedding_signature, last_reset_at, vec_loaded) + `markMemoryNeedsReindex`, `getMemoryReindexQueue`, മുതലായവ (പ്ലാൻ 21)                                        |
-| `db/<domain>.ts`          | ഓരോ ഡൊമെയ്നിനും ഒരു മൊഡ്യൂൾ: ദാതാക്കൾ, കോമ്പോകൾ, apiKeys, ഉപയോക്താക്കൾ, സെഷനുകൾ, ഉപയോഗം, ഓഡിറ്റ് ലോഗ്, വെബ്ഹുക്കുകൾ, കഴിവുകൾ, memory_entries, cloud_agent_tasks, evals* \* , reasoning_cache, തുടങ്ങിയവ. |
+| സബ്ദിർ                    | ഉദ്ദേശം                                                                                                                                                                                                |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `db/core.ts`              | WAL ജേണലിംഗ് ഉള്ള `getDbInstance()` singleton                                                                                                                                                          |
+| `db/migrations/`          | പതിപ്പ് ചെയ്ത SQL ഫയലുകൾ (idempotent, ഇടപാട്). `073_memory_vec.sql` `memory_vec_meta` + `needs_reindex` കോളം ചേർക്കുന്നു (പ്ലാൻ 21).                                                                   |
+| `db/playgroundPresets.ts` | പ്ലേഗ്രൗണ്ട് സ്റ്റുഡിയോ പ്രീസെറ്റുകൾക്കുള്ള CRUD മൊഡ്യൂൾ (`listPlaygroundPresets`, `getPlaygroundPreset`, `createPlaygroundPreset`, `updatePlaygroundPreset`, `deletePlaygroundPreset`)                |
+| `db/memoryVec.ts`         | `memory_vec_meta` നുള്ള CRUD (active_dim, embedding_signature, last_reset_at, vec_loaded) + `markMemoryNeedsReindex`, `getMemoryReindexQueue`, മുതലായവ (പ്ലാൻ 21)                                      |
+| `db/<domain>.ts`          | ഓരോ ഡൊമെയ്നിനും ഒരു മൊഡ്യൂൾ: ദാതാക്കൾ, കോമ്പോകൾ, apiKeys, ഉപയോക്താക്കൾ, സെഷനുകൾ, ഉപയോഗം, ഓഡിറ്റ് ലോഗ്, വെബ്ഹുക്കുകൾ, കഴിവുകൾ, memory_entries, cloud_agent_tasks, evals* \* , reasoning_cache, മുതലായവ. |
 
 ### `src/domain/`
 
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `components/`                    | ഡാഷ്ബോർഡ് ഘടകം API: `packages/ui-kit` ക്ക് മുകളിലുള്ള അഡാപ്റ്ററുകൾ — `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: സ്ക്രീനുകൾ ഉപയോഗിക്കുന്ന ഐക്കൺ പേരുകൾ → ലൂസൈഡ് ഘടകങ്ങൾ (`<Icon>`)                             |
-| `constants/providers.ts`         | **381 ദാതാക്കൾ** Zod മൂല്യനിർണ്ണയത്തോടെ (സത്യത്തിൻ്റെ ഉറവിടം)                                             |
+| `constants/providers.ts`         | **388 ദാതാക്കൾ** Zod മൂല്യനിർണ്ണയത്തോടെ (സത്യത്തിൻ്റെ ഉറവിടം)                                             |
 | `constants/cliTools.ts`          | ബാഹ്യ CLI ടൂൾ രജിസ്ട്രി                                                                                   |
 | `constants/routingStrategies.ts` | **20 റൂട്ടിംഗ് തന്ത്രങ്ങൾ** മുൻഗണനകളോടെ                                                                   |
 | `constants/publicApiRoutes.ts`   | Bearer (vs management) ഓത്ത് ആവശ്യമുള്ള റൂട്ടുകൾ                                                          |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ബാഹ്യ CLI സംയോജനങ്ങൾ + ആന്തരിക OmniRoute CLI                                                |
 | `I18N.md`                   | i18n ആർക്കിടെക്ചർ, ഒരു ഭാഷ ചേർക്കുന്നു, 67 ലൊക്കേലുകൾ                                       |
 | `UNINSTALL.md`              | അൺഇൻസ്റ്റാൾ ഘട്ടങ്ങൾ വൃത്തിയാക്കുക                                                          |
-| `PROVIDER_REFERENCE.md`     | **സ്വയമേവ സൃഷ്ടിച്ചത്** 381 ദാതാക്കളുടെ കാറ്റലോഗ് (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **സ്വയമേവ സൃഷ്ടിച്ചത്** 388 ദാതാക്കളുടെ കാറ്റലോഗ് (regen: `npm run gen:provider-reference`) |
 
 ### സബ്സിസ്റ്റം ആഴത്തിലുള്ള ഡൈവുകൾ
 

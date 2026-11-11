@@ -99,12 +99,13 @@ Search Tools Studio, `/dashboard/search-tools`-ஐ ஓர் அடிப்ப�
 
 ## வழங்குநர் பட்டியல்
 
-`ProviderCatalog.tsx`, `GET /api/search/providers` இலிருந்து முழுமையான வழங்குநர் பட்டியலை வெளிப்படுத்துகிறது
-(fetch வழங்குநர்களை உள்ளடக்குவதற்காக F4-இல் விரிவாக்கப்பட்டது):
+`ProviderCatalog.tsx` `GET /api/search/providers` இலிருந்து முழு வழங்குநர் பட்டியலை வெளிப்படுத்துகிறது (F4 இல் நீட்டிக்கப்பட்ட வழங்குநர்களை உள்ளடக்கியது):
 
-| `kind` | `"search"` (20 வழங்குநர்கள்) அல்லது `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 வழங்குநர்கள்) அல்லது `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-நற்சான்றுகள் உள்ளனவா மற்றும் அனைத்து விசைகளும் தற்போது cooldown நிலையில் உள்ளனவா என்பதைச் சரிபார்ப்பதன் மூலம், கோரிக்கை நேரத்தில் நிலை **பெறப்படுகிறது**.
+நிலை உள்ளது** கோரிக்கை நேரத்தில் பெறப்பட்டது** நற்சான்றிதழ்கள் உள்ளதா மற்றும் அனைத்து விசைகளும் தற்போது கூல்டவுனில் உள்ளனவா என்பதைச் சரிபார்ப்பதன் மூலம்.
+
+`codex-search` (Codex வலைத் தேடல்) க்கு அதன் சொந்த விசை இல்லை: இது இணைக்கப்பட்ட Codex (ChatGPT) கணக்கை மீண்டும் பயன்படுத்துகிறது, எனவே ஒவ்வொரு தேடலும் ChatGPT சந்தா ஒதுக்கீட்டைச் செலவழித்து சுமார் 10-40 வினாடிகள் ஆகும். கோரிக்கை பெயரிடும்போது அது இயங்கும்; தானியங்கி தேர்வுக்கு `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` அம்சக் கொடி தேவை (இயல்புநிலையாக ஆஃப்).
 
 ---
 

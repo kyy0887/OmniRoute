@@ -191,7 +191,7 @@ src/
 | `memory/`                                | Розмовна пам'ять (SQLite FTS5 + sqlite-vec hybrid RRF + Qdrant рівень 2) — див `docs/frameworks/MEMORY.md`                                                                                                                                                                                                                  |
 | `memory/embedding/`                      | Рівень вбудовування кількох джерел: `index.ts` (розв’язувач), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (план 21)                                                                                                                                                                      |
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + hybrid RRF (FTS5 + вектор, k = 60). Lazy-init, витончено знижується, коли sqlite-vec недоступний. (план 21)                                                                                                                                                                   |
-| `memory/reindex.ts`                      | `runReindexBatch()` — обробляє спогади за допомогою `needs_reindex=1` у фоновому режимі; викликається `POST /api/memory/reindex` і шляхом відкладеного заповнення. (план 21)                                                                                                                                                |
+| `memory/reindex.ts`                      | `runReindexBatch()` — обробляє спогади за допомогою `needs_reindex=1` у фоновому режимі; викликається `POST /api/memory/reindex` і шляхом відкладеної заповнення. (план 21)                                                                                                                                                 |
 | `monitoring/`                            | Перевірка працездатності, метрика емісії                                                                                                                                                                                                                                                                                    |
 | `oauth/`                                 | потоки OAuth/import для 22 модулів провайдера (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, openference, qoder, trae, xai-oauth, zed-hosted, zed)                                                   |
 | `plugins/`                               | Реєстр плагінів                                                                                                                                                                                                                                                                                                             |
@@ -241,8 +241,8 @@ src/
 | Модуль                           | призначення                                                                                                   |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Компонент приладової панелі API: адаптери через `packages/ui-kit` — див. `docs/architecture/DESIGN_SYSTEM.md` |
-| `constants/iconMap.ts`           | `ICON_MAP`: назви піктограм, які використовуються компонентами екранів → Lucide (`<Icon>`)                    |
-| `constants/providers.ts`         | **381 провайдер** з перевіркою Zod (джерело правди)                                                           |
+| `constants/iconMap.ts`           | `ICON_MAP`: назви значків, які використовуються компонентами екранів → Lucide (`<Icon>`)                      |
+| `constants/providers.ts`         | **388 провайдерів** з перевіркою Zod (джерело правди)                                                         |
 | `constants/cliTools.ts`          | Зовнішній реєстр інструментів CLI                                                                             |
 | `constants/routingStrategies.ts` | **20 стратегій маршрутизації** з пріоритетами                                                                 |
 | `constants/publicApiRoutes.ts`   | Маршрути, які вимагають автентифікації носія (проти керування).                                               |
@@ -395,24 +395,24 @@ open-sse/
 
 ### Гіди вищого рівня
 
-| Док                         | призначення                                                                               |
-| --------------------------- | ----------------------------------------------------------------------------------------- |
-| `ARCHITECTURE.md`           | Архітектура високого рівня, карта підсистеми, поверхня приладової панелі                  |
-| `CODEBASE_DOCUMENTATION.md` | Інженерна довідка: довідники, модулі, умовні позначення                                   |
-| `FEATURES.md`               | Матриця функцій із підсвічуванням v3.8                                                    |
-| `USER_GUIDE.md`             | Посібник кінцевого користувача (налаштування, моделі, комбо, CLIs, аудіо тощо)            |
-| `API_REFERENCE.md`          | посилання на кінцеву точку API з моделлю авторизації                                      |
-| `openapi.yaml`              | Специфікація OpenAPI 3.0 (121 шлях)                                                       |
-| `SETUP_GUIDE.md`            | Методи встановлення (npm, npx, Docker, Electron, Termux, джерело)                         |
-| `ENVIRONMENT.md`            | Усі змінні env (~ 800 задокументовано, ~ 3050 рядків `.env.example`)                      |
-| `TROUBLESHOOTING.md`        | Поширені помилки Відомі проблеми + v3.8.0                                                 |
-| `RELEASE_CHECKLIST.md`      | Повний потік випусків (навички, хаскі, звичайні коміти, розгортання)                      |
-| `COVERAGE_PLAN.md`          | Цілі покриття та поточний стан                                                            |
-| `FREE_TIERS.md`             | Підібрані безкоштовні постачальники (48 + безкоштовно + 11 OAuth)                         |
-| `CLI-TOOLS.md`              | CLI інтеграція + Внутрішня OmniRoute CLI                                                  |
-| `I18N.md`                   | Архітектура i18n, додавання мови, 67 локалей                                              |
-| `UNINSTALL.md`              | Етапи чистого видалення                                                                   |
-| `PROVIDER_REFERENCE.md`     | **Автоматично створено** каталог 381 провайдера (regen: `npm run gen:provider-reference`) |
+| Док                         | призначення                                                                                |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| `ARCHITECTURE.md`           | Архітектура високого рівня, карта підсистеми, поверхня приладової панелі                   |
+| `CODEBASE_DOCUMENTATION.md` | Інженерна довідка: довідники, модулі, умовні позначення                                    |
+| `FEATURES.md`               | Матриця функцій із підсвічуванням v3.8                                                     |
+| `USER_GUIDE.md`             | Посібник кінцевого користувача (налаштування, моделі, комбо, CLIs, аудіо тощо)             |
+| `API_REFERENCE.md`          | посилання на кінцеву точку API з моделлю авторизації                                       |
+| `openapi.yaml`              | Специфікація OpenAPI 3.0 (121 шлях)                                                        |
+| `SETUP_GUIDE.md`            | Методи встановлення (npm, npx, Docker, Electron, Termux, джерело)                          |
+| `ENVIRONMENT.md`            | Усі змінні env (~ 800 задокументовано, ~ 3050 рядків `.env.example`)                       |
+| `TROUBLESHOOTING.md`        | Поширені помилки Відомі проблеми + v3.8.0                                                  |
+| `RELEASE_CHECKLIST.md`      | Повний потік випусків (навички, хаскі, звичайні коміти, розгортання)                       |
+| `COVERAGE_PLAN.md`          | Цілі покриття та поточний стан                                                             |
+| `FREE_TIERS.md`             | Підібрані безкоштовні постачальники (48 + безкоштовно + 11 OAuth)                          |
+| `CLI-TOOLS.md`              | CLI інтеграція + Внутрішня OmniRoute CLI                                                   |
+| `I18N.md`                   | Архітектура i18n, додавання мови, 67 локалей                                               |
+| `UNINSTALL.md`              | Етапи чистого видалення                                                                    |
+| `PROVIDER_REFERENCE.md`     | **Автоматично створено** каталог 388 провайдерів (regen: `npm run gen:provider-reference`) |
 
 ### Підсистема глибоких занурень
 

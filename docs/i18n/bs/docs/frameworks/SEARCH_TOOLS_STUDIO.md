@@ -99,15 +99,15 @@ Pokreće isti upit/URL paralelno kod najviše **4 pružatelja** (D22):
 
 ---
 
-## Katalog pružatelja usluga
+## Provider Catalog
 
-`ProviderCatalog.tsx` prikazuje potpunu listu pružatelja usluga iz `GET /api/search/providers`
-(proširenu u F4 kako bi uključivala pružatelje usluga dohvaćanja):
+`ProviderCatalog.tsx` izlaže potpunu listu dobavljača iz `GET /api/search/providers` (prošireno u F4 da bi uključilo dobavljače preuzimanja):
 
-| `kind` | `"search"` (20 pružatelja usluga) ili `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 provajdera) ili `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, okretno pretraživanje, anysearch-search, paralelno pretraživanje) |
 
-Status se **izvodi u trenutku zahtjeva** provjerom postoje li pristupni podaci i jesu li
-svi ključevi trenutno u periodu čekanja.
+Status je** izvedeno u vrijeme zahtjeva** provjerom da li postoje vjerodajnice i da li su svi ključevi trenutno u fazi hlađenja.
+
+`codex-search` (Codex Web Search) nema svoj ključ: ponovo koristi povezani Codex (ChatGPT) nalog, tako da svako pretraživanje troši ChatGPT kvotu pretplate i traje oko 10–40 s. Pokreće se kada ga zahtjev imenuje; za automatski odabir potrebna je zastavica funkcije `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (podrazumevano isključena).
 
 ---
 

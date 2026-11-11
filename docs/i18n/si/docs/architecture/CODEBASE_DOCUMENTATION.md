@@ -486,9 +486,9 @@ open-sse/
 
 ඉහළ මට්ටමේ විධායක මොඩියුල 159 (`*.ts` minus `base.ts`, `index.ts` සහ පරීක්ෂණ — ගණන් කිරීමේ `npm run check:docs-counts` මිනුම්). සෑම විධායක පන්තියක්ම `BaseExecutor` (`base.ts`) සෘජුව හෝ `DefaultExecutor` හරහා හෝ වෙනත් ක්‍රියාත්මක කරන්නෙකු හරහා දිගු කරයි; ඉතිරි මොඩියුලයන් එක්-සැපයුම්කරුට සහායකයින් වේ (මෙවලම් ක්‍රම, fetch/TTS ඇඩප්ටර, quirk හසුරුවන්න). විධායකයින්ට ඇතුළත් වන්නේ:
 
-`antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `pollinations`, `qoder`, plus `devin-desktop` `petals` බෙදාගත් අනන්‍යතා සහායකයා) සහ `claudeIdentity.ts` (රෙජිස්ට්‍රිය) `index.ts`
+`antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode` `cursor` `default` `devin-cli` `muse-spark-web` `nlpcloud` `opencode` `perplexity-web` `pollinations` `qoder` `devin-desktop` `petals` `claudeIdentity.ts` රෙජිස්ට්‍රිය) `index.ts`
 
-> සටහන: මෙහි ලැයිස්තුගත කර නොමැති සපයන්නන් සඳහා සාමාන්‍ය OpenAI-අනුකූල ක්‍රියාකාරකය භාවිතයෙන් `default.ts` විසින් සේවය කරනු ලැබේ. සම්පූර්ණ සැපයුම්කරුවන්ගේ නාමාවලිය (සපයන්නන් 381) `src/shared/constants/providers.ts` හි වාසය කරයි.
+> සටහන: මෙහි ලැයිස්තුගත කර නොමැති සපයන්නන් සඳහා සාමාන්‍ය OpenAI-අනුකූල ක්‍රියාකාරකය භාවිතයෙන් `default.ts` විසින් සේවය කරනු ලැබේ. සම්පූර්ණ සැපයුම්කරුවන්ගේ නාමාවලිය (සපයන්නන් 388) `src/shared/constants/providers.ts` හි වාසය කරයි.
 
 ### 4.3 `open-sse/translator/`
 
@@ -519,7 +519,7 @@ open-sse/
 | ආදර්ශ හැසිරවීම       | `modelCapabilities.ts`, `modelDeprecation.ts`, `modelFamilyFallback.ts`, `modelStrip.ts`, `model.ts`, `provider.ts`, `providerRequestDefaults.ts`, `providerCostData.ts`, `payloadRules.ts`                                                              |
 | සම්පීඩනය             | `compression/` — සම්පූර්ණ සම්පීඩන එන්ජින් රැහැන්                                                                                                                                                                                                         |
 | ටෝකන් + සැසිය        | `tokenRefresh.ts`, `sessionManager.ts`, `apiKeyRotator.ts`, `contextManager.ts`, `contextHandoff.ts`, `systemPrompt.ts`, `roleNormalizer.ts`, `responsesInputSanitizer.ts`, `toolSchemaSanitizer.ts`, `toolLimitDetector.ts`, `thinkingBudget.ts`        |
-| ස්ථරය / මැනිෆෙස්ටය   | `tierResolver.ts`, `tierConfig.ts`, `tierDefaults.json`, `tierTypes.ts`, `manifestAdapter.ts`                                                                                                                                                            |
+| ස්ථරය / මැනිෆෙස්ට්   | `tierResolver.ts`, `tierConfig.ts`, `tierDefaults.json`, `tierTypes.ts`, `manifestAdapter.ts`                                                                                                                                                            |
 | IP / ජාලය            | `ipFilter.ts`, `webSearchFallback.ts`                                                                                                                                                                                                                    |
 | කණ්ඩායම්             | `batchProcessor.ts`                                                                                                                                                                                                                                      |
 | භාවිතය               | `usage.ts`                                                                                                                                                                                                                                               |

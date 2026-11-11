@@ -170,7 +170,7 @@ src/
 | `a2a/`                                   | A2A -protokolloppgavebehandling, ferdigheter (5), streaming                                                                                                                                                                                                                                                        |
 | `acp/`                                   | CLI Agent Registry (lokal CLI -oppdagelse — se `docs/frameworks/AGENT_PROTOCOLS_GUIDE.md`)                                                                                                                                                                                                                         |
 | `api/`                                   | Delte API hjelpere (`requireManagementAuth`, validering)                                                                                                                                                                                                                                                           |
-| `auth/`                                  | Sesjon, hashing av passord, tokenvalidering                                                                                                                                                                                                                                                                        |
+| `auth/`                                  | Økt, hashing av passord, tokenvalidering                                                                                                                                                                                                                                                                           |
 | `batches/`                               | OpenAI Batcher API behandlere                                                                                                                                                                                                                                                                                      |
 | `catalog/`                               | Leverandørkatalog Zod -validering + -kapasitetsoppløsning                                                                                                                                                                                                                                                          |
 | `cloudAgent/`                            | Cloud Agents (Codex Cloud, Devin, Jules) — se `docs/frameworks/CLOUD_AGENT.md`                                                                                                                                                                                                                                     |
@@ -192,10 +192,10 @@ src/
 | `memory/embedding/`                      | Innebyggingslag med flere kilder: `index.ts` (oppløser), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (plan 21)                                                                                                                                                                  |
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + hybrid RRF (FTS5 + vektor, k = 60). Lazy-init, degraderes elegant når sqlite-vec utilgjengelig. (plan 21)                                                                                                                                                            |
 | `memory/reindex.ts`                      | `runReindexBatch()` — behandler minner med `needs_reindex=1` i bakgrunnen; kalt av `POST /api/memory/reindex` og lazy-backfill-bane. (plan 21)                                                                                                                                                                     |
-| `monitoring/`                            | Helsesjekker, metrikkutslipp                                                                                                                                                                                                                                                                                       |
-| `oauth/`                                 | OAuth/import strømmer for 22 leverandørmoduler (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, qoder- traference, zed)                                                                       |
+| `monitoring/`                            | Helsesjekker, beregninger utslipp                                                                                                                                                                                                                                                                                  |
+| `oauth/`                                 | OAuth/import -flyter for 22 leverandørmoduler (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, host traference, xai-oae, zed)                                                                 |
 | `plugins/`                               | Plugin-register                                                                                                                                                                                                                                                                                                    |
-| `promptCache/`                           | Antropiske hurtigbufferbruddpunkter                                                                                                                                                                                                                                                                                |
+| `promptCache/`                           | Antropisk stil hurtigbufferbruddpunkter                                                                                                                                                                                                                                                                            |
 | `skills/`                                | Ferdighetsrammeverk (innebygd + marketplace + SkillsSH) — se `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                           |
 | `playground/`                            | Playground Studio delte hjelpere: `codeExport.ts` (curl/Python/TS generator), `promptImprover.ts` (meta-prompt-bygger), `streamMetrics.ts` (ren TTFT/TPS), `types.ts` (pristabell) — se `docs/frameworks/PLAYGROUND_STUDIO.md`                                                                                     |
 | `webhookDispatcher.ts`                   | HMAC webhook levering — se `docs/frameworks/WEBHOOKS.md`                                                                                                                                                                                                                                                           |
@@ -225,7 +225,7 @@ src/
 | `lockoutPolicy.ts`     | Model/connection lockout policy                  |
 | `tagRouter.ts`         | Tag-basert ruting                                |
 | `comboResolver.ts`     | Kombioppløsning (brukt av kombinasjonsmotor)     |
-| `modelAvailability.ts` | Tilgjengelighetssjekk per modell                 |
+| `modelAvailability.ts` | Kontroll av tilgjengelighet per modell           |
 | `assessment/`          | Modellvurdering (fase 1 av RFC-AUTO-ASSESSMENT ) |
 
 ### `src/server/`
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `components/`                    | Dashboard komponent API: adaptere over `packages/ui-kit` — se `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ikonnavn som brukes av skjermene → Lucide-komponenter (`<Icon>`)                       |
-| `constants/providers.ts`         | **381 tilbydere** med Zod -validering (kilde til sannhet)                                          |
+| `constants/providers.ts`         | **388 tilbydere** med Zod -validering (kilde til sannhet)                                          |
 | `constants/cliTools.ts`          | Eksternt CLI -verktøyregister                                                                      |
 | `constants/routingStrategies.ts` | **20 rutingstrategier** med prioriteringer                                                         |
 | `constants/publicApiRoutes.ts`   | Ruter som krever bærer (mot administrasjon) autentisering                                          |
@@ -410,9 +410,9 @@ open-sse/
 | `COVERAGE_PLAN.md`          | Dekningsmål og nåværende tilstand                                                       |
 | `FREE_TIERS.md`             | Kuraterte frittstående leverandører (48 + gratis + 11 OAuth)                            |
 | `CLI-TOOLS.md`              | Eksterne CLI -integrasjoner + Intern OmniRoute CLI                                      |
-| `I18N.md`                   | i18n-arkitektur, legger til et språk, 67 lokaliteter                                    |
+| `I18N.md`                   | i18n architecture, adding a language, 67 locales                                        |
 | `UNINSTALL.md`              | Rengjør avinstalleringstrinn                                                            |
-| `PROVIDER_REFERENCE.md`     | **Autogenerert** katalog med 381 leverandører (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Autogenerert** katalog med 388 leverandører (regen: `npm run gen:provider-reference`) |
 
 ### Delsystem dypdykk
 
@@ -426,24 +426,24 @@ open-sse/
 | `RADAR.md`                                  | Radar gratis modellkatalogoverlegg (`RADAR_ENABLED`, av som standard) |
 | `MEMORY.md`                                 | Minnesystem (SQLite FTS5 + Qdrant)                                    |
 | `EVALS.md`                                  | Evalrammeverk (suiter, runs, rubrikker)                               |
-| `GUARDRAILS.md`                             | PII -masker, rask injeksjon, synsbro                                  |
+| `GUARDRAILS.md`                             | PII masker, prompt injection, vision bridge                           |
 | `COMPLIANCE.md`                             | Revisjonslogg, oppbevaring, fravalg av noLog                          |
 | `WEBHOOKS.md`                               | HMAC-signert webhook-levering                                         |
 | `REASONING_REPLAY.md`                       | Hybrid memory/SQLite -cache for `reasoning_content`                   |
 | `AUTHZ_GUIDE.md`                            | Autorisasjonsrørledning (`classify` → `policies` → `enforce`)         |
 | `RESILIENCE_GUIDE.md`                       | Strømbryter + cooldown + modell lockout                               |
 | `docs/security/STEALTH_GUIDE.md` (bare git) | TLS fingeravtrykk (JA3/JA4), Claude Code CCH, MITM cert               |
-| `AUTO-COMBO.md`                             | Auto Combo-motor (16-faktor scoring, 6 moduspakker, virtuell fabrikk) |
+| `AUTO-COMBO.md`                             | Auto Combo engine (16-factor scoring, 6 mode packs, virtual factory)  |
 
 ### Komprimering
 
-| Dok                             | Hensikt                                      |
-| ------------------------------- | -------------------------------------------- |
-| `COMPRESSION_GUIDE.md`          | Oversikt over komprimeringsmoduser + veikart |
-| `COMPRESSION_ENGINES.md`        | Caveman + RTK -motorer, registerkontrakt     |
-| `COMPRESSION_RULES_FORMAT.md`   | Caveman rule pack JSON skjema                |
-| `COMPRESSION_LANGUAGE_PACKS.md` | Beholdning per språk regelpakke              |
-| `RTK_COMPRESSION.md`            | RTK deklarativ rørledning (56 filtre)        |
+| Dok                             | Hensikt                                    |
+| ------------------------------- | ------------------------------------------ |
+| `COMPRESSION_GUIDE.md`          | Oversikt over kompresjonsmoduser + veikart |
+| `COMPRESSION_ENGINES.md`        | Caveman + RTK engines, registry contract   |
+| `COMPRESSION_RULES_FORMAT.md`   | Caveman rule pack JSON schema              |
+| `COMPRESSION_LANGUAGE_PACKS.md` | Beholdning per språk regelpakke            |
+| `RTK_COMPRESSION.md`            | RTK deklarativ rørledning (56 filtre)      |
 
 ### Utplassering
 

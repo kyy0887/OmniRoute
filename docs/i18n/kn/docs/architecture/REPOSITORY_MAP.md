@@ -172,7 +172,7 @@ src/
 | `api/`                                   | ಹಂಚಿದ API ಸಹಾಯಕರು (`requireManagementAuth`, ಮೌಲ್ಯೀಕರಣ)                                                                                                                                                                                                                                                            |
 | `auth/`                                  | ಸೆಷನ್, ಪಾಸ್ವರ್ಡ್ ಹ್ಯಾಶಿಂಗ್, ಟೋಕನ್ ಮೌಲ್ಯೀಕರಣ                                                                                                                                                                                                                                                                       |
 | `batches/`                               | OpenAI ಬ್ಯಾಚ್ಗಳು API ಹ್ಯಾಂಡ್ಲರ್ಗಳು                                                                                                                                                                                                                                                                                |
-| `catalog/`                               | ಪೂರೈಕೆದಾರರ ಕ್ಯಾಟಲಾಗ್ Zod ಮೌಲ್ಯೀಕರಣ + ಸಾಮರ್ಥ್ಯದ ನಿರ್ಣಯ                                                                                                                                                                                                                                                             |
+| `catalog/`                               | ಪೂರೈಕೆದಾರರ ಕ್ಯಾಟಲಾಗ್ Zod ಮೌಲ್ಯೀಕರಣ + ಸಾಮರ್ಥ್ಯದ ರೆಸಲ್ಯೂಶನ್                                                                                                                                                                                                                                                         |
 | `cloudAgent/`                            | ಮೇಘ ಏಜೆಂಟ್ಗಳು (Codex ಮೇಘ, Devin, Jules) — `docs/frameworks/CLOUD_AGENT.md` ನೋಡಿ                                                                                                                                                                                                                                   |
 | `combos/`                                | ಕಾಂಬೊ ರೆಸಲ್ಯೂಶನ್ + ಮರುಕ್ರಮಗೊಳಿಸಿದ ಸಹಾಯಕರು                                                                                                                                                                                                                                                                         |
 | `audit/`                                 | ಚಟುವಟಿಕೆ ಫೀಡ್ ಸಹಾಯಕರು: `highLevelActions.ts` (ಅನುಮತಿಪಟ್ಟಿ + `isHighLevelAction()`), `activityIcons.ts` (ಆಕ್ಷನ್ → icon/verb ನಕ್ಷೆ), `timeline.ts` (groupByDay/relativeTime) — `docs/architecture/MONITORING_SECTIONS.md` ನೋಡಿ                                                                                      |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `components/`                    | ಡ್ಯಾಶ್ಬೋರ್ಡ್ ಘಟಕ API: `packages/ui-kit` — ಮೇಲಿನ ಅಡಾಪ್ಟರುಗಳು `docs/architecture/DESIGN_SYSTEM.md` ನೋಡಿ |
 | `constants/iconMap.ts`           | `ICON_MAP`: ಪರದೆಗಳಿಂದ ಬಳಸಲಾಗುವ ಐಕಾನ್ ಹೆಸರುಗಳು → ಲುಸೈಡ್ ಘಟಕಗಳು (`<Icon>`)                              |
-| `constants/providers.ts`         | **381 ಪೂರೈಕೆದಾರರು** Zod ಮೌಲ್ಯೀಕರಣದೊಂದಿಗೆ (ಸತ್ಯದ ಮೂಲ)                                                  |
+| `constants/providers.ts`         | **388 ಪೂರೈಕೆದಾರರು** Zod ಮೌಲ್ಯೀಕರಣದೊಂದಿಗೆ (ಸತ್ಯದ ಮೂಲ)                                                  |
 | `constants/cliTools.ts`          | ಬಾಹ್ಯ CLI ಟೂಲ್ ರಿಜಿಸ್ಟ್ರಿ                                                                             |
 | `constants/routingStrategies.ts` | **20 ರೂಟಿಂಗ್ ತಂತ್ರಗಳು** ಆದ್ಯತೆಗಳೊಂದಿಗೆ                                                                |
 | `constants/publicApiRoutes.ts`   | ಬೇರರ್ (ವಿರುದ್ಧ ನಿರ್ವಹಣೆ) ದೃಢೀಕರಣದ ಅಗತ್ಯವಿರುವ ಮಾರ್ಗಗಳು                                                 |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | ಬಾಹ್ಯ CLI ಸಂಯೋಜನೆಗಳು + ಆಂತರಿಕ OmniRoute CLI                                              |
 | `I18N.md`                   | i18n ಆರ್ಕಿಟೆಕ್ಚರ್, ಒಂದು ಭಾಷೆಯನ್ನು ಸೇರಿಸುವುದು, 67 ಲೊಕೇಲ್ಗಳು                               |
 | `UNINSTALL.md`              | ಅನ್ಇನ್ಸ್ಟಾಲ್ ಹಂತಗಳನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಿ                                                      |
-| `PROVIDER_REFERENCE.md`     | **ಸ್ವಯಂ-ರಚಿಸಲಾಗಿದೆ** 381 ಪೂರೈಕೆದಾರರ ಕ್ಯಾಟಲಾಗ್ (ರೀಜೆನ್: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ಸ್ವಯಂ-ರಚಿಸಲಾಗಿದೆ** 388 ಪೂರೈಕೆದಾರರ ಕ್ಯಾಟಲಾಗ್ (ರೀಜೆನ್: `npm run gen:provider-reference`) |
 
 ### ಉಪವ್ಯವಸ್ಥೆಯ ಡೀಪ್-ಡೈವ್ಸ್
 

@@ -171,7 +171,7 @@ src/
 | `acp/`                                   | Cơ quan đăng ký đại lý CLI (khám phá CLI cục bộ — xem `docs/frameworks/AGENT_PROTOCOLS_GUIDE.md`)                                                                                                                                                                                                                              |
 | `api/`                                   | Người trợ giúp API được chia sẻ (`requireManagementAuth`, xác thực)                                                                                                                                                                                                                                                            |
 | `auth/`                                  | Phiên, băm mật khẩu, xác thực mã thông báo                                                                                                                                                                                                                                                                                     |
-| `batches/`                               | Trình xử lý API hàng loạt OpenAI                                                                                                                                                                                                                                                                                               |
+| `batches/`                               | OpenAI hàng loạt trình xử lý API                                                                                                                                                                                                                                                                                               |
 | `catalog/`                               | Danh mục nhà cung cấp xác thực Zod độ phân giải khả năng +                                                                                                                                                                                                                                                                     |
 | `cloudAgent/`                            | Đại lý đám mây (Codex Cloud, Devin, Jules) — xem `docs/frameworks/CLOUD_AGENT.md`                                                                                                                                                                                                                                              |
 | `combos/`                                | Combo giải quyết + sắp xếp lại trợ giúp                                                                                                                                                                                                                                                                                        |
@@ -190,7 +190,7 @@ src/
 | `jobs/`                                  | Công việc nền (giống như cron)                                                                                                                                                                                                                                                                                                 |
 | `memory/`                                | Bộ nhớ đàm thoại (SQLite FTS5 + sqlite-vec hybrid RRF + Qdrant cấp 2) — xem `docs/frameworks/MEMORY.md`                                                                                                                                                                                                                        |
 | `memory/embedding/`                      | Lớp nhúng đa nguồn: `index.ts` (trình phân giải), `remote.ts`, `staticPotion.ts`, `transformersLocal.ts`, `cache.ts`, `types.ts` (kế hoạch 21)                                                                                                                                                                                 |
-| `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 trình bao bọc — KNN brute-force + lai RRF ( vector FTS5 +, k = 60). Lazy-init, xuống cấp một cách duyên dáng khi không có sqlite-vec. (kế hoạch 21)                                                                                                                                                          |
+| `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 trình bao bọc — KNN brute-force + lai RRF (FTS5 +, k = 60). Lazy-init, xuống cấp một cách duyên dáng khi không có sqlite-vec. (kế hoạch 21)                                                                                                                                                                  |
 | `memory/reindex.ts`                      | `runReindexBatch()` — xử lý ký ức với `needs_reindex=1` ở chế độ nền; được gọi bằng `POST /api/memory/reindex` và đường dẫn lấp đầy lười biếng. (kế hoạch 21)                                                                                                                                                                  |
 | `monitoring/`                            | Kiểm tra tình trạng, phát thải số liệu                                                                                                                                                                                                                                                                                         |
 | `oauth/`                                 | luồng OAuth/import cho 22 mô-đun nhà cung cấp (agy, antiGravity, claude, cline, codebuddy-cn, codex, con trỏ, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, openference, qoder, trae, xai-oauth, zed-hosted, zed)                                                     |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Thành phần bảng điều khiển API: bộ điều hợp trên `packages/ui-kit` — xem `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: tên biểu tượng được sử dụng bởi màn hình → Các thành phần Lucide (`<Icon>`)                       |
-| `constants/providers.ts`         | **381 nhà cung cấp** với xác nhận Zod (nguồn sự thật)                                                         |
+| `constants/providers.ts`         | **388 nhà cung cấp** với xác nhận Zod (nguồn sự thật)                                                         |
 | `constants/cliTools.ts`          | Đăng ký công cụ CLI bên ngoài                                                                                 |
 | `constants/routingStrategies.ts` | **20 chiến lược định tuyến** với những ưu tiên                                                                |
 | `constants/publicApiRoutes.ts`   | Các tuyến yêu cầu xác thực Bearer (so với quản lý)                                                            |
@@ -400,7 +400,7 @@ open-sse/
 | `ARCHITECTURE.md`           | Kiến trúc cấp cao, bản đồ hệ thống con, bề mặt bảng điều khiển                               |
 | `CODEBASE_DOCUMENTATION.md` | Tài liệu tham khảo kỹ thuật: thư mục, mô-đun, quy ước                                        |
 | `FEATURES.md`               | Ma trận tính năng với các điểm nổi bật của v3.8                                              |
-| `USER_GUIDE.md`             | Hướng dẫn sử dụng cho người dùng cuối (thiết lập, kiểu máy, combo, CLIs, âm thanh, v.v.)     |
+| `USER_GUIDE.md`             | Hướng dẫn sử dụng người dùng cuối (thiết lập, kiểu máy, combo, CLIs, âm thanh, v.v.)         |
 | `API_REFERENCE.md`          | tham chiếu điểm cuối API với mô hình xác thực                                                |
 | `openapi.yaml`              | thông số OpenAPI 3.0 (121 đường dẫn)                                                         |
 | `SETUP_GUIDE.md`            | Phương thức cài đặt (npm, npx, Docker, Electron, Termux, source)                             |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Tích hợp CLI bên ngoài + CLIOmniRoute bộ                                                     |
 | `I18N.md`                   | Kiến trúc i18n, thêm ngôn ngữ, 67 ngôn ngữ                                                   |
 | `UNINSTALL.md`              | Làm sạch các bước gỡ cài đặt                                                                 |
-| `PROVIDER_REFERENCE.md`     | **Được tạo tự động** danh mục của 381 nhà cung cấp (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Được tạo tự động** danh mục của 388 nhà cung cấp (regen: `npm run gen:provider-reference`) |
 
 ### Tìm hiểu sâu về hệ thống con
 
@@ -421,7 +421,7 @@ open-sse/
 | `MCP-SERVER.md`                            | máy chủ MCP : 110 công cụ, 3 phương tiện vận chuyển, 33 phạm vi, điểm cuối REST  |
 | `A2A-SERVER.md`                            | A2A v0.3: JSON-RPC, 6 kỹ năng, người trợ giúp REST, thẻ đại lý                   |
 | `AGENT_PROTOCOLS_GUIDE.md`                 | Hướng dẫn thống nhất: A2A vs ACP vs Cloud Agents                                 |
-| `CLOUD_AGENT.md`                           | phối hợp đám mây Codex / Devin / Jules                                           |
+| `CLOUD_AGENT.md`                           | dàn nhạc đám mây Codex / Devin / Jules                                           |
 | `SKILLS.md`                                | Khung kỹ năng (hộp cát tích hợp thị trường + + SkillsSH + )                      |
 | `RADAR.md`                                 | Lớp phủ danh mục mô hình miễn phí của radar (`RADAR_ENABLED`, tắt theo mặc định) |
 | `MEMORY.md`                                | Hệ thống bộ nhớ (SQLite FTS5 + Qdrant)                                           |

@@ -153,7 +153,7 @@ src/
 | `app/(dashboard)/dashboard/tools/agent-bridge/`                              | AgentBridge prietaisų skydelio puslapis — serverio kortelė, 9 agento kortelės, sąrankos vedlys, modelio atvaizdavimas, apėjimo sąrašas. i18n PT-BR + EN. Žiūrėkite `docs/frameworks/AGENTBRIDGE.md`.                                                                                                                             |
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | Eismo inspektoriaus prietaisų skydelio puslapis — DevTools padalintas, 7 detalių skirtukai, 4 fiksavimo režimo perjungikliai, seanso įrašymo priemonė, konteksto spalvinimas. i18n PT-BR + EN. Žiūrėkite `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                 |
 | `app/(dashboard)/dashboard/activity/`                                        | Veiklos informacijos santraukos puslapis (B grupė): `page.tsx` (serveris) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — žr `docs/architecture/MONITORING_SECTIONS.md`                                                                                                    |
-| `app/(dashboard)/dashboard/costs/quota-share/`                               | Kvotos dalijimosi puslapis (B grupė): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                                |
+| `app/(dashboard)/dashboard/costs/quota-share/`                               | Kvotos bendrinimo puslapis (B grupė): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                                |
 | `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Teikėjo plano konfigūracijos puslapis (B grupė): `page.tsx` + `ProviderPlanConfigClient.tsx` — kvotos matmenys vienam ryšio nepaisymui                                                                                                                                                                                           |
 | `app/docs/`                                                                  | Įterpta dokumentų peržiūros priemonė (pateikiama `docs/*.md`)                                                                                                                                                                                                                                                                    |
 | `app/landing/`                                                               | Rinkodaros nukreipimo puslapis                                                                                                                                                                                                                                                                                                   |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Prietaisų skydelio komponentas API: adapteriai per `packages/ui-kit` — žr `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ekranuose naudojami piktogramų pavadinimai → Lucide komponentai (`<Icon>`)                         |
-| `constants/providers.ts`         | **381 teikėjas** su Zod patvirtinimu (tiesos šaltinis)                                                         |
+| `constants/providers.ts`         | **388 teikėjai** su Zod patvirtinimu (tiesos šaltinis)                                                         |
 | `constants/cliTools.ts`          | Išorinis CLI įrankių registras                                                                                 |
 | `constants/routingStrategies.ts` | **20 maršruto parinkimo strategijų** su prioritetais                                                           |
 | `constants/publicApiRoutes.ts`   | Maršrutai, kuriems reikalingas nešiklio (prieš valdymą) autentifikavimas                                       |
@@ -400,7 +400,7 @@ open-sse/
 | `ARCHITECTURE.md`           | Aukšto lygio architektūra, posistemės žemėlapis, prietaisų skydelio paviršius            |
 | `CODEBASE_DOCUMENTATION.md` | Inžinerinė nuoroda: katalogai, moduliai, konvencijos                                     |
 | `FEATURES.md`               | Funkcijų matrica su v3.8 akcentais                                                       |
-| `USER_GUIDE.md`             | Galutinio vartotojo vadovas (sąranka, modeliai, kombinacijos, CLIs, garsas ir kt.)       |
+| `USER_GUIDE.md`             | Galutinio vartotojo vadovas (sąranka, modeliai, deriniai, CLIs, garsas ir kt.)           |
 | `API_REFERENCE.md`          | API galutinio taško nuoroda su autentifikavimo modeliu                                   |
 | `openapi.yaml`              | OpenAPI 3.0 specifikacija (121 kelias)                                                   |
 | `SETUP_GUIDE.md`            | Diegimo metodai (npm, npx, Docker, Electron, Termux, šaltinis)                           |
@@ -412,9 +412,9 @@ open-sse/
 | `CLI-TOOLS.md`              | Išorinės CLI integracijos + Vidinės OmniRoute CLI                                        |
 | `I18N.md`                   | i18n architektūra, pridedant kalbą, 67 lokalės                                           |
 | `UNINSTALL.md`              | Išvalykite pašalinimo veiksmus                                                           |
-| `PROVIDER_REFERENCE.md`     | **Sukurta automatiškai** 381 teikėjo katalogas (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Sukurta automatiškai** 388 teikėjų katalogas (regen: `npm run gen:provider-reference`) |
 
-### Posistemio giluminiai nardymai
+### Posisteminis giluminis nardymas
 
 | Dok                                        | Tikslas                                                                                            |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------- |

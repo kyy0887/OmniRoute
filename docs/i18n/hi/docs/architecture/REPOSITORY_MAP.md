@@ -147,7 +147,7 @@ src/
 | `app/api/tools/traffic-inspector/`                                           | ट्रैफिक इंस्पेक्टर REST + WS API — 16 + मार्ग (अनुरोध, सत्र, होस्ट, कैप्चर-मोड, निर्यात, डब्ल्यूएस)। LOCAL_ONLY + SPAWN_CAPABLE. `docs/frameworks/TRAFFIC_INSPECTOR.md §8` देखें।                                                                                                                                   |
 | `app/a2a/`                                                                   | A2A JSON-RPC 2.0 प्रवेश बिंदु (`POST /a2a`)                                                                                                                                                                                                                                                                         |
 | `app/.well-known/agent.json/`                                                | A2A एजेंट कार्ड (खोज)                                                                                                                                                                                                                                                                                               |
-| `app/(dashboard)/dashboard/`                                                 | डैशबोर्ड UI पृष्ठ (50 + अनुभाग, ~ 118 page.tsx फ़ाइलें: प्रदाता, कॉम्बो, सेटिंग्स, मेमोरी, कौशल, वेबहुक, इवैल्स, ऑडिट, बैच, कैश, लागत, स्वास्थ्य, सिस्टम, गतिविधि, आदि)                                                                                                                                             |
+| `app/(dashboard)/dashboard/`                                                 | डैशबोर्ड UI पेज (50 + अनुभाग, ~ 118 page.tsx फ़ाइलें: प्रदाता, कॉम्बो, सेटिंग्स, मेमोरी, कौशल, वेबहुक, इवैल्स, ऑडिट, बैच, कैश, लागत, स्वास्थ्य, सिस्टम, गतिविधि, आदि)                                                                                                                                               |
 | `app/(dashboard)/dashboard/search-tools/`                                    | खोज उपकरण स्टूडियो UI (3 टैब: Search/Scrape/Compare + SearchConceptCard + ProviderCatalog) — देखें `docs/frameworks/SEARCH_TOOLS_STUDIO.md`                                                                                                                                                                         |
 | `app/(dashboard)/dashboard/memory/`                                          | मेमोरी स्टूडियो (योजना 21): `page.tsx` (3-टैब शेल), `components/` (MemoryConceptCard, MemoryEngineStatus, EmbeddingSourceSelector, EditMemoryModal, RetrievePreview, QdrantConfigCard, RerankConfigCard), `components/tabs/` (MemoriesTab, PlaygroundTab, EngineTab), `hooks/` (useEngineStatus, useMemorySettings) |
 | `app/(dashboard)/dashboard/tools/agent-bridge/`                              | AgentBridge डैशबोर्ड पेज — सर्वर कार्ड, 9 एजेंट कार्ड, सेटअप विज़ार्ड, मॉडल मैपिंग, बाईपास सूची। i18n पीटी-बीआर + EN। `docs/frameworks/AGENTBRIDGE.md` देखें।                                                                                                                                                       |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ---------------------------------------------------------------------------------------- |
 | `components/`                    | डैशबोर्ड घटक API: `packages/ui-kit` — एडाप्टर `docs/architecture/DESIGN_SYSTEM.md` देखें |
 | `constants/iconMap.ts`           | `ICON_MAP`: स्क्रीन द्वारा उपयोग किए जाने वाले आइकन नाम → ल्यूसिड घटक (`<Icon>`)         |
-| `constants/providers.ts`         | **381 प्रदाता** Zod सत्यापन के साथ (सच्चाई का स्रोत)                                     |
+| `constants/providers.ts`         | **388 प्रदाता** Zod सत्यापन के साथ (सच्चाई का स्रोत)                                     |
 | `constants/cliTools.ts`          | बाहरी CLI टूल रजिस्ट्री                                                                  |
 | `constants/routingStrategies.ts` | **20 रूटिंग रणनीतियाँ** प्राथमिकताओं के साथ                                              |
 | `constants/publicApiRoutes.ts`   | वे रूट जिनके लिए बियरर (बनाम प्रबंधन) प्रमाणीकरण की आवश्यकता होती है                     |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | बाहरी CLI एकीकरण + आंतरिक OmniRoute CLI                                           |
 | `I18N.md`                   | i18n आर्किटेक्चर, एक भाषा, 67 स्थान जोड़ना                                        |
 | `UNINSTALL.md`              | अनइंस्टॉल चरण साफ़ करें                                                           |
-| `PROVIDER_REFERENCE.md`     | **स्वतः उत्पन्न** 381 प्रदाताओं की सूची (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **स्वतः उत्पन्न** 388 प्रदाताओं की सूची (regen: `npm run gen:provider-reference`) |
 
 ### सबसिस्टम गहराई से गोता लगाता है
 
@@ -463,7 +463,7 @@ open-sse/
 | उपदिर                 | उद्देश्य                                                                                                                                                                                 |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `docs/i18n/`          | स्थानीयकृत दस्तावेज़ अनुवाद (41 स्थान)                                                                                                                                                   |
-| `docs/screenshots/`   | गाइडों के लिए छवि परिसंपत्तियाँ                                                                                                                                                          |
+| `docs/screenshots/`   | मार्गदर्शकों के लिए छवि संपत्ति                                                                                                                                                          |
 | `_tasks/superpowers/` | महाशक्तियों सेPlans/specs (`writing-plans`/`brainstorming`) + अनुसंधान — पृथक, अलग-अलग-संस्करणित रेपो, मुख्य वृक्ष द्वारा gitignored। CLAUDE.md → "योजना एवं अनुसंधान कलाकृतियाँ" देखें। |
 
 ---

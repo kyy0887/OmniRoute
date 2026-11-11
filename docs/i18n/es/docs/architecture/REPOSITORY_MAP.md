@@ -139,7 +139,7 @@ src/
 
 | Camino                                                                       | Objetivo                                                                                                                                                                                                                                                                                                                   |
 | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app/api/v1/`                                                                | API pública compatible con OpenAI (~ 25 subrutas: chat, completaciones, incrustaciones, archivos, lotes, audio, imágenes, videos, música, reclasificación, moderaciones, búsqueda, ws, agentes, cuentas, proveedores, etc.)                                                                                                |
+| `app/api/v1/`                                                                | API público compatible con OpenAI (~ 25 subrutas: chat, completaciones, incrustaciones, archivos, lotes, audio, imágenes, videos, música, reclasificación, moderaciones, búsqueda, ws, agentes, cuentas, proveedores, etc.)                                                                                                |
 | `app/api/v1beta/`                                                            | Puntos finales API estilo Géminis                                                                                                                                                                                                                                                                                          |
 | `app/api/playground/`                                                        | Rutas de Playground Studio: `improve-prompt/` (POST — LLM prom rewriter), `presets/` (GET list / POST create), `presets/[id]/` (GET / PUT / DELETE) — ver `docs/frameworks/PLAYGROUND_STUDIO.md`                                                                                                                           |
 | `app/api/` (non-v1)                                                          | rutas Management/admin (directorios ~ 60: proveedores, combos, configuraciones, mcp, a2a, evaluaciones, memoria, habilidades, webhooks, cumplimiento, resiliencia, monitoreo, túneles, herramientas cli, etc.)                                                                                                             |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Componente del tablero API: adaptadores sobre `packages/ui-kit` — ver `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: nombres de iconos utilizados por las pantallas → Componentes de Lucide (`<Icon>`)              |
-| `constants/providers.ts`         | **381 proveedores** con validación Zod (fuente de verdad)                                                  |
+| `constants/providers.ts`         | **388 proveedores** con validación Zod (fuente de verdad)                                                  |
 | `constants/cliTools.ts`          | Registro externo de herramientas CLI                                                                       |
 | `constants/routingStrategies.ts` | **20 estrategias de enrutamiento** con prioridades                                                         |
 | `constants/publicApiRoutes.ts`   | Rutas que requieren autenticación de portador (frente a administración)                                    |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Integraciones CLI externas + OmniRoute internas CLI                                                |
 | `I18N.md`                   | Arquitectura i18n, agregando un idioma, 67 configuraciones regionales                              |
 | `UNINSTALL.md`              | Pasos de desinstalación limpia                                                                     |
-| `PROVIDER_REFERENCE.md`     | **Generado automáticamente** catálogo de 381 proveedores (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Generado automáticamente** catálogo de 388 proveedores (regen: `npm run gen:provider-reference`) |
 
 ### Inmersiones profundas en el subsistema
 

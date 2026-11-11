@@ -98,15 +98,15 @@ Táàbù tuntun fún yíyọ àkóónú jáde láti URL kan nípasẹ̀ `POST /v
 
 ---
 
-## Kátálọ́ọ̀gù Olùpèsè
+## Katalogi Olupese
 
-`ProviderCatalog.tsx` ń ṣàfihàn àtòjọ àwọn olùpèsè ní ẹ̀kúnrẹ́rẹ́ láti inú `GET /api/search/providers`
-(tí a mú gbòòrò sí i nínú F4 láti fi àwọn olùpèsè ìgbàwálẹ̀ kún un):
+`ProviderCatalog.tsx` ṣe afihan atokọ olupese ni kikun lati `GET /api/search/providers` (ti o gbooro sii ni F4 lati pẹlu awọn olupese gbigba):
 
-| `kind` | `"search"` (olùpèsè 20) tàbí `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (olupese 23) tabi `"fetch"` (firecrawl, jina-reader, tavily-sear, tinyfish, nimble-sear, anysearch-wiari, parallel-sear) |
 
-A máa ń **ṣírò ipò náà ní àkókò ìbéèrè** nípa ṣíṣàyẹ̀wò bóyá àwọn ẹ̀rí ìdánimọ̀ wà àti bóyá
-gbogbo àwọn kọ́kọ́rọ́ wà nínú àkókò ìdádúró lọ́wọ́lọ́wọ́.
+Ipo naa jẹ** ti ari ni akoko ìbéèrè** nipa ṣayẹwo boya awọn iwe-ẹri wa ati boya gbogbo awọn bọtini wa lọwọlọwọ ni itutu agbaiye.
+
+`codex-search` (Codex Wẹẹbu Wẹẹbu) ko ni bọtini ti ara rẹ: o tun lo akọọlẹ Codex (ChatGPT) ti o sopọ, nitorinaa wiwa kọọkan n na ipin ṣiṣe alabapin ChatGPT ati gba to bii 10–40 s. O nṣiṣẹ nigbati ibeere kan ba sọ orukọ rẹ; aṣayan aifọwọyi nilo asia ẹya `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (pa nipasẹ aiyipada).
 
 ---
 

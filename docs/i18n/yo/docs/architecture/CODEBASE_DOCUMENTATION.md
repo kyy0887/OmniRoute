@@ -444,7 +444,7 @@ A pín un sí àwọn àkójọpọ̀ abẹ́-ìtọ́sọ́nà tó dojú kọ i
 
 ---
 
-## 4. `open-sse/` — śiśanwọle engine workspace
+## 4. `open-sse/` — śiśanwọle engine aaye iṣẹ
 
 Aaye iṣẹ npm lọtọ ti a tẹjade bi `@omniroute/open-sse`. Ni ṣiṣe ṣiṣe ibeere, awọn alaṣẹ, awọn onitumọ, awọn iṣẹ, oluyipada, ati olupin MCP.
 
@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`, plus `claudeIdentity.ts` (shared identity helper) and `index.ts` (registry).
 
-> Akiyesi: Awọn olupese ti a ko ṣe akojọ si nibi ti wa ni iranṣẹ nipasẹ `default.ts` ni lilo oluṣe adaṣe ibaramu OpenAI jeneriki. Katalogi olupese ni kikun (awọn olupese 381) ngbe ni `src/shared/constants/providers.ts`.
+> Akiyesi: Awọn olupese ti a ko ṣe akojọ si nibi ti wa ni iranṣẹ nipasẹ `default.ts` ni lilo oluṣe adaṣe ibaramu OpenAI jeneriki. Katalogi olupese ni kikun (awọn olupese 388) ngbe ni `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 

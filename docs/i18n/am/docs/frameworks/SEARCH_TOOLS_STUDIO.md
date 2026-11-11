@@ -98,14 +98,15 @@ Search Tools Studio፣ `/dashboard/search-tools`ን ከመሠረታዊ የፍለ
 
 ---
 
-## የአቅራቢዎች ካታሎግ
+## የአቅራቢ ካታሎግ
 
-`ProviderCatalog.tsx` ሙሉውን የአቅራቢዎች ዝርዝር ከ`GET /api/search/providers` ያቀርባል
-(fetch አቅራቢዎችን ለማካተት በF4 የተስፋፋ):
+`ProviderCatalog.tsx` ሙሉውን የአቅራቢዎች ዝርዝር ከ `GET /api/search/providers` ያጋልጣል (በF4 ውስጥ ተዘርግቶ አቅራቢዎችን ለማካተት)
 
-| `kind` | `"search"` (20 አቅራቢዎች) ወይም `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 አቅራቢዎች) ወይም `"fetch"` (ፋየርክራውል፣ ጂና-አንባቢ፣ ታቪሊ-ፍለጋ፣ ትንንሽፊሽ፣ ኒብል-ፍለጋ፣ ማንኛውም ፍለጋ-ፍለጋ፣ ትይዩ-ፍለጋ) |
 
-ሁኔታው ማረጋገጫዎች መኖራቸውን እና ሁሉም ቁልፎች በአሁኑ ጊዜ በ cooldown ውስጥ መሆናቸውን በመፈተሽ **ጥያቄው በሚቀርብበት ጊዜ ይወሰናል**።
+ሁኔታው ነው።** በጥያቄ ጊዜ የተገኘ** ምስክርነቶች መኖራቸውን እና ሁሉም ቁልፎች በአሁኑ ጊዜ በማቀዝቀዝ ላይ መሆናቸውን በማጣራት።
+
+`codex-search` (Codex ድር ፍለጋ) የራሱ የሆነ ቁልፍ የለውም፡ የተገናኘ Codex (ChatGPT) መለያን እንደገና ይጠቀማል፣ ስለዚህ እያንዳንዱ ፍለጋ ChatGPT የደንበኝነት ምዝገባ ኮታ ያወጣል እና ከ10-40 ሰከንድ ይወስዳል። ጥያቄው ሲሰየም ይሰራል; ራስ-ሰር ምርጫ የ `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` ባህሪ ባንዲራ ያስፈልገዋል (በነባሪ ጠፍቷል)።
 
 ---
 

@@ -14,7 +14,7 @@ OmniRoute - Next.js-da qurilgan mahalliy AI marshrutlash shlyuzi va asboblar pan
 
 Asosiy qobiliyatlar:
 
-- CLI/tools uchun OpenAI-mos API yuzasi (381 ta provayder, 159 ta ijrochi modul)
+- CLI/tools uchun OpenAI-mos API yuzasi (388 ta provayder, 159 ta ijrochi modul)
 - provayder formatlari bo'ylab Request/response tarjimasi
 - Model kombinatsiyasi (ko'p modelli ketma-ketlik)
 - Strukturaviy kombinatsiyalangan qadamlar (`provider + model + connection`) `compositeTiers` tomonidan ish vaqti tartibi
@@ -38,7 +38,7 @@ Asosiy qobiliyatlar:
 - Usage/cost kuzatuvi va so'rovlar jurnali
 - multi-device/state sinxronlash uchun ixtiyoriy bulutli sinxronlash
 - API kirishni boshqarish uchun IP allowlist/blocklist
-- Fikrlash byudjetini boshqarish (passthrough/auto/custom/adaptive)
+- Byudjetni o'ylash (passthrough/auto/custom/adaptive)
 - Global tizim tezkor in'ektsiya
 - Seansni kuzatish va barmoq izlari
 - Provayderga xos profillar bilan har bir hisob uchun kengaytirilgan tarif chegarasi
@@ -69,7 +69,7 @@ Asosiy qobiliyatlar:
 - OpenAI-ga mos keladigan WS mijozlari uchun WebSocket ko'prigi (`/v1/ws`)
 - Sinxronlash tokenini boshqarish (issue/revoke, ETag versiyasidagi konfiguratsiya paketini yuklab olish)
 - GLM Thinking (`glmt`) birinchi darajali provayder oldindan o'rnatilgan
-- Gibrid tokenlarni hisoblash (provayder tomonidagi `/messages/count_tokens` hisob-kitoblarni qaytarish bilan)
+- Gibrid tokenlarni hisoblash (provayder tomonidagi `/messages/count_tokens` hisob-kitobi bilan)
 - Model taxallusni avtomatik ekish (boshlang‘ichda 30 + o‘zaro proksi dialektini normallashtirish)
 - SSRF himoyasi, shaxsiy URL blokirovkasi va sozlanishi mumkin bo'lgan qayta urinish bilan xavfsiz chiqish
 - Sozlanishi mumkin bo'lgan `requestRetry` va `maxRetryIntervalSec` bilan sovish vaqtini hisobga olgan holda chat qayta uriladi
@@ -78,7 +78,7 @@ Asosiy qobiliyatlar:
 
 Asosiy ish vaqti modeli:
 
-- `src/app/api/*` ostidagi Next.js ilova marshrutlari asboblar paneli APIs va APIs mosligini amalga oshiradi
+- `src/app/api/*` ostidagi Next.js ilova marshrutlari asboblar paneli APIs va moslik APIs ham amalga oshiradi
 - `src/sse/*` + `open-sse/*` -dagi umumiy SSE/routing yadrosi provayderning bajarilishi, tarjimasi, strimingi, qaytarilishi va foydalanishini boshqaradi.
 
 ## Maʼlumotnoma diagrammalari
@@ -858,41 +858,47 @@ flowchart LR
 - `src/lib/db/*`: muayyan modullarni bevosita import qiling — barrel ishlatmang (eski `localDb.ts` qayta eksport qatlami olib tashlangan)
 - `src/lib/usageDb.ts`: SQLite jadvallari ustidagi foydalanish tarixi/chaqiruv jurnallari fasadi
 
-## Provayder ijrochilarining qamrovi (Strategiya shabloni)
+## Provayder ijrochi qamrovi (Strategiya namunasi)
 
-Har bir provayderda URL yaratish, sarlavhalarni shakllantirish, eksponensial kechikish bilan qayta urinish, hisob ma’lumotlarini yangilash ilgaklari va `execute()` boshqaruv metodini taqdim etuvchi `BaseExecutor` (`open-sse/executors/base.ts` faylida) sinfini kengaytiradigan ixtisoslashtirilgan ijrochi mavjud.
+Har bir provayder `BaseExecutor` ( `open-sse/executors/base.ts` da) ni kengaytiruvchi ixtisoslashgan ijrochiga ega boʻlib, u URL qurish, sarlavhani qurish, eksponensial orqaga qaytish bilan qayta urinish, hisob maʼlumotlarini yangilash ilgaklari va `execute()` orkestrlash usulini taʼminlaydi.
 
-| Ijrochi                   | Provayder(lar)                                                                                                                                                     | Maxsus ishlov berish                                                                |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA va boshqalar | Har bir provayder uchun dinamik URL/sarlavha konfiguratsiyasi                       |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                                 | Maxsus loyiha/seans IDlari, Retry-After tahlili, 429 xatosini niqoblash             |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                       | Joylashtirishga asoslangan marshrutlash, api-version soʻrovini majburiy qoʻllash    |
-| `BlackboxWebExecutor`     | Blackbox AI (veb rejimi)                                                                                                                                           | TLS raqamli izi emulyatsiyasi bilan veb-seansni teskari muhandislik qilish          |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH yoʻli)                                                                                                                                              | Cheklov va vositalarni qayta moslash konveyerlari, raqamli izni shakllantirish      |
-| `CliProxyApiExecutor`     | CLIProxyAPI bilan mos provayderlar                                                                                                                                 | Maxsus autentifikatsiya va protokolga ishlov berish                                 |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                              | Hisob ID sini kiritish, Neurons asosida foydalanishni kuzatish                      |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                                       | Tizim koʻrsatmalarini kiritadi, mulohaza yuritish darajasini majburan belgilaydi    |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                                | Mavzu/navbatni mahkamlash bilan brauzer seansi va Responses API oʻrtasidagi koʻprik |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                                       | OAuth va har bir seans uchun sarlavhalarni aylantirish                              |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                         | ConnectRPC protokoli, Protobuf kodlash, nazorat summasi orqali soʻrovni imzolash    |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                          | Bulut agenti moduli orqali Devin vazifalarining hayot siklini bogʻlash              |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                                     | Copilot tokenini yangilash, VSCode ga taqlid qiluvchi sarlavhalar                   |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                         | GitLab OAuth va loyiha doirasidagi marshrutlash                                     |
-| `GlmExecutor`             | Z.AI GLM (jumladan, `glmt` oldindan sozlamasi)                                                                                                                     | Fikrlash byudjetini hisobga olish, GLMT oldindan sozlama konstantalari              |
-| `GrokWebExecutor`         | xAI Grok veb                                                                                                                                                       | Veb-seansni teskari muhandislik qilish, rejim tanlash (fikrlash/standart)           |
-| `KieExecutor`             | KIE                                                                                                                                                                | Aylanma seans tayanchlari bilan maxsus token chiqarish                              |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                             | AWS EventStream ikkilik formati → SSE konvertatsiyasi                               |
-| `MuseSparkWebExecutor`    | Muse Spark (veb)                                                                                                                                                   | Rasmli xabarlarni bogʻlash bilan veb-seansni teskari muhandislik qilish             |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                          | Provayderga xos soʻrov tanasi tuzilishi                                             |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                           | AI SDK bilan mos provayder sozlamasi                                                |
-| `PerplexityWebExecutor`   | Perplexity veb                                                                                                                                                     | Suhbatni davom ettirish uchun veb-seansni teskari muhandislik qilish                |
-| `PetalsExecutor`          | Petals taqsimlangan inferensi                                                                                                                                      | Markazlashmagan toʻda orqali marshrutlash                                           |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                                    | API kaliti talab qilinmaydi, soʻrovlar tezligi cheklangan                           |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                           | PAT va OAuth qoʻllab-quvvatlashi, koʻp modelli bepul tarif                          |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                                   | Xizmat hisobi autentifikatsiyasi, hududga asoslangan oxirgi nuqtalar                |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                                      | Import qilingan API kaliti va Connect-protobuf orqali chat oqimi                    |
+| Ijrochi                   | Provayder(lar)                                                                                                                                                | Maxsus ishlov berish                                                                        |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA hokazo. | Har bir provayder uchun dinamik URL/header konfiguratsiyasi                                 |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                            | Maxsus project/session IDs, Qayta urinib ko'ring-tahlil qilgandan keyin, 429 xiralashtirish |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                  | Joylashtirishga asoslangan marshrutlash, api-versiya so'rovlarini bajarish                  |
+| `BlackboxWebExecutor`     | Blackbox AI (veb-rejim)                                                                                                                                       | TLS barmoq izi emulyatsiyasi bilan veb-sessiya teskari                                      |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH yo'li)                                                                                                                                         | Constraint + tool-remap pipelines, barmoq izini shakllantirish                              |
+| `CliProxyApiExecutor`     | CLIProxyAPI-mos provayderlar                                                                                                                                  | Shaxsiy avtorizatsiya va protokol bilan ishlash                                             |
+| `CloudflareAiExecutor`    | Cloudflare Ishchilar AI                                                                                                                                       | Hisob ID in'ektsiyasi, Neyronlarga asoslangan foydalanishni kuzatish                        |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                                  | Tizim ko'rsatmalarini kiritadi, fikr yuritishga majbur qiladi                               |
+| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                           | Brauzer-sessiya thread/turn pinning bilan API ko'prigiga javob beradi                       |
+| `CommandCodeExecutor`     | Buyruq kodi                                                                                                                                                   | OAuth + har bir sessiya sarlavhasini aylantirish                                            |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                    | ConnectRPC protokoli, Protobuf kodlash, nazorat summasi orqali so'rovni imzolash            |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                     | bulut agenti moduli orqali Devin vazifasining hayot aylanishini ko'paytirish                |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                                | Copilot tokenini yangilash, VSCode-ga taqlid qiluvchi sarlavhalar                           |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                    | GitLab OAuth + loyiha doirasidagi marshrutlash                                              |
+| `GlmExecutor`             | Z.AI GLM (shu jumladan, `glmt` oldindan oʻrnatilgan)                                                                                                          | Fikrlash-byudjet xabardor, GLMT oldindan belgilangan konstantalar                           |
+| `GrokWebExecutor`         | xAI Grok veb                                                                                                                                                  | Veb-sessiyani teskari, rejim tanlash (think/standard)                                       |
+| `KieExecutor`             | KIE                                                                                                                                                           | Aylanadigan seans langarlari bilan maxsus token chiqarish                                   |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                        | AWS EventStream ikkilik formati → SSE konvertatsiyasi                                       |
+| `MuseSparkWebExecutor`    | Muse Spark (veb)                                                                                                                                              | Tasvir-xabar ko'prigi bilan veb-sessiya teskari                                             |
+| `NlpCloudExecutor`        | NLP bulut                                                                                                                                                     | Provayderga xos so'rovning tana shakli                                                      |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                      | AI SDK mos keladigan provayderni sozlash                                                    |
+| `PerplexityWebExecutor`   | Murakkablik tarmog'i                                                                                                                                          | Suhbatni davom ettirish uchun veb-sessiya teskari                                           |
+| `PetalsExecutor`          | Gulbarglar tarqalgan xulosa                                                                                                                                   | Markazlashtirilmagan to'dani marshrutlash                                                   |
+| `PollinationsExecutor`    | Changlanishlar AI                                                                                                                                             | API kaliti talab qilinmaydi, so‘rovlar tezligi cheklangan                                   |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                      | PAT va OAuth qo'llab-quvvatlash, ko'p modelli bepul daraja                                  |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                              | Xizmat hisobini autentifikatsiya qilish, mintaqaga asoslangan oxirgi nuqtalar               |
+| `DevinDesktopExecutor`    | Devin ish stoli                                                                                                                                               | Import qilingan API kaliti + Connect-protobuf chat oqimi                                    |
 
-Boshqa barcha provayderlar (jumladan, moslashtirilgan maxsus tugunlar) `DefaultExecutor`dan foydalanadi.
+Boshqa barcha provayderlar (jumladan, maxsus mos tugunlar) `DefaultExecutor` foydalanadilar.
+
+### Avtomatlashtirilgan problar va veb-sessiya hisoblari
+
+Model testlari, Hammasini sinab ko'ring, kombinatsiyalangan testlar va baholashlar haqiqiy suhbat so'rovlarini yuboradi. Veb-sessiya provayderi tizimga kirgan foydalanuvchi sifatida ishlaydi, shuning uchun har bir so'rov o'sha hisob qaydnomasida suhbat sifatida saqlanadi; Bunday suhbatlarni qoldirgan avtomatlashtirilgan problar hisobni to'xtatib qo'yishdi (#14780). Shunday qilib, chat quvuri avtomatlashtirilgan tekshiruv yetib boradigan har bir maqsadni rad etadi, uning provayderi veb-sessiya hisob ma'lumotlarini oladi, maqsad provayderi hal etilgach va hisob ma'lumotlari tanlanmaguncha (`src/lib/providers/chatProbePolicy.ts`). Rad etish `error.code` `chat_probe_not_isolated` bilan `422` bo'lib, zond yuguruvchilari buni muvaffaqiyatsizlik emas, balki o'tkazib yuborish deb xabar berishadi.
+
+Har bir chatni provayderning o'z tarixsiz rejimida boshqaradigan ijrochi uni `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`) bilan e'lon qiladi; keyin provayderga tekshirishga ruxsat beriladi. ChatGPT Web `temporary-chat` e'lon qiladi. Deklaratsiyani uning mexanizmiga sinov orqali mahkamlang, shuning uchun da'vo uni haqiqatga aylantiradigan koddan uzoqlasha olmaydi.
 
 ## Provayderlar muvofiqligi matritsasi
 

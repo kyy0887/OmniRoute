@@ -153,7 +153,7 @@ src/
 | `app/(dashboard)/dashboard/tools/agent-bridge/`                              | AgentBridge డాష్బోర్డ్ పేజీ — సర్వర్ కార్డ్, 9 ఏజెంట్ కార్డ్లు, సెటప్ విజార్డ్, మోడల్ మ్యాపింగ్, బైపాస్ జాబితా. i18n PT-BR + EN. `docs/frameworks/AGENTBRIDGE.md` చూడండి.                                                                                                                                       |
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | ట్రాఫిక్ ఇన్స్పెక్టర్ డాష్బోర్డ్ పేజీ — DevTools స్ప్లిట్, 7 వివరాల ట్యాబ్లు, 4 క్యాప్చర్ మోడ్ టోగుల్స్, సెషన్ రికార్డర్, కాంటెక్స్ట్ కలరైజేషన్. i18n PT-BR + EN. `docs/frameworks/TRAFFIC_INSPECTOR.md` చూడండి.                                                                                                |
 | `app/(dashboard)/dashboard/activity/`                                        | కార్యాచరణ ఫీడ్ పేజీ (గ్రూప్ B): `page.tsx` (సర్వర్) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — `docs/architecture/MONITORING_SECTIONS.md` చూడండి                                                                                                     |
-| `app/(dashboard)/dashboard/costs/quota-share/`                               | కోటా భాగస్వామ్య పేజీ (గ్రూప్ B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                    |
+| `app/(dashboard)/dashboard/costs/quota-share/`                               | కోటా షేరింగ్ పేజీ (గ్రూప్ B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                       |
 | `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | ప్రొవైడర్ ప్లాన్ కాన్ఫిగర్ పేజీ (గ్రూప్ B): `page.tsx` + `ProviderPlanConfigClient.tsx` — కోటా కొలతలు ప్రతి కనెక్షన్ ఓవర్రైడ్                                                                                                                                                                                   |
 | `app/docs/`                                                                  | పొందుపరిచిన డాక్యుమెంటేషన్ వ్యూయర్ ( `docs/*.md` రెండర్లు)                                                                                                                                                                                                                                                      |
 | `app/landing/`                                                               | మార్కెటింగ్ ల్యాండింగ్ పేజీ                                                                                                                                                                                                                                                                                     |
@@ -242,12 +242,12 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `components/`                    | డాష్బోర్డ్ కాంపోనెంట్ API: `packages/ui-kit` పై అడాప్టర్లు — `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: స్క్రీన్ల ద్వారా ఉపయోగించబడే ఐకాన్ పేర్లు → లూసైడ్ భాగాలు (`<Icon>`)                  |
-| `constants/providers.ts`         | **381 ప్రొవైడర్లు** Zod ధ్రువీకరణతో (సత్యం యొక్క మూలం)                                            |
+| `constants/providers.ts`         | **388 ప్రొవైడర్లు** Zod ధ్రువీకరణతో (సత్యం యొక్క మూలం)                                            |
 | `constants/cliTools.ts`          | బాహ్య CLI టూల్ రిజిస్ట్రీ                                                                         |
 | `constants/routingStrategies.ts` | **20 రూటింగ్ వ్యూహాలు** ప్రాధాన్యతలతో                                                             |
 | `constants/publicApiRoutes.ts`   | బేరర్ (వర్సెస్ మేనేజ్మెంట్) ప్రమాణీకరణ అవసరమయ్యే మార్గాలు                                         |
 | `constants/upstreamHeaders.ts`   | అప్స్ట్రీమ్ అభ్యర్థనల కోసం హెడర్ నిరాకరణ                                                          |
-| `validation/schemas.ts`          | ~ 80 Zod స్కీమాలు ( API కాంట్రాక్టుల కోసం సత్యం యొక్క ఒకే మూలం)                                   |
+| `validation/schemas.ts`          | ~ 80 Zod స్కీమాలు ( API కాంట్రాక్ట్ల కోసం సత్యం యొక్క ఒకే మూలం)                                   |
 | `validation/helpers.ts`          | Zod ధ్రువీకరణ సహాయకులు (`validateBody`, మొదలైనవి)                                                 |
 | `types/`                         | భాగస్వామ్య TS రకాలు                                                                               |
 | `contracts/`                     | పబ్లిక్ API ఒప్పందాలు ( `package.json` లో `files:` వినియోగించబడతాయి)                              |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | బాహ్య CLI ఇంటిగ్రేషన్లు + అంతర్గత OmniRoute CLI                                                   |
 | `I18N.md`                   | i18n ఆర్కిటెక్చర్, ఒక భాషను జోడించడం, 67 లొకేల్స్                                                 |
 | `UNINSTALL.md`              | అన్ఇన్స్టాల్ దశలను శుభ్రం చేయండి                                                                  |
-| `PROVIDER_REFERENCE.md`     | **స్వయంచాలకంగా రూపొందించబడింది** 381 ప్రొవైడర్ల జాబితా (రీజెన్: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **స్వయంచాలకంగా రూపొందించబడింది** 388 ప్రొవైడర్ల జాబితా (రీజెన్: `npm run gen:provider-reference`) |
 
 ### సబ్సిస్టమ్ డీప్-డైవ్స్
 

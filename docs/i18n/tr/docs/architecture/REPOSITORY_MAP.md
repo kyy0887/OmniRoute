@@ -144,7 +144,7 @@ src/
 | `app/api/playground/`                                                        | Playground Studio rotaları: `improve-prompt/` (POST — LLM istemi yeniden yazan), `presets/` (GET listesi / POST oluştur), `presets/[id]/` (GET / PUT / DELETE) — bkz `docs/frameworks/PLAYGROUND_STUDIO.md`                                                                                                            |
 | `app/api/` (non-v1)                                                          | Management/admin rotaları (~ 60 dizinleri: sağlayıcılar, kombinasyonlar, ayarlar, mcp, a2a, değerlendirmeler, bellek, beceriler, web kancaları, uyumluluk, esneklik, izleme, tüneller, iklimlendirme araçları vb.)                                                                                                     |
 | `app/api/tools/agent-bridge/`                                                | AgentBridge REST API — 12 rota (sunucu kontrolü, aracı state/DNS/mappings, bypass, sertifika, yukarı akış CA). LOCAL_ONLY + SPAWN_CAPABLE. `docs/frameworks/AGENTBRIDGE.md §7` bakın.                                                                                                                                  |
-| `app/api/tools/traffic-inspector/`                                           | Traffic Inspector REST + WS API — 16 + rotası (istekler, oturumlar, ana bilgisayarlar, yakalama modları, dışa aktarma, ws). LOCAL_ONLY + SPAWN_CAPABLE. Bakınız `docs/frameworks/TRAFFIC_INSPECTOR.md §8`.                                                                                                             |
+| `app/api/tools/traffic-inspector/`                                           | Traffic Inspector REST + WS API — 16 + rotası (istekler, oturumlar, ana bilgisayarlar, yakalama modları, dışa aktarma, ws). LOCAL_ONLY + SPAWN_CAPABLE. Bkz `docs/frameworks/TRAFFIC_INSPECTOR.md §8`.                                                                                                                 |
 | `app/a2a/`                                                                   | A2A JSON-RPC 2.0 giriş noktası (`POST /a2a`)                                                                                                                                                                                                                                                                           |
 | `app/.well-known/agent.json/`                                                | A2A Temsilci Kartı (keşif)                                                                                                                                                                                                                                                                                             |
 | `app/(dashboard)/dashboard/`                                                 | Kontrol paneli UI sayfaları (50 + bölümü, ~ 118 page.tsx dosyaları: sağlayıcılar, kombinasyonlar, ayarlar, bellek, beceriler, web kancaları, değerlendirmeler, denetim, toplu iş, önbellek, maliyetler, sağlık, sistem, etkinlik vb.)                                                                                  |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Kontrol paneli bileşeni API: `packages/ui-kit` üzerindeki adaptörler — bkz. `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ekranlar tarafından kullanılan simge adları → Lucide bileşenleri (`<Icon>`)                          |
-| `constants/providers.ts`         | **381 sağlayıcı** Zod doğrulaması ile (gerçeğin kaynağı)                                                         |
+| `constants/providers.ts`         | **388 sağlayıcı** Zod doğrulaması ile (gerçeğin kaynağı)                                                         |
 | `constants/cliTools.ts`          | Harici CLI aracı kaydı                                                                                           |
 | `constants/routingStrategies.ts` | **20 yönlendirme stratejisi** önceliklere sahip                                                                  |
 | `constants/publicApiRoutes.ts`   | Taşıyıcı (yönetim vs.) kimlik doğrulaması gerektiren rotalar                                                     |
@@ -395,24 +395,24 @@ open-sse/
 
 ### Üst düzey kılavuzlar
 
-| Doktor                      | Amaç                                                                                                   |
-| --------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `ARCHITECTURE.md`           | Üst düzey mimari, alt sistem haritası, gösterge paneli yüzeyi                                          |
-| `CODEBASE_DOCUMENTATION.md` | Mühendislik referansı: dizinler, modüller, kurallar                                                    |
-| `FEATURES.md`               | v3.8'in öne çıkan özelliklerini içeren özellik matrisi                                                 |
-| `USER_GUIDE.md`             | Son kullanıcı kılavuzu (kurulum, modeller, kombinasyonlar, CLIs, ses vb.)                              |
-| `API_REFERENCE.md`          | Kimlik doğrulama modeliyle API uç nokta referansı                                                      |
-| `openapi.yaml`              | OpenAPI 3.0 spesifikasyonu (121 yol)                                                                   |
-| `SETUP_GUIDE.md`            | Kurulum yöntemleri (npm, npx, Docker, Electron, Termux, kaynak)                                        |
-| `ENVIRONMENT.md`            | Tüm env değişkenleri (~ 800 belgelenmiştir, ~ 3.050 satır `.env.example`)                              |
-| `TROUBLESHOOTING.md`        | Yaygın hatalar + v3.8.0'da bilinen sorunlar                                                            |
-| `RELEASE_CHECKLIST.md`      | Tam sürüm akışı (beceriler, husky, geleneksel taahhütler, dağıtım)                                     |
-| `COVERAGE_PLAN.md`          | Kapsam hedefleri ve mevcut durum                                                                       |
-| `FREE_TIERS.md`             | Seçilmiş ücretsiz katmanlı sağlayıcılar (48 + ücretsiz + 11 OAuth)                                     |
-| `CLI-TOOLS.md`              | Harici CLI entegrasyonları + Dahili OmniRoute CLI                                                      |
-| `I18N.md`                   | i18n mimarisi, dil ekleme, 67 yerel ayar                                                               |
-| `UNINSTALL.md`              | Kaldırma adımlarını temizleyin                                                                         |
-| `PROVIDER_REFERENCE.md`     | **Otomatik olarak oluşturuldu** 381 sağlayıcının kataloğu (yenileme: `npm run gen:provider-reference`) |
+| Doktor                      | Amaç                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `ARCHITECTURE.md`           | Üst düzey mimari, alt sistem haritası, gösterge paneli yüzeyi                                                |
+| `CODEBASE_DOCUMENTATION.md` | Mühendislik referansı: dizinler, modüller, kurallar                                                          |
+| `FEATURES.md`               | v3.8'in öne çıkan özelliklerini içeren özellik matrisi                                                       |
+| `USER_GUIDE.md`             | Son kullanıcı kılavuzu (kurulum, modeller, kombinasyonlar, CLIs, ses vb.)                                    |
+| `API_REFERENCE.md`          | Kimlik doğrulama modeliyle API uç nokta referansı                                                            |
+| `openapi.yaml`              | OpenAPI 3.0 spesifikasyonu (121 yol)                                                                         |
+| `SETUP_GUIDE.md`            | Kurulum yöntemleri (npm, npx, Docker, Electron, Termux, kaynak)                                              |
+| `ENVIRONMENT.md`            | Tüm env değişkenleri (~ 800 belgelenmiştir, ~ 3.050 satır `.env.example`)                                    |
+| `TROUBLESHOOTING.md`        | Yaygın hatalar + v3.8.0'da bilinen sorunlar                                                                  |
+| `RELEASE_CHECKLIST.md`      | Tam sürüm akışı (beceriler, husky, geleneksel taahhütler, dağıtım)                                           |
+| `COVERAGE_PLAN.md`          | Kapsam hedefleri ve mevcut durum                                                                             |
+| `FREE_TIERS.md`             | Seçilmiş ücretsiz katmanlı sağlayıcılar (48 + ücretsiz + 11 OAuth)                                           |
+| `CLI-TOOLS.md`              | Harici CLI entegrasyonları + Dahili OmniRoute CLI                                                            |
+| `I18N.md`                   | i18n mimarisi, dil ekleme, 67 yerel ayar                                                                     |
+| `UNINSTALL.md`              | Kaldırma adımlarını temizleyin                                                                               |
+| `PROVIDER_REFERENCE.md`     | **Otomatik olarak oluşturuldu** 388 sağlayıcıdan oluşan katalog (yenileme: `npm run gen:provider-reference`) |
 
 ### Alt sistem derinlemesine incelemeleri
 

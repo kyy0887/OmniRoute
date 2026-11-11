@@ -487,9 +487,9 @@ open-sse/
 
 159 yüksək səviyyəli icraçı modulları (`*.ts` minus `base.ts`, `index.ts` və testlər — `npm run check:docs-counts` ölçmələri). Hər bir icraçı sinfi birbaşa və ya `DefaultExecutor` və ya başqa icraçı vasitəsilə `BaseExecutor` (`base.ts`) genişləndirir; qalan modullar provayderə görə köməkçilərdir (alət sxemləri, fetch/TTS adapterləri, quirk işləyiciləri). İcraçılara daxildir:
 
-`antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode`, `cursor`, `default`, `devin-cli`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, plus `claudeIdentity.ts` `muse-spark-web` paylaşılan şəxsiyyət köməkçisi) və `index.ts` `devin-desktop` reyestr).
+`antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode`, `cursor`, `default`, `devin-cli`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, plus `claudeIdentity.ts` `muse-spark-web` paylaşılan şəxsiyyət `devin-desktop`) və `index.ts` (registr).
 
-> Qeyd: burada qeyd olunmayan provayderlərə ümumi OpenAI-a uyğun icraçıdan istifadə edərək `default.ts` xidmət göstərir. Tam provayder kataloqu (381 provayder) `src/shared/constants/providers.ts`-də yaşayır.
+> Qeyd: burada qeyd olunmayan provayderlərə ümumi OpenAI-a uyğun icraçıdan istifadə edərək `default.ts` xidmət göstərir. Tam provayder kataloqu (388 provayder) `src/shared/constants/providers.ts`-də yaşayır.
 
 ### 4.3 `open-sse/translator/`
 

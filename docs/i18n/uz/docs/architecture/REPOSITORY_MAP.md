@@ -193,7 +193,7 @@ src/
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + gibrid RRF (FTS5 + vektor, k = 60). Lazy-init, sqlite-vec mavjud bo'lmaganda yaxshi yomonlashadi. (21-reja)                                                                                                                                                                 |
 | `memory/reindex.ts`                      | `runReindexBatch()` — xotiralarni fonda `needs_reindex=1` bilan qayta ishlaydi; `POST /api/memory/reindex` va dangasa to'ldirish yo'li bilan chaqiriladi. (21-reja)                                                                                                                                                       |
 | `monitoring/`                            | Salomatlik tekshiruvlari, emissiya ko'rsatkichlari                                                                                                                                                                                                                                                                        |
-| `oauth/`                                 | 22 ta provayder modullari uchun OAuth/import oqimlari (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-kodlash, kiro, qoaue, ochiq, zed-hosted, zed)                                                               |
+| `oauth/`                                 | 22 ta provayder moduli uchun OAuth/import oqimlari (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-kodlash, kiro, qoaue, ochiq, zed-hosted, zed)                                                                  |
 | `plugins/`                               | Plagin ro'yxatga olish kitobi                                                                                                                                                                                                                                                                                             |
 | `promptCache/`                           | Antropik uslubdagi tezkor kesh cheklash nuqtalari                                                                                                                                                                                                                                                                         |
 | `skills/`                                | Ko'nikmalar tizimi (o'rnatilgan + bozori + SkillsSH) — qarang: `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                                |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Boshqaruv paneli komponenti API: `packages/ui-kit` — ustidagi adapterlar `docs/architecture/DESIGN_SYSTEM.md` qarang |
 | `constants/iconMap.ts`           | `ICON_MAP`: ekranlar tomonidan ishlatiladigan piktogramma nomlari → Lucide komponentlari (`<Icon>`)                  |
-| `constants/providers.ts`         | **381 ta provayder** Zod validation bilan (haqiqat manbai)                                                           |
+| `constants/providers.ts`         | **388 ta provayder** Zod validation bilan (haqiqat manbai)                                                           |
 | `constants/cliTools.ts`          | Tashqi CLI vositalari reestri                                                                                        |
 | `constants/routingStrategies.ts` | **20 marshrutlash strategiyasi** ustuvorliklar bilan                                                                 |
 | `constants/publicApiRoutes.ts`   | Bearer (boshqaruvga qarshi) autentsiyasi talab qilinadigan marshrutlar                                               |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Tashqi CLI integratsiyalari + Ichki OmniRoute CLI                                                |
 | `I18N.md`                   | i18n arxitekturasi, til qoʻshish, 67 ta mahalliy til                                             |
 | `UNINSTALL.md`              | O'chirish bosqichlarini tozalang                                                                 |
-| `PROVIDER_REFERENCE.md`     | **Avtomatik yaratilgan** 381 ta provayderlar katalogi (regen: `npm run gen:provider-reference`)  |
+| `PROVIDER_REFERENCE.md`     | **Avtomatik yaratilgan** 388 ta provayderlar katalogi (regen: `npm run gen:provider-reference`)  |
 
 ### Quyi tizim chuqur sho'ng'idi
 
@@ -428,7 +428,7 @@ open-sse/
 | `EVALS.md`                                   | Baholash ramkasi (to'plamlar, yugurishlar, rubrikalar)                              |
 | `GUARDRAILS.md`                              | PII maskasi, tezkor in'ektsiya, ko'rish ko'prigi                                    |
 | `COMPLIANCE.md`                              | Audit jurnali, saqlash, noLog -dan voz kechish                                      |
-| `WEBHOOKS.md`                                | HMAC imzolangan veb-huk yetkazib berish                                             |
+| `WEBHOOKS.md`                                | HMAC imzosi bilan veb-huk yetkazib berish                                           |
 | `REASONING_REPLAY.md`                        | `reasoning_content` uchun gibrid memory/SQLite kesh                                 |
 | `AUTHZ_GUIDE.md`                             | Avtorizatsiya quvuri (`classify` → `policies` → `enforce`)                          |
 | `RESILIENCE_GUIDE.md`                        | O'chirish to'xtatuvchisi + sovutish + modeli blokirovkasi                           |
@@ -442,7 +442,7 @@ open-sse/
 | `COMPRESSION_GUIDE.md`          | Siqish rejimlarining umumiy ko'rinishi + yo'l xaritasi  |
 | `COMPRESSION_ENGINES.md`        | Caveman + RTK dvigatellari, ro'yxatga olish shartnomasi |
 | `COMPRESSION_RULES_FORMAT.md`   | G'or odami qoidalari to'plami JSON sxemasi              |
-| `COMPRESSION_LANGUAGE_PACKS.md` | Har bir til uchun qoidalar to'plami inventarizatsiyasi  |
+| `COMPRESSION_LANGUAGE_PACKS.md` | Har bir til uchun qoidalar toʻplami inventarizatsiyasi  |
 | `RTK_COMPRESSION.md`            | RTK deklarativ quvur liniyasi (56 filtr)                |
 
 ### Joylashtirish

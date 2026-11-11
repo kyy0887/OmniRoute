@@ -154,8 +154,8 @@ src/
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | Stran nadzorne plošče Traffic Inspector razdeljena — DevTools, 7 zavihkov s podrobnostmi, 4 preklopi načina zajema, snemalnik seje, barvanje konteksta. i18n PT-BR + EN. Glej `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                                      |
 | `app/(dashboard)/dashboard/activity/`                                        | Stran z virom dejavnosti (skupina B): `page.tsx` (strežnik) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — glej `docs/architecture/MONITORING_SECTIONS.md`                                                                                                          |
 | `app/(dashboard)/dashboard/costs/quota-share/`                               | Stran za deljenje kvot (skupina B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                            |
-| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Konfiguracijska stran načrta ponudnika (skupina B): `page.tsx` + `ProviderPlanConfigClient.tsx` — razsežnosti kvote na preglasitev povezave                                                                                                                                                                                |
-| `app/docs/`                                                                  | Vdelan pregledovalnik dokumentacije (upodobi `docs/*.md`)                                                                                                                                                                                                                                                                  |
+| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Konfiguracijska stran načrta ponudnika (skupina B): `page.tsx` + `ProviderPlanConfigClient.tsx` — dimenzije kvote na preglasitev povezave                                                                                                                                                                                  |
+| `app/docs/`                                                                  | Vdelan pregledovalnik dokumentacije (upodablja `docs/*.md`)                                                                                                                                                                                                                                                                |
 | `app/landing/`                                                               | Tržna ciljna stran                                                                                                                                                                                                                                                                                                         |
 | `app/login/`, `forgot-password/`, `forbidden/`                               | Strani, povezane z avtorizacijo                                                                                                                                                                                                                                                                                            |
 | `app/{400,401,403,408,429,500,502,503}/`                                     | strani HTTP                                                                                                                                                                                                                                                                                                                |
@@ -226,7 +226,7 @@ src/
 | `tagRouter.ts`         | Usmerjanje na podlagi oznak                          |
 | `comboResolver.ts`     | Kombinirana ločljivost (uporablja kombinirani motor) |
 | `modelAvailability.ts` | Preverjanje razpoložljivosti po modelu               |
-| `assessment/`          | Ocena modela (1. faza RFC-AUTO-ASSESSMENT )          |
+| `assessment/`          | Ocena modela (1. faza RFC-AUTO-ACESSMENT )           |
 
 ### `src/server/`
 
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Komponenta nadzorne plošče API: adapterji preko `packages/ui-kit` — glejte `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: imena ikon, ki jih uporabljajo komponente → Lucide (`<Icon>`)                                       |
-| `constants/providers.ts`         | **381 ponudnikov** z Zod validacijo (vir resnice)                                                               |
+| `constants/providers.ts`         | **388 ponudnikov** z Zod validacijo (vir resnice)                                                               |
 | `constants/cliTools.ts`          | Zunanji register orodja CLI                                                                                     |
 | `constants/routingStrategies.ts` | **20 strategij usmerjanja** s prioritetami                                                                      |
 | `constants/publicApiRoutes.ts`   | Poti, ki zahtevajo overitev nosilca (v primerjavi z upravljanjem).                                              |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Zunanje integracije CLI + Notranji OmniRoute CLI                                          |
 | `I18N.md`                   | arhitektura i18n, dodajanje jezika, 67 krajev                                             |
 | `UNINSTALL.md`              | Koraki čiste odstranitve                                                                  |
-| `PROVIDER_REFERENCE.md`     | **Samodejno ustvarjeno** katalog 381 ponudnikov (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Samodejno ustvarjeno** katalog 388 ponudnikov (regen: `npm run gen:provider-reference`) |
 
 ### Podsistem globokih potopov
 
@@ -431,7 +431,7 @@ open-sse/
 | `WEBHOOKS.md`                               | Dostava webhooka s podpisom HMAC                                                         |
 | `REASONING_REPLAY.md`                       | Hibridni predpomnilnik memory/SQLite za `reasoning_content`                              |
 | `AUTHZ_GUIDE.md`                            | Avtorizacijski cevovod (`classify` → `policies` → `enforce`)                             |
-| `RESILIENCE_GUIDE.md`                       | Odklopnik + cooldown + model lockout                                                     |
+| `RESILIENCE_GUIDE.md`                       | Odklopnik + ohladitev + zaklepanje modela                                                |
 | `docs/security/STEALTH_GUIDE.md` (samo git) | TLS prstni odtis (JA3/JA4), Claude koda CCH, MITM cert                                   |
 | `AUTO-COMBO.md`                             | Motor Auto Combo (16-faktorsko točkovanje, 6 paketov načinov, virtualna tovarna)         |
 

@@ -98,15 +98,15 @@ Yana gudanar da tambaya/URL iri ɗaya a lokaci guda a kan masu samarwa har zuwa 
 
 ---
 
-## Kundin Masu Bayar da Sabis
+## Kataloji mai bayarwa
 
-`ProviderCatalog.tsx` yana bayyana cikakken jerin masu bayar da sabis daga `GET /api/search/providers`
-(an faɗaɗa shi a F4 don haɗa masu bayar da sabis na fetch):
+`ProviderCatalog.tsx` yana fallasa cikakken jerin masu bada sabis daga `GET /api/search/providers` (wanda aka shimfida a cikin F4 don haɗa da masu samarwa):
 
-| `kind` | `"search"` (masu bayar da sabis 20) ko `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (masu samar da 23) ko `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-Ana **ƙayyade matsayin a lokacin buƙata** ta hanyar bincika ko bayanan shiga suna nan da kuma ko
-dukkan maɓallan suna cikin lokacin jira a halin yanzu.
+Matsayin shine** samu a lokacin bukata** ta hanyar duba ko akwai takaddun shaida da ko duk maɓallan suna cikin sanyi a halin yanzu.
+
+`codex-search` ( Binciken Yanar Gizo Codex ) ba shi da maɓalli na kansa: yana sake amfani da asusun Codex (ChatGPT) da aka haɗa, don haka kowane bincike yana kashe adadin kuɗin kuɗin ChatGPT kuma yana ɗaukar kusan 10-40 s. Yana gudana lokacin da buƙatun sunansa; Zaɓin atomatik yana buƙatar alamar fasalin `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (kashe ta tsohuwa).
 
 ---
 

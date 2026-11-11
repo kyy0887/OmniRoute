@@ -100,13 +100,13 @@ Izpilda vienu un to pašu vaicājumu/URL paralēli līdz pat **4 pakalpojumu sni
 
 ## Pakalpojumu sniedzēju katalogs
 
-`ProviderCatalog.tsx` parāda pilnu pakalpojumu sniedzēju sarakstu no `GET /api/search/providers`
-(F4 paplašināts, iekļaujot arī izgūšanas pakalpojumu sniedzējus):
+`ProviderCatalog.tsx` atklāj pilnu pakalpojumu sniedzēju sarakstu no `GET /api/search/providers` (paplašināts F4, lai iekļautu izneses nodrošinātājus):
 
-| `kind` | `"search"` (20 pakalpojumu sniedzēji) vai `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 pakalpojumu sniedzēji) vai `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, paralēlā meklēšana) |
 
-Statuss tiek **noteikts pieprasījuma izpildes laikā**, pārbaudot, vai pastāv akreditācijas dati un vai
-visām atslēgām pašlaik ir nogaidīšanas periods.
+Statuss ir** atvasināts pēc pieprasījuma laika** pārbaudot, vai pastāv akreditācijas dati un vai visas atslēgas pašlaik ir atdzisušas.
+
+`codex-search` (Codex Web Search) nav savas atslēgas: tā atkārtoti izmanto pievienoto Codex (ChatGPT) kontu, tāpēc katra meklēšana tērē ChatGPT abonēšanas kvotu un aizņem apmēram 10–40 s. Tas darbojas, kad pieprasījums to nosauc; automātiskai atlasei ir nepieciešams `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` līdzekļa karodziņš (pēc noklusējuma izslēgts).
 
 ---
 

@@ -97,14 +97,15 @@ Search Tools Studio는 `/dashboard/search-tools`를 기본 검색 플레이그�
 
 ---
 
-## 제공자 카탈로그
+## 공급자 카탈로그
 
-`ProviderCatalog.tsx`는 `GET /api/search/providers`에서 전체 제공자 목록을 노출합니다
-(F4에서 fetch 제공자를 포함하도록 확장됨):
+`ProviderCatalog.tsx` `GET /api/search/providers` 의 전체 공급자 목록을 노출합니다(F4에서 가져오기 공급자를 포함하도록 확장됨).
 
-| `kind` | `"search"`(20개 제공자) 또는 `"fetch"`(firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23개 공급자) 또는 `"fetch"` (firecrawl, jina-reader, tavily-search,tinyfish, nimble-search, anysearch-search, 병렬 검색) |
 
-상태는 자격 증명의 존재 여부와 모든 키가 현재 쿨다운 상태인지 확인하여 **요청 시점에 파생**됩니다.
+상태는** 요청 시 파생됨** 자격 증명이 존재하는지, 모든 키가 현재 휴지 상태인지 확인합니다.
+
+`codex-search` (Codex Web Search)에는 자체 키가 없습니다. 연결된 Codex (ChatGPT) 계정을 재사용하므로 각 검색은 ChatGPT 구독 할당량을 소비하고 약 10~40초가 걸립니다. 요청이 이름을 지정하면 실행됩니다. 자동 선택에는 `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` 기능 플래그가 필요합니다(기본적으로 꺼져 있음).
 
 ---
 

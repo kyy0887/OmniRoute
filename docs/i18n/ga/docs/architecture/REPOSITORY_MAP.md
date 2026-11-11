@@ -154,7 +154,7 @@ src/
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | Leathanach painéal Cigire Tráchta — DevTools split, 7 cluaisín sonraí, 4 scorán modh gabhála, taifeadta seisiúin, dathú comhthéacs. i18n PT-BR + EN. Féach `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                                                      |
 | `app/(dashboard)/dashboard/activity/`                                        | Leathanach fotha gníomhaíochta (Grúpa B): `page.tsx` (freastalaí) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — féach `docs/architecture/MONITORING_SECTIONS.md`                                                                                                |
 | `app/(dashboard)/dashboard/costs/quota-share/`                               | Leathanach Comhroinnte Cuóta (Grúpa B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                     |
-| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Leathanach cumraíochta an phlean soláthraí (Grúpa B): toisí cuóta `page.tsx` + `ProviderPlanConfigClient.tsx` — in aghaidh an naisc a shárú                                                                                                                                                                             |
+| `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Leathanach cumraíochta an phlean soláthraí (Grúpa B): toisí cuóta `page.tsx` + `ProviderPlanConfigClient.tsx` in aghaidh — naisc sáraithe                                                                                                                                                                               |
 | `app/docs/`                                                                  | Breathnóir doiciméadaithe leabaithe ( rindreáil `docs/*.md`)                                                                                                                                                                                                                                                            |
 | `app/landing/`                                                               | Leathanach tuirlingthe margaíochta                                                                                                                                                                                                                                                                                      |
 | `app/login/`, `forgot-password/`, `forbidden/`                               | Leathanaigh a bhaineann le hÚdar                                                                                                                                                                                                                                                                                        |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | `components/`                    | Comhpháirt painéal API: cuibheoirí thar `packages/ui-kit` — féach `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: ainmneacha deilbhín a úsáideann na scáileáin → Comhpháirteanna Lucide (`<Icon>`)           |
-| `constants/providers.ts`         | **381 soláthraí** le bailíochtú Zod (foinse na fírinne)                                                |
+| `constants/providers.ts`         | **388 soláthraí** le bailíochtú Zod (foinse na fírinne)                                                |
 | `constants/cliTools.ts`          | Clár seachtrach CLI uirlisí                                                                            |
 | `constants/routingStrategies.ts` | **20 straitéis ródaithe** le tosaíochtaí                                                               |
 | `constants/publicApiRoutes.ts`   | Bealaí óna dteastaíonn údar Iompróra (vs bainistíocht).                                                |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | Comhtháthú CLI + Inmheánach OmniRoute CLI                                          |
 | `I18N.md`                   | i18n ailtireacht, ag cur teanga leis, 67 logán                                     |
 | `UNINSTALL.md`              | Glan na céimeanna díshuiteála                                                      |
-| `PROVIDER_REFERENCE.md`     | **Uathghinte** catalóg de 381 soláthraí (regen: `npm run gen:provider-reference`)  |
+| `PROVIDER_REFERENCE.md`     | **Uathghinte** catalóg de 388 soláthraí (regen: `npm run gen:provider-reference`)  |
 
 ### Tumadh domhain fochóras
 

@@ -98,15 +98,15 @@ Iħaddem l-istess mistoqsija/URL fuq sa **4 fornituri b’mod parallel** (D22):
 
 ---
 
-## Katalgu tal-Fornituri
+## Il-Katalgu tal-Fornitur
 
-`ProviderCatalog.tsx` jesponi l-lista sħiħa tal-fornituri minn `GET /api/search/providers`
-(estiża f'F4 biex tinkludi l-fornituri tal-fetch):
+`ProviderCatalog.tsx` jesponi l-lista sħiħa tal-fornituri minn `GET /api/search/providers` (estiż f'F4 biex jinkludi fornituri ta' fetch):
 
-| `kind` | `"search"` (20 fornitur) jew `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 fornitur) jew `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-L-istatus jiġi **derivat fil-ħin tat-talba** billi jiġi ċċekkjat jekk jeżistux kredenzjali u jekk
-iċ-ċwievet kollha humiex attwalment fil-perjodu ta' cooldown.
+L-istatus huwa** derivat fil-ħin tat-talba** billi tiċċekkja jekk jeżistux kredenzjali u jekk iċ-ċwievet kollha humiex bħalissa f'kooldown.
+
+`codex-search` (Codex Web Search) m'għandha l-ebda ċavetta tagħha stess: terġa' tuża kont Codex (ChatGPT) konness, għalhekk kull tfittxija tonfoq kwota ta' abbonament ChatGPT u tieħu madwar 10–40 s. Jiġri meta talba isimha; l-għażla awtomatika teħtieġ il-bandiera tal-karatteristika `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (mitfi b'mod awtomatiku).
 
 ---
 

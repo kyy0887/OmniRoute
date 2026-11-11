@@ -100,13 +100,13 @@ Search Tools Studio הופך את `/dashboard/search-tools` מסביבת ניס�
 
 ## קטלוג ספקים
 
-`ProviderCatalog.tsx` חושף את רשימת הספקים המלאה מ־`GET /api/search/providers`
-(שהורחבה ב־F4 כדי לכלול ספקי אחזור):
+`ProviderCatalog.tsx` חושפת את רשימת הספקים המלאה מ- `GET /api/search/providers` (מורחבת ב-F4 לכלול ספקי אחזור):
 
-| `kind` | `"search"` (20 ספקים) או `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 ספקים) או `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-הסטטוס **נגזר בזמן הבקשה** באמצעות בדיקה אם קיימים פרטי גישה ואם
-כל המפתחות נמצאים כעת בתקופת צינון.
+הסטטוס הוא** נגזר בזמן בקשה** על ידי בדיקה אם קיימים אישורים והאם כל המפתחות נמצאים כעת בצינון.
+
+`codex-search` (Codex Web Search) אין מפתח משלו: הוא עושה שימוש חוזר בחשבון Codex (ChatGPT) מחובר, כך שכל חיפוש מוציא מכסת מנויים ChatGPT ולוקח בערך 10-40 שניות. הוא פועל כאשר בקשה נותנת לו שם; לבחירה אוטומטית צריך את דגל ה- `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` (כבוי כברירת מחדל).
 
 ---
 

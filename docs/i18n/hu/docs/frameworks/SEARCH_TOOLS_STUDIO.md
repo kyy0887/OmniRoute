@@ -98,15 +98,15 @@ Ugyanazt a lekérdezést/URL-t legfeljebb **4 szolgáltatónál párhuzamosan** 
 
 ---
 
-## Szolgáltatókatalógus
+## Szolgáltatói katalógus
 
-A `ProviderCatalog.tsx` megjeleníti a teljes szolgáltatólistát a `GET /api/search/providers` végpontból
-(az F4-ben kibővítve a lekérési szolgáltatókkal):
+`ProviderCatalog.tsx` megjeleníti a `GET /api/search/providers` teljes szolgáltatói listáját (kibővítve az F4-ben, hogy tartalmazza a lekérési szolgáltatókat):
 
-| `kind` | `"search"` (20 szolgáltató) vagy `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (23 szolgáltató) vagy `"fetch"` (firecrawl, jina-olvasó, tavily-search, tinyfish, fürge-search, anysearch-search, párhuzamos keresés) |
 
-Az állapot **a kérés időpontjában kerül meghatározásra** annak ellenőrzésével, hogy léteznek-e hitelesítő adatok, és hogy
-jelenleg minden kulcs várakozási időszakban van-e.
+Az állapot az** kéréskor származtatott** annak ellenőrzésével, hogy léteznek-e hitelesítő adatok, és hogy az összes kulcs lehűlés alatt van-e.
+
+`codex-search` (Codex Web Search) nincs saját kulcsa: újra használ egy csatlakoztatott Codex (ChatGPT) fiókot, így minden keresés ChatGPT előfizetési kvótát költ, és körülbelül 10–40 másodpercet vesz igénybe. Akkor fut le, amikor egy kérés megnevezi; az automatikus kiválasztáshoz a `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` funkciójelző szükséges (alapértelmezés szerint ki).
 
 ---
 

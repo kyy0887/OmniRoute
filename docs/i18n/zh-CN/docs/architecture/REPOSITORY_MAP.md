@@ -242,7 +242,7 @@ src/
 | -------------------------------- | -------------------------------------------------------------------------------------- |
 | `components/`                    | 仪表板组件API： `packages/ui-kit`上的适配器—请参阅`docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`：屏幕使用的图标名称→ Lucide 组件 (`<Icon>`)                                 |
-| `constants/providers.ts`         | **381 家提供者**通过Zod验证（事实来源）                                                |
+| `constants/providers.ts`         | **388 提供者**通过Zod验证（事实来源）                                                  |
 | `constants/cliTools.ts`          | 外部CLI工具注册表                                                                      |
 | `constants/routingStrategies.ts` | **20种路由策略**有优先事项                                                             |
 | `constants/publicApiRoutes.ts`   | 需要承载（与管理）身份验证的路由                                                       |
@@ -395,24 +395,24 @@ open-sse/
 
 ### 顶级指南
 
-| 医生                        | 目的                                                                     |
-| --------------------------- | ------------------------------------------------------------------------ |
-| `ARCHITECTURE.md`           | 高层架构、子系统图、仪表板表面                                           |
-| `CODEBASE_DOCUMENTATION.md` | 工程参考：目录、模块、约定                                               |
-| `FEATURES.md`               | v3.8 亮点功能矩阵                                                        |
-| `USER_GUIDE.md`             | 最终用户手册（设置、模型、组合、 CLIs、音频等）                          |
-| `API_REFERENCE.md`          | 具有身份验证模型的API端点参考                                            |
-| `openapi.yaml`              | OpenAPI 3.0 规范（121 个路径）                                           |
-| `SETUP_GUIDE.md`            | 安装方法（npm、npx、 Docker、 Electron、Termux、源）                     |
-| `ENVIRONMENT.md`            | 所有环境变量（~ 800 记录， ~ 3,050 行`.env.example`）                    |
-| `TROUBLESHOOTING.md`        | 常见错误+ v3.8.0 已知问题                                                |
-| `RELEASE_CHECKLIST.md`      | 完整的发布流程（技能、husky、常规提交、部署）                            |
-| `COVERAGE_PLAN.md`          | 覆盖目标和现状                                                           |
-| `FREE_TIERS.md`             | 精选的免费提供者（48 +免费+ 11 OAuth）                                   |
-| `CLI-TOOLS.md`              | 外部CLI集成+内部OmniRoute CLI                                            |
-| `I18N.md`                   | i18n 架构，添加语言，67 个语言环境                                       |
-| `UNINSTALL.md`              | 干净卸载步骤                                                             |
-| `PROVIDER_REFERENCE.md`     | **自动生成**381 家提供者目录（regen： `npm run gen:provider-reference`） |
+| 医生                        | 目的                                                                       |
+| --------------------------- | -------------------------------------------------------------------------- |
+| `ARCHITECTURE.md`           | 高层架构、子系统图、仪表板表面                                             |
+| `CODEBASE_DOCUMENTATION.md` | 工程参考：目录、模块、约定                                                 |
+| `FEATURES.md`               | v3.8 亮点功能矩阵                                                          |
+| `USER_GUIDE.md`             | 最终用户手册（设置、模型、组合、 CLIs、音频等）                            |
+| `API_REFERENCE.md`          | 具有身份验证模型的API端点参考                                              |
+| `openapi.yaml`              | OpenAPI 3.0 规范（121 个路径）                                             |
+| `SETUP_GUIDE.md`            | 安装方法（npm、npx、 Docker、 Electron、Termux、源）                       |
+| `ENVIRONMENT.md`            | 所有环境变量（~ 800 记录， ~ 3,050 行`.env.example`）                      |
+| `TROUBLESHOOTING.md`        | 常见错误+ v3.8.0 已知问题                                                  |
+| `RELEASE_CHECKLIST.md`      | 完整的发布流程（技能、husky、常规提交、部署）                              |
+| `COVERAGE_PLAN.md`          | 覆盖目标和现状                                                             |
+| `FREE_TIERS.md`             | 精选的免费提供者（48 +免费+ 11 OAuth）                                     |
+| `CLI-TOOLS.md`              | 外部CLI集成+内部OmniRoute CLI                                              |
+| `I18N.md`                   | i18n 架构，添加语言，67 个语言环境                                         |
+| `UNINSTALL.md`              | 干净卸载步骤                                                               |
+| `PROVIDER_REFERENCE.md`     | **自动生成**388 个提供者的目录（regen： `npm run gen:provider-reference`） |
 
 ### 子系统深入研究
 

@@ -489,7 +489,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `qoder`, പ്ലസ് `devin-desktop`(പങ്കിട്ട ഐഡൻ്റിറ്റി സഹായി) `pollinations` `claudeIdentity.ts` (രജിസ്ട്രി) `index.ts`
 
-> ശ്രദ്ധിക്കുക: ഇവിടെ ലിസ്റ്റുചെയ്തിട്ടില്ലാത്ത ദാതാക്കൾക്ക് പൊതുവായ OpenAI-അനുയോജ്യമായ എക്സിക്യൂട്ടർ ഉപയോഗിച്ച് `default.ts` സേവനം നൽകുന്നു. പൂർണ്ണ ദാതാവിൻ്റെ കാറ്റലോഗ് (381 ദാതാക്കൾ) `src/shared/constants/providers.ts` ൽ താമസിക്കുന്നു.
+> ശ്രദ്ധിക്കുക: ഇവിടെ ലിസ്റ്റുചെയ്തിട്ടില്ലാത്ത ദാതാക്കൾക്ക് പൊതുവായ OpenAI-അനുയോജ്യമായ എക്സിക്യൂട്ടർ ഉപയോഗിച്ച് `default.ts` സേവനം നൽകുന്നു. പൂർണ്ണ ദാതാവിൻ്റെ കാറ്റലോഗ് (388 ദാതാക്കൾ) `src/shared/constants/providers.ts` ൽ താമസിക്കുന്നു.
 
 ### 4.3 `open-sse/translator/`
 
@@ -498,7 +498,7 @@ open-sse/
 - **9 അഭ്യർത്ഥന വിവർത്തകർ** (`translator/request/`): `antigravity-to-openai`, `claude-to-gemini`, `claude-to-openai`, `gemini-to-openai`, `openai-responses`, `openai-to-claude`, `openai-to-cursor`, `openai-to-gemini`, `openai-to-kiro`.
 - **9 പ്രതികരണ വിവർത്തകർ** (`translator/response/`): `claude-to-openai`, `cursor-to-openai`, `gemini-to-claude`, `gemini-to-openai`, `kiro-to-openai`, `openai-responses`, `openai-to-antigravity`, `openai-to-claude`.
 - **9 സഹായികൾ** (`translator/helpers/`): `claudeHelper`, `geminiHelper`, `geminiToolsSanitizer`, `maxTokensHelper`, `openaiHelper`, `responsesApiHelper`, `schemaCoercion`, `toolCallHelper`, കൂടാതെ സഹായ പരിശോധനകൾ.
-- **ഇമേജ് സഹായികൾ** (`translator/image/sizeMapper.ts`).
+- **ചിത്ര സഹായികൾ** (`translator/image/sizeMapper.ts`).
 - ഉയർന്ന തലം: `bootstrap.ts`, `formats.ts`, `registry.ts`, `index.ts`.
 
 ### 4.4 `open-sse/transformer/`

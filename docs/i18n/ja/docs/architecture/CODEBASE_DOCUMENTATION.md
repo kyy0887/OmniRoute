@@ -491,7 +491,7 @@ open-sse/
 
 `antigravity`、 `azure-openai`、 `blackbox-web`、 `cliproxyapi`、 `chatgpt-web-codex`、 `cloudflare-ai`、 `codex`、 `commandCode`、 `cursor`、 `default`、 `devin-cli`、 `muse-spark-web`、 `nlpcloud`、 `opencode`、 `perplexity-web`、 `petals`、 `pollinations`、 `qoder`、 `vertex`、 `devin-desktop`、さらに`claudeIdentity.ts` (共有 ID ヘルパー) と`index.ts` (レジストリ)。
 
-> 注: ここにリストされていないプロバイダーは、汎用の OpenAI 互換エグゼキューターを使用して`default.ts`によって提供されます。完全なプロバイダー カタログ (381 プロバイダー) は`src/shared/constants/providers.ts`にあります。
+> 注: ここにリストされていないプロバイダーは、汎用の OpenAI 互換エグゼキューターを使用して`default.ts`によって提供されます。完全なプロバイダー カタログ (388 プロバイダー) は`src/shared/constants/providers.ts`にあります。
 
 ### 4.3 `open-sse/translator/`
 
@@ -529,7 +529,7 @@ open-sse/
 
 ### 4.6 `open-sse/mcp-server/`
 
-- **110 個のユニークなツール**`server.ts`で接続されています ( `schemas/tools.ts` +メモリ、スキル、GitHub スキル、プール、ゲーミフィケーション、プラグイン、 Notion、 Obsidian、ローカル コーパスおよび圧縮モジュール— Union の`countUniqueMcpTools`によってカウントされる 45 の正規)。
+- **110 個のユニークなツール**`server.ts`で接続されています ( `schemas/tools.ts`の 45 の標準+メモリ、スキル、GitHub スキル、プール、ゲーミフィケーション、プラグイン、 Notion、 Obsidian、ローカル コーパスおよび圧縮モジュール— Union は`countUniqueMcpTools`によってカウントされます)。
 - **3つのトランスポート**: stdio、 HTTPストリーミング可能、 SSE。
 - **33 スコープ**`src/shared/constants/mcpScopes.ts`内の—ベース リストは実行時に適用され、フル セットは各ツール モジュールによって宣言されたスコープの結合です。
 - 監査テーブル: `mcp_tool_audit` ( `audit.ts`によって設定されます)。

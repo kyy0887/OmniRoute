@@ -152,7 +152,7 @@ src/
 | `app/(dashboard)/dashboard/memory/`                                          | Memory Studio (planul 21): `page.tsx` (shell cu 3 file), `components/` (MemoryConceptCard, MemoryEngineStatus, EmbeddingSourceSelector, EditMemoryModal, RetrievePreview, QdrantConfigCard, RerankConfigCard), `components/tabs/` (MemoriesTab, PlaygroundTab, EngineTab), `hooks/` (useEngineStatususeMemorySettings |
 | `app/(dashboard)/dashboard/tools/agent-bridge/`                              | Pagina tabloului de bord AgentBridge Card server —, 9 carduri de agent, asistent de configurare, mapare model, listă de ocolire. i18n PT-BR + EN. Vezi `docs/frameworks/AGENTBRIDGE.md`.                                                                                                                              |
 | `app/(dashboard)/dashboard/tools/traffic-inspector/`                         | Pagina tabloului de bord Traffic Inspector — DevTools split, 7 file de detalii, 4 comutări pentru modul de captură, înregistrare de sesiune, colorare context. i18n PT-BR + EN. Vezi `docs/frameworks/TRAFFIC_INSPECTOR.md`.                                                                                          |
-| `app/(dashboard)/dashboard/activity/`                                        | Pagina de feed de activitate (Grupul B): `page.tsx` (server) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — vezi `docs/architecture/MONITORING_SECTIONS.md`                                                                                                    |
+| `app/(dashboard)/dashboard/activity/`                                        | Pagina de flux de activitate (Grupul B): `page.tsx` (server) + `ActivityFeedClient.tsx` + `components/{ActivityFeed,ActivityItem,DayHeader,EventTypeFilter}.tsx` — vezi `docs/architecture/MONITORING_SECTIONS.md`                                                                                                    |
 | `app/(dashboard)/dashboard/costs/quota-share/`                               | Pagina de partajare a cotelor (Grupul B): `QuotaSharePageClient.tsx` + `components/{PoolCard,DimensionBar,AllocationTable,BurnRateChart,QuotaConceptCard,CreatePoolModal,EditAllocationsModal}.tsx` + `hooks/{usePools,usePoolUsage,useLocalStoragePoolMigration}.ts`                                                 |
 | `app/(dashboard)/dashboard/costs/quota-share/plans/`                         | Pagina de configurare a planului furnizorului (Grupul B): `page.tsx` + `ProviderPlanConfigClient.tsx` — dimensiunile cotei per conexiune înlocuire                                                                                                                                                                    |
 | `app/docs/`                                                                  | Vizualizator de documentație încorporat (rendează `docs/*.md`)                                                                                                                                                                                                                                                        |
@@ -193,7 +193,7 @@ src/
 | `memory/vectorStore.ts`                  | sqlite-vec v0.1.9 wrapper — KNN brute-force + hybrid RRF (FTS5 + vector, k = 60). Lazy-init, se degradează cu grație atunci când sqlite-vec nu este disponibil. (planul 21)                                                                                                                                                        |
 | `memory/reindex.ts`                      | `runReindexBatch()` — procesează amintirile cu `needs_reindex=1` în fundal; numit de `POST /api/memory/reindex` și calea lazy-backfill. (planul 21)                                                                                                                                                                                |
 | `monitoring/`                            | Controale de sănătate, emisii de metrici                                                                                                                                                                                                                                                                                           |
-| `oauth/`                                 | OAuth/import curge pentru 22 de module de furnizor (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, openference, qo-host zed)                                                                                 |
+| `oauth/`                                 | OAuth/import curge pentru 22 de module de furnizor (agy, antigravity, claude, cline, codebuddy-cn, codex, cursor, devin-desktop, ghe-copilot, github, gitlab-duo, grok-cli-oauth, grok-cli, kilocode, kimi-coding, kiro, openference, qod-oeth, qod-oauth, zed)                                                                    |
 | `plugins/`                               | Registrul pluginului                                                                                                                                                                                                                                                                                                               |
 | `promptCache/`                           | Puncte de întrerupere prompte în cache în stil antropic                                                                                                                                                                                                                                                                            |
 | `skills/`                                | Cadrul de competențe (piața + încorporată + SkillsSH) — vezi `docs/frameworks/SKILLS.md`                                                                                                                                                                                                                                           |
@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `components/`                    | Componenta tabloului de bord API: adaptoare peste `packages/ui-kit` — vezi `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: nume de pictograme utilizate de ecranele componente → Lucide (`<Icon>`)                             |
-| `constants/providers.ts`         | **381 de furnizori** cu validare Zod (sursa adevărului)                                                         |
+| `constants/providers.ts`         | **388 de furnizori** cu validare Zod (sursa adevărului)                                                         |
 | `constants/cliTools.ts`          | Registrul extern al instrumentului CLI                                                                          |
 | `constants/routingStrategies.ts` | **20 de strategii de rutare** cu prioritati                                                                     |
 | `constants/publicApiRoutes.ts`   | Rute care necesită autentificare Bearer (vs management)                                                         |
@@ -412,13 +412,13 @@ open-sse/
 | `CLI-TOOLS.md`              | Integrari externe CLI + Intern OmniRoute CLI                                              |
 | `I18N.md`                   | Arhitectură i18n, adăugarea unei limbi, 67 de locații                                     |
 | `UNINSTALL.md`              | Curățați pașii de dezinstalare                                                            |
-| `PROVIDER_REFERENCE.md`     | **Generat automat** catalog cu 381 de furnizori (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **Generat automat** catalog cu 388 de furnizori (regen: `npm run gen:provider-reference`) |
 
 ### Subsistem scufundări adânci
 
 | Doc                                         | Scop                                                                                       |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `MCP-SERVER.md`                             | Server MCP : 110 instrumente, 3 transporturi, 33 de domenii, puncte finale REST            |
+| `MCP-SERVER.md`                             | Server MCP : 110 instrumente, 3 transporturi, 33 domenii, puncte finale REST               |
 | `A2A-SERVER.md`                             | A2A v0.3: JSON-RPC, 6 abilități, ajutoare REST, card de agent                              |
 | `AGENT_PROTOCOLS_GUIDE.md`                  | Ghid unificat: A2A vs ACP vs Cloud Agents                                                  |
 | `CLOUD_AGENT.md`                            | Orchestrație Codex Cloud / Devin / Jules                                                   |
@@ -432,7 +432,7 @@ open-sse/
 | `REASONING_REPLAY.md`                       | Cache hibrid memory/SQLite pentru `reasoning_content`                                      |
 | `AUTHZ_GUIDE.md`                            | Conductă de autorizare (`classify` → `policies` → `enforce`)                               |
 | `RESILIENCE_GUIDE.md`                       | Întrerupător + cooldown + model lockout                                                    |
-| `docs/security/STEALTH_GUIDE.md` (doar git) | TLS fingerprinting (JA3/JA4), Claude Code CCH, MITM cert                                   |
+| `docs/security/STEALTH_GUIDE.md` (doar git) | TLS fingerprinting (JA3/JA4), cod Claude CCH, MITM cert                                    |
 | `AUTO-COMBO.md`                             | Motor Combo automat (punctare în 16 factori, pachete cu 6 moduri, fabrică virtuală)        |
 
 ### Comprimare

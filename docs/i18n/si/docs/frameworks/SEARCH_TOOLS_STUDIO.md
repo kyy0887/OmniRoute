@@ -97,14 +97,15 @@ Search Tools Studio මඟින් `/dashboard/search-tools`, මූලික �
 
 ---
 
-## සැපයුම්කරු නාමාවලිය
+## සපයන්නාගේ නාමාවලිය
 
-`ProviderCatalog.tsx` මඟින් `GET /api/search/providers` වෙතින් සම්පූර්ණ සැපයුම්කරු ලැයිස්තුව නිරාවරණය කරයි
-(fetch සැපයුම්කරුවන් ඇතුළත් කිරීමට F4 හිදී පුළුල් කරන ලදී):
+`ProviderCatalog.tsx` `GET /api/search/providers` වෙතින් සම්පූර්ණ සැපයුම්කරුවන්ගේ ලැයිස්තුව හෙළිදරව් කරයි (සපයන්නන් ඇතුළත් කිරීමට F4 හි දීර්ඝ කර ඇත):
 
-| `kind` | `"search"` (සැපයුම්කරුවන් 20ක්) හෝ `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
+| `kind` | `"search"` (සපයන්නන් 23) හෝ `"fetch"` (firecrawl, jina-reader, tavily-search, tinyfish, nimble-search, anysearch-search, parallel-search) |
 
-අක්තපත්ර පවතින්නේද සහ සියලුම යතුරු දැනට cooldown තත්ත්වයේ පවතින්නේද යන්න පරීක්ෂා කිරීමෙන්, ඉල්ලීම සිදු කරන අවස්ථාවේදී තත්ත්වය **ව්යුත්පන්න කෙරේ**.
+තත්ත්වය වේ** ඉල්ලීම් වේලාවට ව්‍යුත්පන්න කර ඇත** අක්තපත්‍ර තිබේද සහ සියලුම යතුරු දැනට සිසිල් වී තිබේද යන්න පරීක්ෂා කිරීමෙන්.
+
+`codex-search` (Codex Web Search) හට තමන්ගේම යතුරක් නොමැත: එය සම්බන්ධිත Codex (ChatGPT) ගිණුමක් නැවත භාවිතා කරයි, එබැවින් සෑම සෙවුමකටම ChatGPT දායක කෝටාව වැය වන අතර තත්පර 10-40ක් පමණ ගත වේ. ඉල්ලීමක් එය නම් කරන විට එය ක්රියාත්මක වේ; ස්වයංක්‍රීය තේරීමට `CODEX_SEARCH_AUTO_FALLBACK_ENABLED` විශේෂාංග ධජය අවශ්‍ය වේ (පෙරනිමියෙන් අක්‍රිය).
 
 ---
 

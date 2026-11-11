@@ -242,7 +242,7 @@ src/
 | -------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `components/`                    | مكون لوحة المعلومات API: المحولات عبر `packages/ui-kit` — راجع `docs/architecture/DESIGN_SYSTEM.md` |
 | `constants/iconMap.ts`           | `ICON_MAP`: أسماء الأيقونات المستخدمة من قبل مكونات الشاشات → Lucide (`<Icon>`)                     |
-| `constants/providers.ts`         | **381 مقدم** مع التحقق من صحة Zod (مصدر الحقيقة)                                                    |
+| `constants/providers.ts`         | **388 مقدم** مع التحقق من صحة Zod (مصدر الحقيقة)                                                    |
 | `constants/cliTools.ts`          | تسجيل أداة CLI الخارجية                                                                             |
 | `constants/routingStrategies.ts` | **20 استراتيجية توجيه** مع الأولويات                                                                |
 | `constants/publicApiRoutes.ts`   | الطرق التي تتطلب مصادقة الحامل (مقابل الإدارة).                                                     |
@@ -412,7 +412,7 @@ open-sse/
 | `CLI-TOOLS.md`              | تكاملات CLI الخارجية + الداخلية OmniRoute CLI                                             |
 | `I18N.md`                   | بنية i18n، إضافة لغة، 67 لغة                                                              |
 | `UNINSTALL.md`              | خطوات إلغاء التثبيت النظيفة                                                               |
-| `PROVIDER_REFERENCE.md`     | **تم إنشاؤها تلقائيًا** كتالوج 381 مقدمي الخدمة (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **تم إنشاؤها تلقائيًا** كتالوج 388 مقدمي الخدمة (regen: `npm run gen:provider-reference`) |
 
 ### الغوص العميق في النظام الفرعي
 

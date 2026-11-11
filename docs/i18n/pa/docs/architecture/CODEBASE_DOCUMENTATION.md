@@ -490,13 +490,13 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, ਪਲੱਸ `claudeIdentity.ts` (ਸਾਂਝੀ ਪਛਾਣ ਸਹਾਇਕ) ਅਤੇ `index.ts` (ਰਜਿਸਟਰੀ) `devin-desktop`
 
-> ਨੋਟ: ਇੱਥੇ ਸੂਚੀਬੱਧ ਪ੍ਰਦਾਤਾਵਾਂ ਨੂੰ `default.ts` ਦੁਆਰਾ ਆਮ OpenAI- ਅਨੁਕੂਲ ਐਗਜ਼ੀਕਿਊਟਰ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਸੇਵਾ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ। ਪੂਰਾ ਪ੍ਰਦਾਤਾ ਕੈਟਾਲਾਗ (381 ਪ੍ਰਦਾਤਾ) `src/shared/constants/providers.ts` ਵਿੱਚ ਰਹਿੰਦਾ ਹੈ।
+> ਨੋਟ: ਇੱਥੇ ਸੂਚੀਬੱਧ ਪ੍ਰਦਾਤਾਵਾਂ ਨੂੰ `default.ts` ਦੁਆਰਾ ਆਮ OpenAI- ਅਨੁਕੂਲ ਐਗਜ਼ੀਕਿਊਟਰ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਸੇਵਾ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ। ਪੂਰਾ ਪ੍ਰਦਾਤਾ ਕੈਟਾਲਾਗ (388 ਪ੍ਰਦਾਤਾ) `src/shared/constants/providers.ts` ਵਿੱਚ ਰਹਿੰਦਾ ਹੈ।
 
 ### 4.3 `open-sse/translator/`
 
 ਹੱਬ-ਐਂਡ-ਸਪੋਕ ਅਨੁਵਾਦ (OpenAI ਹੱਬ ਹੈ)।
 
-- **9 ਬੇਨਤੀ ਅਨੁਵਾਦਕਾਂ** (`translator/request/`): `antigravity-to-openai`, `claude-to-gemini`, `claude-to-openai`, `gemini-to-openai`, `openai-responses`, `openai-to-claude`, `openai-to-cursor`, `openai-to-gemini`, `openai-to-kiro`.
+- **9 ਅਨੁਵਾਦਕਾਂ ਦੀ ਬੇਨਤੀ ਕਰੋ** (`translator/request/`): `antigravity-to-openai`, `claude-to-gemini`, `claude-to-openai`, `gemini-to-openai`, `openai-responses`, `openai-to-claude`, `openai-to-cursor`, `openai-to-gemini`, `openai-to-kiro`.
 - **9 ਜਵਾਬ ਅਨੁਵਾਦਕ** (`translator/response/`): `claude-to-openai`, `cursor-to-openai`, `gemini-to-claude`, `gemini-to-openai`, `kiro-to-openai`, `openai-responses`, `openai-to-antigravity`, `openai-to-claude`.
 - **9 ਸਹਾਇਕ** (`translator/helpers/`): `claudeHelper`, `geminiHelper`, `geminiToolsSanitizer`, `maxTokensHelper`, `openaiHelper`, `responsesApiHelper`, `schemaCoercion`, `toolCallHelper`, ਪਲੱਸ ਸਹਾਇਕ ਟੈਸਟ।
 - **ਚਿੱਤਰ ਸਹਾਇਕ** (`translator/image/sizeMapper.ts`)

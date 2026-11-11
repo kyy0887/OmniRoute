@@ -486,11 +486,11 @@ open-sse/
 
 ### 4.2 `open-sse/executors/`
 
-159 modul pelaksana peringkat atas (`*.ts` tolak `base.ts`, `index.ts` dan ujian — kiraan `npm run check:docs-counts` ukuran). Setiap kelas pelaksana memanjangkan `BaseExecutor` (`base.ts`), secara langsung atau melalui `DefaultExecutor` atau pelaksana lain; modul yang selebihnya ialah pembantu setiap penyedia (skema alat, penyesuai fetch/TTS, pengendali quirk). Pelaksana termasuk:
+159 modul pelaksana peringkat atas (`*.ts` tolak `base.ts`, `index.ts` dan ujian — kiraan `npm run check:docs-counts` ukuran). Setiap kelas pelaksana memanjangkan `BaseExecutor` (`base.ts`), secara langsung atau melalui `DefaultExecutor` atau pelaksana lain; modul yang selebihnya ialah pembantu setiap penyedia (skema alat, penyesuai fetch/TTS, pengendali kebiasaan). Pelaksana termasuk:
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder`, `vertex`, `devin-desktop`(bantuan), `claudeIdentity.ts` (bantuan), `index.ts` dan kongsi).
 
-> Nota: pembekal yang tidak disenaraikan di sini disediakan oleh `default.ts` menggunakan pelaksana serasi OpenAI generik. Katalog pembekal penuh (381 pembekal) tinggal di `src/shared/constants/providers.ts`.
+> Nota: pembekal yang tidak disenaraikan di sini disediakan oleh `default.ts` menggunakan pelaksana serasi OpenAI generik. Katalog pembekal penuh (388 pembekal) tinggal di `src/shared/constants/providers.ts`.
 
 ### 4.3 `open-sse/translator/`
 

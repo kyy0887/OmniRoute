@@ -241,8 +241,8 @@ src/
 | මොඩියුලය                         | අරමුණ                                                                                             |
 | -------------------------------- | ------------------------------------------------------------------------------------------------- |
 | `components/`                    | උපකරණ පුවරු සංරචක API: `packages/ui-kit` — හරහා ඇඩප්ටර `docs/architecture/DESIGN_SYSTEM.md` බලන්න |
-| `constants/iconMap.ts`           | `ICON_MAP`: තිර → Lucide සංරචක (`<Icon>`) භාවිතා කරන අයිකන නම්                                    |
-| `constants/providers.ts`         | **381 සපයන්නන්** Zod වලංගුකරණය සමඟ (සත්‍ය මූලාශ්‍රය)                                              |
+| `constants/iconMap.ts`           | `ICON_MAP`: තිර → Lucide සංරචක භාවිතා කරන අයිකන නම් (`<Icon>`)                                    |
+| `constants/providers.ts`         | **388 සපයන්නන්** Zod වලංගුකරණය සමඟ (සත්‍ය මූලාශ්‍රය)                                              |
 | `constants/cliTools.ts`          | බාහිර CLI මෙවලම් ලේඛනය                                                                            |
 | `constants/routingStrategies.ts` | **මාර්ගගත කිරීමේ උපාය මාර්ග 20 ක්** ප්රමුඛතා සමඟ                                                  |
 | `constants/publicApiRoutes.ts`   | Bearer (එදිරිව කළමනාකරණය) auth අවශ්‍ය මාර්ග                                                       |
@@ -400,7 +400,7 @@ open-sse/
 | `ARCHITECTURE.md`           | ඉහළ මට්ටමේ ගෘහ නිර්මාණ ශිල්පය, උප පද්ධති සිතියම, උපකරණ පුවරු මතුපිට                                        |
 | `CODEBASE_DOCUMENTATION.md` | ඉංජිනේරු යොමු: නාමාවලි, මොඩියුල, සම්මුති                                                                   |
 | `FEATURES.md`               | v3.8 උද්දීපනය සහිත විශේෂාංග අනුකෘතිය                                                                       |
-| `USER_GUIDE.md`             | අවසාන පරිශීලක අත්පොත (සැකසීම, ආකෘති, සංයෝජන, CLIs, ශ්‍රව්‍ය, ආදිය)                                         |
+| `USER_GUIDE.md`             | අවසාන-පරිශීලක අත්පොත (සැකසීම, ආකෘති, සංයෝජන, CLIs, ශ්‍රව්‍ය, ආදිය)                                         |
 | `API_REFERENCE.md`          | API අවසාන ලක්ෂ්‍ය යොමුව auth ආකෘතිය සමඟ                                                                    |
 | `openapi.yaml`              | OpenAPI 3.0 පිරිවිතර (මාර්ග 121)                                                                           |
 | `SETUP_GUIDE.md`            | ස්ථාපන ක්‍රම (npm, npx, Docker, Electron, Termux, මූලාශ්‍රය)                                               |
@@ -412,28 +412,28 @@ open-sse/
 | `CLI-TOOLS.md`              | බාහිර CLI ඒකාබද්ධ කිරීම් + අභ්යන්තර OmniRoute CLI                                                          |
 | `I18N.md`                   | i18n ගෘහ නිර්මාණ ශිල්පය, භාෂාවක් එකතු කිරීම, ස්ථාන 67 ක්                                                   |
 | `UNINSTALL.md`              | අස්ථාපනය කිරීමේ පියවර පිරිසිදු කරන්න                                                                       |
-| `PROVIDER_REFERENCE.md`     | **ස්වයංක්‍රීයව උත්පාදනය කරන ලදී** සපයන්නන් 381 දෙනෙකුගේ නාමාවලිය (regen: `npm run gen:provider-reference`) |
+| `PROVIDER_REFERENCE.md`     | **ස්වයංක්‍රීයව උත්පාදනය කරන ලදී** සපයන්නන් 388 දෙනෙකුගේ නාමාවලිය (regen: `npm run gen:provider-reference`) |
 
 ### උප පද්ධතිය ගැඹුරු කිමිදුම්
 
-| ඩොක්ටර්                                     | අරමුණ                                                                              |
-| ------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `MCP-SERVER.md`                             | MCP සේවාදායකය: මෙවලම් 110, ප්‍රවාහන 3, විෂය පථ 33, REST අන්ත ලක්ෂ්‍ය               |
-| `A2A-SERVER.md`                             | A2A v0.3: JSON-RPC, කුසලතා 6ක්, REST සහායකයින්, නියෝජිත කාඩ්පත                     |
-| `AGENT_PROTOCOLS_GUIDE.md`                  | ඒකාබද්ධ මාර්ගෝපදේශය: A2A vs ACP vs Cloud Agents                                    |
-| `CLOUD_AGENT.md`                            | Codex Cloud / Devin / Jules වාද්‍ය වෘන්දය                                          |
-| `SKILLS.md`                                 | නිපුණතා රාමුව (සාදන ලද + වෙළඳපොළ + SkillsSH + වැලිපිල්ල)                           |
-| `RADAR.md`                                  | රේඩාර් නිදහස් මාදිලි නාමාවලි ආවරණය (`RADAR_ENABLED`, පෙරනිමියෙන් අක්‍රියයි)        |
-| `MEMORY.md`                                 | මතක පද්ධතිය (SQLite FTS5 + Qdrant)                                                 |
-| `EVALS.md`                                  | Eval රාමුව (සූට්, ධාවන, rubrics)                                                   |
-| `GUARDRAILS.md`                             | PII මාස්කර්, ක්ෂණික එන්නත්, දර්ශන පාලම                                             |
-| `COMPLIANCE.md`                             | විගණන ලොගය, රඳවා තබා ගැනීම, noLog ඉවත් වීම                                         |
-| `WEBHOOKS.md`                               | HMAC-අත්සන් කළ webhook බෙදා හැරීම                                                  |
-| `REASONING_REPLAY.md`                       | `reasoning_content` සඳහා Hybrid memory/SQLite හැඹිලිය                              |
-| `AUTHZ_GUIDE.md`                            | අවසර නල මාර්ගය (`classify` → `policies` → `enforce`)                               |
-| `RESILIENCE_GUIDE.md`                       | Circuit Breaker + cooldown + model lockout                                         |
-| `docs/security/STEALTH_GUIDE.md` (git පමණි) | TLS ඇඟිලි සලකුණු (JA3/JA4), Claude කේතය CCH, MITM සහතිකය                           |
-| `AUTO-COMBO.md`                             | Auto Combo එන්ජිම (16-සාධක ලකුණු කිරීම, 6 මාදිලියේ ඇසුරුම්, අතථ්‍ය කර්මාන්ත ශාලාව) |
+| ඩොක්ටර්                                     | අරමුණ                                                                             |
+| ------------------------------------------- | --------------------------------------------------------------------------------- |
+| `MCP-SERVER.md`                             | MCP සේවාදායකය: මෙවලම් 110, ප්‍රවාහන 3, විෂය පථ 33, REST අන්ත ලක්ෂ්‍ය              |
+| `A2A-SERVER.md`                             | A2A v0.3: JSON-RPC, කුසලතා 6 ක්, REST සහායකයින්, නියෝජිත කාඩ්පත                   |
+| `AGENT_PROTOCOLS_GUIDE.md`                  | ඒකාබද්ධ මාර්ගෝපදේශය: A2A vs ACP vs Cloud Agents                                   |
+| `CLOUD_AGENT.md`                            | Codex Cloud / Devin / Jules වාද්‍ය වෘන්දය                                         |
+| `SKILLS.md`                                 | නිපුණතා රාමුව (සාදන ලද + වෙළඳපොළ + SkillsSH + වැලිපිල්ල)                          |
+| `RADAR.md`                                  | රේඩාර් නිදහස් මාදිලි නාමාවලි ආවරණය (`RADAR_ENABLED`, පෙරනිමියෙන් අක්‍රියයි)       |
+| `MEMORY.md`                                 | මතක පද්ධතිය (SQLite FTS5 + Qdrant)                                                |
+| `EVALS.md`                                  | Eval රාමුව (සූට්, ධාවන, rubrics)                                                  |
+| `GUARDRAILS.md`                             | PII මාස්කර්, ක්ෂණික එන්නත්, දර්ශන පාලම                                            |
+| `COMPLIANCE.md`                             | විගණන ලොගය, රඳවා තබා ගැනීම, noLog ඉවත් වීම                                        |
+| `WEBHOOKS.md`                               | HMAC-අත්සන් කළ webhook බෙදා හැරීම                                                 |
+| `REASONING_REPLAY.md`                       | `reasoning_content` සඳහා Hybrid memory/SQLite හැඹිලිය                             |
+| `AUTHZ_GUIDE.md`                            | අවසර නල මාර්ගය (`classify` → `policies` → `enforce`)                              |
+| `RESILIENCE_GUIDE.md`                       | Circuit Breaker + cooldown + model lockout                                        |
+| `docs/security/STEALTH_GUIDE.md` (git පමණි) | TLS ඇඟිලි සලකුණු (JA3/JA4), Claude කේතය CCH, MITM සහතිකය                          |
+| `AUTO-COMBO.md`                             | Auto Combo එන්ජිම (16-සාධක ලකුණු කිරීම, 6 මාදිලියේ ඇසුරුම්, අතථ්‍ය කර්මාන්තශාලාව) |
 
 ### සම්පීඩනය
 

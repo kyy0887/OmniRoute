@@ -99,13 +99,13 @@ Search Tools Studio 將 `/dashboard/search-tools` 從基本搜尋測試介面轉
 
 ## 提供者目錄
 
-`ProviderCatalog.tsx` 會公開來自 `GET /api/search/providers` 的完整提供者清單
-（在 F4 中擴充以包含擷取提供者）：
+`ProviderCatalog.tsx`公開來自`GET /api/search/providers`的完整提供者清單（在 F4 中擴展以包含取得提供者）：
 
-| `kind` | `"search"`（20 個提供者）或 `"fetch"`（firecrawl、jina-reader、tavily-search、tinyfish、nimble-search、anysearch-search、parallel-search） |
+| `kind` | `"search"` （23 個提供者）或`"fetch"` （firecrawl、jina-reader、tavily-search、tinyfish、nimble-search、anysearch-search、parallel-search） |
 
-狀態會在**請求時動態判定**，方式是檢查認證資訊是否存在，以及
-所有金鑰目前是否都處於冷卻期間。
+狀態是**在請求時派生**透過檢查憑證是否存在以及所有金鑰目前是否處於冷卻狀態。
+
+`codex-search` (Codex Web Search) 沒有自己的金鑰：它重複使用連線的Codex (ChatGPT) 帳戶，因此每次搜尋都會花費ChatGPT訂閱配額，大約需要 10-40 秒。當請求命名它時它就會運行；自動選擇需要`CODEX_SEARCH_AUTO_FALLBACK_ENABLED`功能標誌（預設為關閉）。
 
 ---
 

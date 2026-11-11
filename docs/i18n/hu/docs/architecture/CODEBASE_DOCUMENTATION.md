@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex` `vertex` `commandCode` `cursor` `default` `devin-cli` `muse-spark-web` `nlpcloud` `opencode` `perplexity-web` `petals` `pollinations` `qoder` `devin-desktop` `claudeIdentity.ts` ) `index.ts`
 
-> Megjegyzés: az itt fel nem sorolt szolgáltatókat `default.ts` az általános OpenAI-kompatibilis végrehajtóval szolgálja ki. A teljes szolgáltatókatalógus (381 szolgáltató) `src/shared/constants/providers.ts` ben található.
+> Megjegyzés: az itt fel nem sorolt szolgáltatókat `default.ts` az általános OpenAI-kompatibilis végrehajtóval szolgálja ki. A teljes szolgáltatókatalógus (388 szolgáltató) `src/shared/constants/providers.ts` ben található.
 
 ### 4.3 `open-sse/translator/`
 
@@ -531,7 +531,7 @@ Fénypontok (a teljes lista `open-sse/services/` alatt):
 - **110 egyedi eszköz** vezetékes `server.ts` -ban (45 kanonikus `schemas/tools.ts` -ben + memória, készségek, GitHub-készségek, pool, gamification, plugin, Notion, Obsidian, helyi korpusz és tömörítési modulok — unió `countUniqueMcpTools`-vel számolva).
 - **3 szállítás** : stdio, HTTP streamelhető, SSE.
 - **33 távcső** futásidejű — alaplistában érvényesítve `src/shared/constants/mcpScopes.ts` ben, a teljes készlet az egyes eszközmodulok által deklarált hatókörök egyesítése.
-- Ellenőrzési táblázat: `mcp_tool_audit` ( `audit.ts` népesíti be).
+- Audit tábla: `mcp_tool_audit` ( `audit.ts` népesíti be).
 - Fájlok: `server.ts`, `index.ts`, `httpTransport.ts`, `audit.ts`, `scopeEnforcement.ts`, `runtimeHeartbeat.ts`, `descriptionCompressor.ts`, `schemas/{tools, a2a, audit, index}.ts`, `tools/{advancedTools, compressionTools, memoryTools, skillTools}.ts`, plusz tesztek a `__tests__/` alatt.
 - A teljes szerszámkatalógusért lásd [MCP-SERVER.md](../frameworks/MCP-SERVER.md).
 

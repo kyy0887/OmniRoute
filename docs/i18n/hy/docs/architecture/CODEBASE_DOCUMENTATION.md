@@ -490,7 +490,7 @@ open-sse/
 
 `antigravity`, `azure-openai`, `blackbox-web`, `cliproxyapi`, `chatgpt-web-codex`, `cloudflare-ai`, `codex`, `commandCode`, `cursor`, `default`, `devin-cli`, `muse-spark-web`, `nlpcloud`, `opencode`, `perplexity-web`, `petals`, `pollinations`, `qoder` `devin-desktop` `vertex` `claudeIdentity.ts` պլյուս (ընդհանուր) օգնական `index.ts`
 
-> Նշում․ այստեղ չնշված մատակարարները սպասարկվում են `default.ts` կողմից՝ օգտագործելով ընդհանուր OpenAI-ի հետ համատեղելի կատարողը: Պրովայդերների ամբողջական կատալոգը (381 մատակարար) ապրում է `src/shared/constants/providers.ts` ում:
+> Նշում․ այստեղ չնշված մատակարարները սպասարկվում են `default.ts` կողմից՝ օգտագործելով ընդհանուր OpenAI-ի հետ համատեղելի կատարողը: Պրովայդերների ամբողջական կատալոգը (388 մատակարար) ապրում է `src/shared/constants/providers.ts` ում:
 
 ### 4.3 `open-sse/translator/`
 
@@ -530,7 +530,7 @@ Hub-and-spoke թարգմանություն (OpenAI հանգույցն է):
 
 - **110 եզակի գործիքներ** լարված `server.ts` ում (45 կանոնական `schemas/tools.ts` + հիշողության մեջ, հմտություններ, GitHub-skills, pool, gamification, plugin, Notion, Obsidian, local-corpus և compression մոդուլներ — միավորում, հաշվված `countUniqueMcpTools` ով):
 - **3 տրանսպորտ** : stdio, HTTP Streamable, SSE.
-- **33 շրջանակ** ուժի մեջ է մտել գործարկման ժամանակ — բազային ցուցակում `src/shared/constants/mcpScopes.ts` ում, ամբողջական հավաքածուն յուրաքանչյուր գործիքի մոդուլի կողմից հայտարարված շրջանակների միավորումն է:
+- **33 շրջանակ** ուժի մեջ է մտել գործարկման ժամանակ — բազային ցուցակում `src/shared/constants/mcpScopes.ts` ում, ամբողջական փաթեթը յուրաքանչյուր գործիքի մոդուլի կողմից հայտարարված շրջանակների միավորումն է:
 - Աուդիտի աղյուսակ. `mcp_tool_audit` (բնակեցված `audit.ts`):
 - Ֆայլեր՝ `server.ts`, `index.ts`, `httpTransport.ts`, `audit.ts`, `scopeEnforcement.ts`, `runtimeHeartbeat.ts`, `descriptionCompressor.ts`, `schemas/{tools, a2a, audit, index}.ts`, `tools/{advancedTools, compressionTools, memoryTools, skillTools}.ts`, գումարած թեստեր `__tests__/`.
 - Տես [MCP-SERVER.md](../frameworks/MCP-SERVER.md) գործիքների ամբողջական կատալոգի համար:

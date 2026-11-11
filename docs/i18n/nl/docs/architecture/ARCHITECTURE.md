@@ -14,7 +14,7 @@ OmniRoute is een lokale AI -routeringsgateway en dashboard gebouwd op Next.js. H
 
 Kernmogelijkheden:
 
-- OpenAI-compatibel API oppervlak voor CLI/tools (381 providers, 159 uitvoerdermodules)
+- OpenAI-compatibel API oppervlak voor CLI/tools (388 providers, 159 uitvoerdermodules)
 - Request/response -vertaling in verschillende providerformaten
 - Terugval op modelcombinaties (reeks met meerdere modellen)
 - Gestructureerde combostappen (`provider + model + connection`) met runtime-bestelling door `compositeTiers`
@@ -44,7 +44,7 @@ Kernmogelijkheden:
 - Verbeterde tarieflimieten per account met providerspecifieke profielen
 - Patroon van stroomonderbrekers voor veerkracht van de provider
 - Bescherming tegen donderende kuddes met mutex-vergrendeling
-- Op handtekeningen gebaseerde cache voor deduplicatie van verzoeken
+- Op handtekeningen gebaseerde cache voor deduplicatie van aanvragen
 - Domeinlaag: kostenregels, fallback-beleid, lock-outbeleid
 - Context Relay: samenvattingen van sessieoverdrachten voor continuïteit van accountrotatie
 - Persistentie van domeinstatus (SQLite -schrijfcache voor fallbacks, budgetten, uitsluitingen, stroomonderbrekers)
@@ -68,7 +68,7 @@ Kernmogelijkheden:
 - OAuth milieuherstelactie
 - WebSocket bridge voor OpenAI-compatibele WS clients (`/v1/ws`)
 - Synchronisatietokenbeheer (issue/revoke, download van configuratiebundel met ETag-versie)
-- GLM Thinking (`glmt`) first-class provider preset
+- GLM Thinking (`glmt`) eersteklas providervoorinstelling
 - Hybride token tellen ( `/messages/count_tokens` aan de providerzijde met terugval op schattingen)
 - Automatisch zaaien van modelalias (30 + cross-proxy dialectnormalisaties bij het opstarten)
 - Veilig uitgaand ophalen met SSRF bewaking, privé- URL -blokkering en configureerbaar opnieuw proberen
@@ -848,41 +848,47 @@ flowchart LR
 - `src/lib/db/*`: importeer specifieke modules rechtstreeks — geen barrel (de oude herexportlaag `localDb.ts` is verwijderd)
 - `src/lib/usageDb.ts`: façade voor gebruiksgeschiedenis en aanroeplogboeken boven op SQLite-tabellen
 
-## Dekking van provider-executors (Strategy-patroon)
+## Dekking van de uitvoerder van de aanbieder (strategiepatroon)
 
-Elke provider heeft een gespecialiseerde executor die `BaseExecutor` uitbreidt (in `open-sse/executors/base.ts`), die URL-opbouw, headerconstructie, nieuwe pogingen met exponentiële back-off, hooks voor het vernieuwen van referenties en de orchestratiemethode `execute()` biedt.
+Elke provider heeft een gespecialiseerde uitvoerder die `BaseExecutor` uitbreidt (in `open-sse/executors/base.ts`), die zorgt voor het bouwen URL, headerconstructie, opnieuw proberen met exponentiële backoff, hooks voor het vernieuwen van referenties en de `execute()` -orkestratiemethode.
 
-| Executor                  | Provider(s)                                                                                                                                                 | Speciale afhandeling                                                                   |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA, enz. | Dynamische URL-/headerconfiguratie per provider                                        |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                          | Aangepaste project-/sessie-ID's, verwerking van Retry-After, verhulling van 429-fouten |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                | Routering op basis van implementaties, afdwingen van api-version-queryparameter        |
-| `BlackboxWebExecutor`     | Blackbox AI (webmodus)                                                                                                                                      | Reverse-engineering van websessies met emulatie van TLS-vingerafdrukken                |
-| `ClaudeIdentityExecutor`  | Claude.ai (CCH-pad)                                                                                                                                         | Pijplijnen voor beperkingen en hertoewijzing van tools, vormgeving van vingerafdrukken |
-| `CliProxyApiExecutor`     | CLIProxyAPI-compatibele providers                                                                                                                           | Aangepaste authenticatie en protocolafhandeling                                        |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                       | Injectie van account-ID, op Neurons gebaseerde gebruiksregistratie                     |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                                | Injecteert systeeminstructies, dwingt redeneerinspanning af                            |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                         | Responses API-brug voor browsersessies met vastzetten van thread/beurt                 |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                                | OAuth + headerrotatie per sessie                                                       |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                  | ConnectRPC-protocol, Protobuf-codering, ondertekening van verzoeken via checksum       |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                   | Koppeling van de levenscyclus van Devin-taken via een cloudagentmodule                 |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                              | Vernieuwing van Copilot-token, headers die VSCode nabootsen                            |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                  | GitLab OAuth + projectgebonden routering                                               |
-| `GlmExecutor`             | Z.AI GLM (incl. `glmt`-preset)                                                                                                                              | Houdt rekening met denkbudget, constanten voor GLMT-preset                             |
-| `GrokWebExecutor`         | xAI Grok-web                                                                                                                                                | Reverse-engineering van websessies, modusselectie (denken/standaard)                   |
-| `KieExecutor`             | KIE                                                                                                                                                         | Aangepaste tokenuitgifte met roterende sessieankers                                    |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                      | Binair AWS EventStream-formaat → SSE-conversie                                         |
-| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                            | Reverse-engineering van websessies met koppeling voor afbeeldingsberichten             |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                   | Providerspecifieke structuur van verzoekbody                                           |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                    | AI SDK-compatibele providerconfiguratie                                                |
-| `PerplexityWebExecutor`   | Perplexity-web                                                                                                                                              | Reverse-engineering van websessies voor het voortzetten van chats                      |
-| `PetalsExecutor`          | Gedistribueerde inferentie van Petals                                                                                                                       | Gedecentraliseerde zwermroutering                                                      |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                             | Geen API-sleutel vereist, verzoeken met snelheidsbeperking                             |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                    | Ondersteuning voor PAT en OAuth, gratis niveau met meerdere modellen                   |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                            | Authenticatie met serviceaccount, regiogebonden eindpunten                             |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                               | Geïmporteerde API-sleutel + chatstreaming via Connect-protobuf                         |
+| Uitvoerder                | Aanbieder(s)                                                                                                                                                   | Speciale behandeling                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Verbijstering, Together, Fireworks, Cerebras, Cohere, NVIDIA, enz. | Dynamische URL/header -configuratie per provider                                                |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                             | Aangepaste project/session IDs, opnieuw proberen na parseren, 429 verduistering                 |
+| `AzureOpenAIExecutor`     | Azuur OpenAI                                                                                                                                                   | Op implementatie gebaseerde routering, afdwinging van query's op API-versie                     |
+| `BlackboxWebExecutor`     | Blackbox AI (webmodus)                                                                                                                                         | Websessie omkeren met TLS vingerafdrukemulatie                                                  |
+| `ClaudeIdentityExecutor`  | Claude.ai (CCH pad)                                                                                                                                            | Beperking + -tools voor het opnieuw toewijzen van pijpleidingen, vormgeving van vingerafdrukken |
+| `CliProxyApiExecutor`     | CLIProxyAPI-compatibele providers                                                                                                                              | Aangepaste authenticatie en protocolafhandeling                                                 |
+| `CloudflareAiExecutor`    | Cloudflare Werknemers AI                                                                                                                                       | Account ID injectie, op neuronen gebaseerd gebruik volgen                                       |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                                   | Injecteert systeeminstructies, dwingt redeneerinspanning af                                     |
+| `ChatGptWebCodexExecutor` | ChatGPT web (Codex)                                                                                                                                            | Browsersessie Reacties API bridge met thread/turn pinning                                       |
+| `CommandCodeExecutor`     | Commandocode                                                                                                                                                   | OAuth + koprotatie per sessie                                                                   |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                     | ConnectRPC protocol, Protobuf-codering, ondertekening aanvragen via checksum                    |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                      | Devin taaklevenscyclusoverbrugging via cloudagentmodule                                         |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                                 | Copilot token vernieuwen, VSCode-nabootsende headers                                            |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                     | GitLab OAuth + projectgerichte routering                                                        |
+| `GlmExecutor`             | Z.AI GLM (incl. `glmt` voorinstelling)                                                                                                                         | Budgetbewust denkend, GLMT vooraf ingestelde constanten                                         |
+| `GrokWebExecutor`         | xAI Grok web                                                                                                                                                   | Websessie omkeren, modusselectie (think/standard)                                               |
+| `KieExecutor`             | KIE                                                                                                                                                            | Aangepaste tokenuitgifte met roterende sessie-ankers                                            |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                         | AWS EventStream binair formaat → SSE conversie                                                  |
+| `MuseSparkWebExecutor`    | Muse Spark (web)                                                                                                                                               | Omgekeerde websessie met overbrugging van beeldberichten                                        |
+| `NlpCloudExecutor`        | NLP Wolk                                                                                                                                                       | Aanbiederspecifiek verzoek lichaamsvorm                                                         |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                       | AI SDK compatibele providerconfiguratie                                                         |
+| `PerplexityWebExecutor`   | Verbijstering web                                                                                                                                              | Websessie omkeren voor voortzetting van de chat                                                 |
+| `PetalsExecutor`          | Bloemblaadjes verdeelde gevolgtrekking                                                                                                                         | Gedecentraliseerde zwermroutering                                                               |
+| `PollinationsExecutor`    | Bestuivingen AI                                                                                                                                                | Geen API sleutel vereist, verzoeken met beperkte snelheid                                       |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                       | PAT en OAuth ondersteuning, gratis laag met meerdere modellen                                   |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                               | Verificatie van serviceaccounts, op regio gebaseerde eindpunten                                 |
+| `DevinDesktopExecutor`    | Devin -bureaublad                                                                                                                                              | Geïmporteerde API sleutel + Connect-protobuf chatstreaming                                      |
 
-Alle andere providers (inclusief aangepaste compatibele nodes) gebruiken de `DefaultExecutor`.
+Alle andere providers (inclusief op maat compatibele knooppunten) gebruiken de `DefaultExecutor`.
+
+### Geautomatiseerde onderzoeken en websessie-accounts
+
+Modeltesten, Alles testen, combotesten en assessments sturen echte chatverzoeken. Een websessieprovider fungeert als de ingelogde gebruiker, dus elk van deze verzoeken wordt opgeslagen als een gesprek op dat account; Bij geautomatiseerde onderzoeken die dergelijke gesprekken achterlieten, werd een account opgeschort (#14780). De chatpijplijn weigert daarom elk doel dat een geautomatiseerde sonde bereikt en waarvan de provider een inloggegevens voor een websessie gebruikt, zodra de provider van het doel is opgelost en voordat er een inloggegevens worden gekozen (`src/lib/providers/chatProbePolicy.ts`). De weigering is `422` met `error.code` `chat_probe_not_isolated`, en de probe-runners rapporteren dit als een overslaan en niet als een mislukking.
+
+Een uitvoerder die elke chat uitvoert in de eigen modus zonder geschiedenis van de provider, declareert deze met `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`); Sondes naar die provider zijn dan toegestaan. ChatGPT Web declareert `temporary-chat`. Maak een declaratie vast aan het mechanisme met een test, zodat de claim de code die de claim waar maakt niet kan overleven.
 
 ## Compatibiliteitsmatrix voor providers
 

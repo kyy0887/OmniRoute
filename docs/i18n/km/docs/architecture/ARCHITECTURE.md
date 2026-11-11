@@ -14,7 +14,7 @@ OmniRoute គឺជាច្រកចេញដំណើរតាមទីតា�
 
 សមត្ថភាពស្នូល៖
 
-- ផ្ទៃ API ដែលត្រូវគ្នាជាមួយ OpenAI សម្រាប់ CLI/tools (អ្នកផ្តល់សេវា 381, ម៉ូឌុលប្រតិបត្តិ 159)
+- ផ្ទៃ API ដែលត្រូវគ្នាជាមួយ OpenAI សម្រាប់ CLI/tools (អ្នកផ្តល់សេវា 388, ម៉ូឌុលប្រតិបត្តិ 159)
 - ការបកប្រែRequest/response ឆ្លងកាត់ទម្រង់អ្នកផ្តល់សេវា
 - បន្សំគំរូថយក្រោយ (លំដាប់ច្រើនម៉ូដែល)
 - ជំហានបន្សំដែលមានរចនាសម្ព័ន្ធ (`provider + model + connection`) ជាមួយនឹងការបញ្ជាពេលវេលាដំណើរការដោយ `compositeTiers`
@@ -60,7 +60,7 @@ OmniRoute គឺជាច្រកចេញដំណើរតាមទីតា�
 - ប្រព័ន្ធសតិ (ស្រង់ចេញ ចាក់ ទាញយក សង្ខេប)
 - ប្រព័ន្ធជំនាញ (បញ្ជីឈ្មោះ ប្រតិបត្តិករ ប្រអប់ខ្សាច់ ជំនាញដែលភ្ជាប់មកជាមួយ)
 - MITM ប្រូកស៊ីជាមួយនឹងការគ្រប់គ្រងវិញ្ញាបនបត្រនិងការគ្រប់គ្រង DNS
-- Prompt injection guard middleware
+- ជំរុញអ្នកការពារផ្នែកកណ្តាល
 - ជម្រុញបំពង់បង្ហាប់ជាមួយ Caveman, RTK, បំពង់ដាក់ជង់, បន្សំបង្ហាប់, កញ្ចប់ភាសា និងការវិភាគ
 - ACP (ពិធីសារទំនាក់ទំនងភ្នាក់ងារ) បញ្ជីឈ្មោះ
 - អ្នកផ្តល់សេវា OAuth ម៉ូឌុល (ម៉ូឌុលបុគ្គលចំនួន 22 នៅក្រោម `src/lib/oauth/providers/`)
@@ -69,17 +69,17 @@ OmniRoute គឺជាច្រកចេញដំណើរតាមទីតា�
 - ស្ពាន WebSocket សម្រាប់អតិថិជន WS ដែលត្រូវគ្នាជាមួយ OpenAI (`/v1/ws`)
 - ការគ្រប់គ្រងនិមិត្តសញ្ញាសមកាលកម្ម (issue/revoke, ETag-versioned config bundle download)
 - GLM Thinking (`glmt`) កំណត់ជាមុនអ្នកផ្តល់សេវាលំដាប់ទីមួយ
-- ការរាប់និមិត្តសញ្ញាកូនកាត់ ( `/messages/count_tokens` ខាងអ្នកផ្តល់សេវាជាមួយនឹងការប៉ាន់ស្មានថយក្រោយ)
-- គំរូឈ្មោះក្លែងក្លាយការបណ្ដុះដោយស្វ័យប្រវត្តិ (ការធ្វើឱ្យប្រក្រតីនៃគ្រាមភាសាឆ្លងប្រូកស៊ី 30 + ពេលចាប់ផ្ដើម)
+- ការរាប់និមិត្តសញ្ញាកូនកាត់ ( `/messages/count_tokens` ខាងអ្នកផ្តល់សេវាជាមួយការប៉ាន់ស្មានថយក្រោយ)
+- គំរូឈ្មោះក្លែងក្លាយដែលបណ្ដុះដោយស្វ័យប្រវត្តិ (ការធ្វើឱ្យប្រក្រតីនៃគ្រាមភាសាឆ្លងប្រូកស៊ី 30 + ពេលចាប់ផ្ដើម)
 - ការនាំយកចេញដោយសុវត្ថិភាពជាមួយនឹង SSRF guard ការទប់ស្កាត់ URL ឯកជន និងការព្យាយាមម្ដងទៀតដែលអាចកំណត់រចនាសម្ព័ន្ធបាន។
 - Cooldown-aware Chat ព្យាយាមម្តងទៀតជាមួយនឹង `requestRetry` និង `maxRetryIntervalSec` ដែលអាចកំណត់រចនាសម្ព័ន្ធបាន។
-- ការផ្ទៀងផ្ទាត់បរិស្ថានពេលដំណើរការជាមួយ Zod នៅពេលចាប់ផ្តើម
+- សុពលភាពនៃបរិស្ថានពេលដំណើរការជាមួយ Zod នៅពេលចាប់ផ្តើម
 - សវនកម្មអនុលោមភាព v2 ជាមួយនឹងការបិទទំព័រ ព្រឹត្តិការណ៍ CRUD អ្នកផ្តល់សេវា និងការកត់ត្រាសុពលភាពដែលត្រូវបានទប់ស្កាត់ SSRF
 
 គំរូពេលវេលាដំណើរការបឋម៖
 
 - ផ្លូវកម្មវិធីNext.js ក្រោម `src/app/api/*` អនុវត្តទាំងផ្ទាំងគ្រប់គ្រង APIs និងភាពឆបគ្នា APIs
-- ស្នូល SSE/routing ចែករំលែកនៅក្នុង `src/sse/*` + `open-sse/*` ដោះស្រាយការប្រតិបត្តិ ការបកប្រែ ការចាក់ផ្សាយ ការធ្លាក់ចុះ និងការប្រើប្រាស់របស់អ្នកផ្តល់សេវា
+- ស្នូល SSE/routing ចែករំលែកនៅក្នុង `src/sse/*` + `open-sse/*` គ្រប់គ្រងការប្រតិបត្តិ ការបកប្រែ ការចាក់ផ្សាយ ការធ្លាក់ចុះ និងការប្រើប្រាស់របស់អ្នកផ្តល់សេវា
 
 ## ដ្យាក្រាមយោង
 
@@ -858,41 +858,47 @@ flowchart LR
 - `src/lib/db/*`: នាំចូលម៉ូឌុលជាក់លាក់ដោយផ្ទាល់ — មិនប្រើ barrel ទេ (ស្រទាប់នាំចេញបន្ត `localDb.ts` ចាស់ត្រូវបានដកចេញ)
 - `src/lib/usageDb.ts`: ចំណុចប្រទាក់សម្រាប់ប្រវត្តិការប្រើប្រាស់/កំណត់ហេតុការហៅនៅលើតារាង SQLite
 
-## វិសាលភាព Executor របស់ Provider (លំនាំ Strategy)
+## គ្របដណ្តប់ប្រតិបត្តិករអ្នកផ្តល់សេវា (លំនាំយុទ្ធសាស្រ្ត)
 
-Provider នីមួយៗមាន executor ឯកទេសមួយដែលពង្រីកពី `BaseExecutor` (នៅក្នុង `open-sse/executors/base.ts`) ដែលផ្តល់នូវការបង្កើត URL, ការស្ថាបនា header, ការព្យាយាមម្តងទៀតដោយប្រើ exponential backoff, hooks សម្រាប់ធ្វើឱ្យ credential ថ្មីឡើងវិញ និង method `execute()` សម្រាប់រៀបចំលំហូរការងារ។
+អ្នកផ្តល់សេវានីមួយៗមានប្រតិបត្តិករឯកទេសដែលពង្រីក `BaseExecutor` (ក្នុង `open-sse/executors/base.ts`) ដែលផ្តល់ការកសាង URL ការសាងសង់បឋមកថា ព្យាយាមម្តងទៀតជាមួយនឹងការបិទឡើងវិញអិចស្ប៉ូណង់ស្យែល ទំពក់ផ្ទុកព័ត៌មានសម្ងាត់ និងវិធីសាស្ត្រតម្រៀប `execute()` ។
 
-| កម្មវិធីប្រតិបត្តិ        | អ្នកផ្តល់សេវា                                                                                                                                               | ការដោះស្រាយពិសេស                                                            |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, Perplexity, Together, Fireworks, Cerebras, Cohere, NVIDIA ជាដើម | ការកំណត់រចនាសម្ព័ន្ធ URL/header បែបឌីណាមិកសម្រាប់អ្នកផ្តល់សេវានីមួយៗ        |
-| `AntigravityExecutor`     | Google Antigravity                                                                                                                                          | ID គម្រោង/សម័យផ្ទាល់ខ្លួន ការញែកតម្លៃ Retry-After និងការបិទបាំង 429         |
-| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                | ការបញ្ជូនតាម deployment និងការបង្ខំឱ្យប្រើ query api-version                |
-| `BlackboxWebExecutor`     | Blackbox AI (មុខងារវេប)                                                                                                                                     | ការធ្វើ reverse សម័យវេបជាមួយការត្រាប់តាម TLS fingerprint                    |
-| `ClaudeIdentityExecutor`  | Claude.ai (ផ្លូវ CCH)                                                                                                                                       | ខ្សែដំណើរការ constraint + tool-remap និងការកែទម្រង់ fingerprint             |
-| `CliProxyApiExecutor`     | អ្នកផ្តល់សេវាដែលឆបគ្នាជាមួយ CLIProxyAPI                                                                                                                     | ការដោះស្រាយការផ្ទៀងផ្ទាត់ និង protocol ផ្ទាល់ខ្លួន                          |
-| `CloudflareAiExecutor`    | Cloudflare Workers AI                                                                                                                                       | ការបញ្ចូល Account ID និងការតាមដានការប្រើប្រាស់ផ្អែកលើ Neurons               |
-| `CodexExecutor`           | OpenAI Codex                                                                                                                                                | បញ្ចូលសេចក្តីណែនាំប្រព័ន្ធ និងបង្ខំកម្រិតការគិតពិចារណា                      |
-| `ChatGptWebCodexExecutor` | ChatGPT Web (Codex)                                                                                                                                         | ស្ពាន Responses API របស់សម័យ browser ជាមួយការចងភ្ជាប់ thread/turn           |
-| `CommandCodeExecutor`     | Command Code                                                                                                                                                | OAuth + ការបង្វិល header តាមសម័យនីមួយៗ                                      |
-| `CursorExecutor`          | Cursor IDE                                                                                                                                                  | protocol ConnectRPC ការអ៊ិនកូដ Protobuf និងការចុះហត្ថលេខាលើសំណើតាម checksum |
-| `DevinCliExecutor`        | Devin CLI                                                                                                                                                   | ការតភ្ជាប់វដ្តជីវិតភារកិច្ច Devin តាមម៉ូឌុល cloud agent                     |
-| `GithubExecutor`          | GitHub Copilot                                                                                                                                              | ការធ្វើឱ្យ token Copilot ស្រស់ឡើងវិញ និង header ដែលត្រាប់តាម VSCode         |
-| `GitlabExecutor`          | GitLab Duo                                                                                                                                                  | GitLab OAuth + ការបញ្ជូនតាមវិសាលភាពគម្រោង                                   |
-| `GlmExecutor`             | Z.AI GLM (រួមទាំង preset `glmt`)                                                                                                                            | យល់ដឹងអំពីថវិកាការគិត និងតម្លៃថេរ preset GLMT                               |
-| `GrokWebExecutor`         | xAI Grok web                                                                                                                                                | ការធ្វើ reverse សម័យវេប និងការជ្រើសរើសមុខងារ (គិត/ស្តង់ដារ)                 |
-| `KieExecutor`             | KIE                                                                                                                                                         | ការចេញ token ផ្ទាល់ខ្លួនជាមួយ anchor សម័យដែលបង្វិលផ្លាស់ប្តូរ               |
-| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                      | ទម្រង់គោលពីរ AWS EventStream → ការបម្លែង SSE                                |
-| `MuseSparkWebExecutor`    | Muse Spark (វេប)                                                                                                                                            | ការធ្វើ reverse សម័យវេបជាមួយការតភ្ជាប់សាររូបភាព                             |
-| `NlpCloudExecutor`        | NLP Cloud                                                                                                                                                   | ទម្រង់ request body ជាក់លាក់សម្រាប់អ្នកផ្តល់សេវា                            |
-| `OpenCodeExecutor`        | OpenCode                                                                                                                                                    | ការរៀបចំអ្នកផ្តល់សេវាដែលឆបគ្នាជាមួយ AI SDK                                  |
-| `PerplexityWebExecutor`   | Perplexity web                                                                                                                                              | ការធ្វើ reverse សម័យវេបសម្រាប់ការបន្តការជជែក                                |
-| `PetalsExecutor`          | ការសន្និដ្ឋានចែកចាយ Petals                                                                                                                                  | ការបញ្ជូនតាម swarm វិមជ្ឈការ                                                |
-| `PollinationsExecutor`    | Pollinations AI                                                                                                                                             | មិនត្រូវការ API key និងសំណើដែលកំណត់អត្រា                                    |
-| `QoderExecutor`           | Qoder AI                                                                                                                                                    | គាំទ្រ PAT និង OAuth ព្រមទាំងកម្រិតឥតគិតថ្លៃពហុម៉ូដែល                       |
-| `VertexExecutor`          | Google Vertex AI                                                                                                                                            | ការផ្ទៀងផ្ទាត់ service account និង endpoint ផ្អែកលើតំបន់                    |
-| `DevinDesktopExecutor`    | Devin Desktop                                                                                                                                               | API key ដែលបាននាំចូល + ការផ្សាយ chat តាម Connect-protobuf                   |
+| ប្រតិបត្តិករ              | អ្នកផ្គត់ផ្គង់                                                                                                                                              | ការគ្រប់គ្រងពិសេស                                                                    |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `DefaultExecutor`         | OpenAI, Claude, Gemini, Qwen, OpenRouter, GLM, Kimi, MiniMax, DeepSeek, Groq, xAI, Mistral, ងឿងឆ្ងល់ , Together, Fireworks, Cerebras, Cohere, NVIDIA ជាដើម។ | ការកំណត់រចនាសម្ព័ន្ធ URL/header ថាមវន្តសម្រាប់អ្នកផ្តល់សេវា                          |
+| `AntigravityExecutor`     | Google Antigravity                                                                                                                                          | project/session IDs ផ្ទាល់ខ្លួន, ព្យាយាមម្តងទៀត-បន្ទាប់ពីការញែក, 429 ភាពច្របូកច្របល់ |
+| `AzureOpenAIExecutor`     | Azure OpenAI                                                                                                                                                | ការកំណត់ផ្លូវផ្អែកលើការដាក់ឱ្យប្រើប្រាស់ ការអនុវត្តសំណួរកំណែ api                     |
+| `BlackboxWebExecutor`     | ប្រអប់ខ្មៅ AI (របៀបគេហទំព័រ)                                                                                                                                | វេនវេនបណ្តាញជាមួយការត្រាប់តាមស្នាមម្រាមដៃ TLS                                        |
+| `ClaudeIdentityExecutor`  | Claude.ai (ផ្លូវ CCH )                                                                                                                                      | ការដាក់កំហិត + tool-remap pipelines រាងស្នាមម្រាមដៃ                                  |
+| `CliProxyApiExecutor`     | អ្នកផ្តល់សេវាដែលត្រូវគ្នា CLIProxyAPI                                                                                                                       | ការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវផ្ទាល់ខ្លួន និងការគ្រប់គ្រងពិធីការ                        |
+| `CloudflareAiExecutor`    | Cloudflare កម្មករ AI                                                                                                                                        | ការចាក់បញ្ចូលគណនី ID, ការតាមដានការប្រើប្រាស់ផ្អែកលើណឺរ៉ូន                            |
+| `CodexExecutor`           | OpenAI Codex                                                                                                                                                | ចាក់បញ្ចូលសេចក្តីណែនាំអំពីប្រព័ន្ធ បង្ខំឱ្យមានការប្រឹងប្រែងវែកញែក                    |
+| `ChatGptWebCodexExecutor` | ChatGPT គេហទំព័រ (Codex)                                                                                                                                    | Browser-session ឆ្លើយតបស្ពាន API ជាមួយនឹងការខ្ទាស់ thread/turn                       |
+| `CommandCodeExecutor`     | កូដបញ្ជា                                                                                                                                                    | OAuth + ការបង្វិលបឋមកថាក្នុងមួយវគ្គ                                                  |
+| `CursorExecutor`          | Cursor IDE                                                                                                                                                  | ពិធីការ ConnectRPC, ការអ៊ិនកូដ Protobuf, ស្នើសុំចុះហត្ថលេខាតាមរយៈ checksum           |
+| `DevinCliExecutor`        | Devin CLI                                                                                                                                                   | ការភ្ជាប់វដ្តជីវិតការងារ Devin តាមរយៈម៉ូឌុលភ្នាក់ងារពពក                              |
+| `GithubExecutor`          | GitHub Copilot                                                                                                                                              | Copilot token refresh, បឋមកថា VSCode-ត្រាប់តាម                                       |
+| `GitlabExecutor`          | GitLab Duo                                                                                                                                                  | GitLab OAuth + project-scoped routing                                                |
+| `GlmExecutor`             | Z.AI GLM (រួមបញ្ចូលការកំណត់ជាមុន `glmt` )                                                                                                                   | ការគិត-ថវិកាដឹង, GLMT កំណត់ជាមុនថេរ                                                  |
+| `GrokWebExecutor`         | គេហទំព័រ xAI Grok                                                                                                                                           | វេនវេនបណ្តាញ ការជ្រើសរើសរបៀប (think/standard)                                        |
+| `KieExecutor`             | KIE                                                                                                                                                         | ការចេញសញ្ញាសម្ងាត់ផ្ទាល់ខ្លួនជាមួយនឹងយុថ្កាសម័យបង្វិល                                |
+| `KiroExecutor`            | AWS CodeWhisperer/Kiro                                                                                                                                      | AWS EventStream ការបម្លែងទ្រង់ទ្រាយគោលពីរ → SSE                                      |
+| `MuseSparkWebExecutor`    | Muse Spark (គេហទំព័រ)                                                                                                                                       | វេននៃបណ្តាញបញ្ច្រាសជាមួយនឹងការភ្ជាប់រូបភាព-សារ                                       |
+| `NlpCloudExecutor`        | NLP ពពក                                                                                                                                                     | ទម្រង់រាងកាយសំណើជាក់លាក់របស់អ្នកផ្តល់សេវា                                            |
+| `OpenCodeExecutor`        | OpenCode                                                                                                                                                    | ការដំឡើងអ្នកផ្តល់សេវាដែលត្រូវគ្នាAI SDK                                              |
+| `PerplexityWebExecutor`   | បណ្តាញភាពច្របូកច្របល់                                                                                                                                       | វេនវេនបណ្តាញសម្រាប់ការបន្តការជជែក                                                    |
+| `PetalsExecutor`          | Petals ចែកចាយសេចក្តីសន្និដ្ឋាន                                                                                                                              | ផ្លូវនៃហ្វូងវិមជ្ឈការ                                                                |
+| `PollinationsExecutor`    | ការលំអង AI                                                                                                                                                  | មិនទាមទារសោ API សំណើមានកំណត់អត្រា                                                    |
+| `QoderExecutor`           | Qoder AI                                                                                                                                                    | ការគាំទ្រ PAT និង OAuth ថ្នាក់ឥតគិតថ្លៃពហុគំរូ                                       |
+| `VertexExecutor`          | Google Vertex AI                                                                                                                                            | ការផ្ទៀងផ្ទាត់គណនីសេវាកម្ម ចំណុចបញ្ចប់ផ្អែកលើតំបន់                                   |
+| `DevinDesktopExecutor`    | Devin ផ្ទៃតុ                                                                                                                                                | បាននាំចូល API key + Connect-protobuf chat streaming                                  |
 
-អ្នកផ្តល់សេវាផ្សេងទៀតទាំងអស់ (រួមទាំងថ្នាំងឆបគ្នាផ្ទាល់ខ្លួន) ប្រើ `DefaultExecutor`។
+អ្នកផ្តល់សេវាផ្សេងទៀតទាំងអស់ (រួមទាំងថ្នាំងដែលឆបគ្នាផ្ទាល់ខ្លួន) ប្រើ `DefaultExecutor`។
+
+### ការស៊ើបអង្កេតដោយស្វ័យប្រវត្តិ និងគណនីសម័យបណ្ដាញ
+
+ការធ្វើតេស្តគំរូ សាកល្បងទាំងអស់ ការធ្វើតេស្តបន្សំ និងការវាយតម្លៃផ្ញើសំណើជជែកពិតប្រាកដ។ អ្នកផ្តល់សេវាវគ្គគេហទំព័រដើរតួជាអ្នកប្រើប្រាស់ដែលបានចូល ដូច្នេះរាល់សំណើទាំងនោះនឹងត្រូវបានរក្សាទុកជាការសន្ទនានៅលើគណនីនោះ។ ការស៊ើបអង្កេតដោយស្វ័យប្រវត្តិដែលចាកចេញពីការសន្ទនាបែបនេះត្រូវបានផ្អាកគណនី (#14780) ។ ដូច្នេះហើយ បំពង់ជជែកដេញដោលបដិសេធរាល់គោលដៅដែលការស៊ើបអង្កេតស្វ័យប្រវត្តិទៅដល់អ្នកផ្តល់សេវាដែលទទួលយកព័ត៌មានសម្ងាត់នៃវគ្គបណ្ដាញ នៅពេលដែលអ្នកផ្តល់សេវារបស់គោលដៅត្រូវបានដោះស្រាយ និងមុនពេលជ្រើសរើសព័ត៌មានសម្ងាត់ (`src/lib/providers/chatProbePolicy.ts`) ។ ការបដិសេធគឺ `422` ជាមួយ `error.code` `chat_probe_not_isolated` ហើយអ្នករត់ការស៊ើបអង្កេតរាយការណ៍ថាវាជាការរំលង មិនមែនជាការបរាជ័យទេ។
+
+ប្រតិបត្តិករដែលដំណើរការរាល់ការជជែកនៅក្នុងរបៀបគ្មានប្រវត្តិផ្ទាល់ខ្លួនរបស់អ្នកផ្តល់សេវាប្រកាសវាជាមួយ `ChatProbeIsolatingExecutor` (`open-sse/executors/chatProbeIsolation.ts`); បន្ទាប់មកការស៊ើបអង្កេតទៅកាន់អ្នកផ្តល់សេវានោះត្រូវបានអនុញ្ញាត។ ChatGPT Web ប្រកាស `temporary-chat`។ ខ្ទាស់ការប្រកាសទៅនឹងយន្តការរបស់វាជាមួយនឹងការធ្វើតេស្ត ដូច្នេះការទាមទារមិនអាចលើសពីកូដដែលធ្វើឱ្យវាពិតនោះទេ។
 
 ## ម៉ាទ្រីសភាពឆបគ្នារបស់អ្នកផ្តល់សេវា
 
